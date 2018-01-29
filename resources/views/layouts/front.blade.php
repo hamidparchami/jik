@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>سرویس کاتالوگ اپسان {{ (isset($page_title) ? ' | ' . $page_title : '') }}</title>
+    <title>سرویس کاتالوگ {{ (isset($page_title) ? ' | ' . $page_title : '') }}</title>
 
     <!-- Styles -->
     <link href="/css/app.css?v=0.1" rel="stylesheet">
@@ -44,7 +44,7 @@
                         <input type="search" class="rtl search-field" placeholder="جستجو...">
                     </div>
                     <div class="col-md-8 text-right header-right-navigation">
-                        <span><a href="/">سرویس کاتالوگ اپسان</a></span>
+                        <span><a href="/">صفحه نخست</a></span>
                         <span><a href="/catalog/list">دسته‌بندی‌ها</a></span>
                         <span><a href="/all-delivered-awards">جوایز اهدا شده</a></span>
                         <span><a href="/all-awards">جوایز آینده</a></span>
@@ -63,8 +63,8 @@
 
 
         <div class="col-md-12 text-center" style="border: 1px solid #dbdbdb; background-color: #f2f2f2; height: 100px; margin-top: 100px; padding-top: 24px; line-height: 2.5em">
-            <img src="/images/appson_logo_bw.svg">
-            <br>اپسان © ۱۳۹۵
+            {{--<img src="/images/appson_logo_bw.svg">--}}
+            <br>© ۱۳۹۵
         </div>
 
 </div>

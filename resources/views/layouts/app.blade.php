@@ -11,7 +11,7 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
 
-    <title>سیستم مدیریت محتوای اپسان</title>
+    <title>پنل مدیریت</title>
 
     <!-- Styles -->
     <link href="/css/app.css?v=0.1" rel="stylesheet">
@@ -60,7 +60,7 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
-                    <a href="{{ url('/admin/home') }}"><img src="/images/header-logo.png"></a>
+                    <a href="{{ url('/admin/home') }}"><img src="/images/header-logo.png" width="32" height="32" style="margin: 8px;"></a>
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">ورود</a></li>
@@ -191,7 +191,7 @@
 
                             <ul class="dropdown-menu rtl" role="menu">
                                 <li>
-                                    <a href="{{ url('/change-password') }}">تغییر رمز</a>
+                                    <a href="{{ url('/user/change-password') }}">تغییر رمز</a>
                                 </li>
                                 <li>
                                     <a href="{{ url('/logout') }}"
@@ -215,8 +215,6 @@
 
     @yield('content')
 
-    <div style="border-top: 1px solid #ccc; padding-top: 40px; background: url('/images/footer-logo.png'); background-repeat: no-repeat; background-position: center -135px; min-height: 300px;">
-    </div>
 </div>
     <!-- Scripts -->
     <script src="/js/app.js"></script>

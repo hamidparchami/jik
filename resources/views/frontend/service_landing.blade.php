@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>سرویس کاتالوگ اپسان {{ (isset($page_title) ? ' | ' . $page_title : '') }}</title>
+    <title>سرویس کاتالوگ {{ (isset($page_title) ? ' | ' . $page_title : '') }}</title>
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
@@ -65,7 +65,7 @@
 
                                 <div class="row" style="margin-top: 32px; margin-bottom: 26px;">
                                     <div class="col-md-6 sponsor-container">
-                                        <img class="sponsor-logo" src="/images/appson_logo.svg">
+                                        {{--<img class="sponsor-logo" src="/images/appson_logo.svg">--}}
                                         {{--<img src="/images/hamrah_aval_logo.png">--}}
                                     </div>
                                     <div class="col-md-6 text-right black-title">{{ $service->price_description }}</div>
@@ -90,7 +90,7 @@
 
                                 <div class="row" style="margin-top: 32px; margin-bottom: 26px;">
                                     <div class="col-md-6 sponsor-container">
-                                        <img class="sponsor-logo" src="/images/appson_logo.svg">
+                                        {{--<img class="sponsor-logo" src="/images/appson_logo.svg">--}}
                                         {{--<img src="/images/hamrah_aval_logo.png">--}}
                                     </div>
                                     <div class="col-md-6 text-right black-text">
@@ -109,7 +109,7 @@
                                 </div>
                                 <div class="row" style="margin-top: 32px; margin-bottom: 26px;">
                                     <div class="col-md-12 text-left sponsor-container">
-                                        <img class="sponsor-logo" src="/images/appson_logo.svg">
+                                        {{--<img class="sponsor-logo" src="/images/appson_logo.svg">--}}
                                         {{--<img src="/images/hamrah_aval_logo.png">--}}
                                     </div>
                                 </div>
@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="row" style="margin-top: 32px; margin-bottom: 26px;">
                                     <div class="col-md-12 text-left sponsor-container">
-                                        <img class="sponsor-logo" src="/images/appson_logo.svg">
+                                        {{--<img class="sponsor-logo" src="/images/appson_logo.svg">--}}
                                         {{--<img src="/images/hamrah_aval_logo.png">--}}
                                     </div>
                                 </div>
@@ -224,8 +224,8 @@
 
     <div class="footer-container" style="border: 1px solid #dbdbdb; background-color: #f2f2f2; height: 100px; padding-top: 24px; line-height: 2.5em">
         <div class="text-center">
-            <img src="/images/appson_logo_bw.svg">
-            <br>اپسان © ۱۳۹۵
+            {{--<img src="/images/appson_logo_bw.svg">--}}
+            <br> © ۱۳۹۵
         </div>
     </div>
 </div>
