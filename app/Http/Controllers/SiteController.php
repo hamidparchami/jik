@@ -18,6 +18,7 @@ class SiteController extends Controller
      */
     public function index()
     {
+        return 'Jikopeek.ir';
         $slider_images = SliderImages::where('is_active', 1)->get();
         $catalogs      = Catalog::where('is_important', 1)->get();
 
