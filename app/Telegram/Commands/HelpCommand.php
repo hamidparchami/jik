@@ -48,7 +48,7 @@ class HelpCommand extends SystemCommand
     {
         $message = $this->getMessage();
         $chat_id = $message->getChat()->getId();
-        $text    = 'راهنما: ' . PHP_EOL . 'در این بات شما بصورت روزانه مطالب مختلفی دریافت می کنید. برای دریافت مطالب شخصی سازی شده می بایست اکانت ویژه خریداری کنید.'.PHP_EOL.'/buy_account';
+        $text    = 'راهنما: ' . PHP_EOL . 'در این بات شما بصورت روزانه مطالب مختلفی دریافت می کنید. برای دریافت مطالب شخصی سازی شده می بایست اکانت ویژه خریداری کنید.'.PHP_EOL.'/register';
         $data = [
             'chat_id' => $chat_id,
             'text'    => $text,
