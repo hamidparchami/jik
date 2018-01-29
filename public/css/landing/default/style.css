@@ -1,0 +1,481 @@
+@import url(bootstrap-rtl.min.css);
+@import url(/css/fontiran.css);
+
+html, body {
+    width: 100%;
+}
+
+body{
+    font-family: IRANSans, tahoma !important;
+    line-height: 1.8;
+    font-weight: 400;
+    font-size: 16px;
+    margin-top: 50px;
+}
+
+a, a:active, a:focus, a:active:focus{
+    text-decoration: none;
+    color: #4990E2;
+}
+
+a:hover {
+    color: #0094A3;
+    text-decoration: none;
+}
+
+.under-btn {
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.bold {
+    font-size: 18px;
+    margin-top: 16px;
+    font-weight: 500;
+}
+
+.normal {
+    font-size: 16px;
+}
+
+/* Navbar */
+
+.navbar-default .navbar-brand {
+    color: #0094A3;
+}
+
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+    color: #00A1B3;
+}
+
+.navbar-brand {
+    padding: 8px 15px;
+}
+
+.navbar-slogan {
+    font-size: 12px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.navbar-default {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #0094A3;
+}
+
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+    color: #00A1B3;
+}
+
+.navbar-collapse {
+	text-align: center;
+}
+
+
+/*.navbar-left>li {
+    display: inline-block;
+}*/
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border: none;
+}
+
+.navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse {
+    max-height: none;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: #E95438;
+    background-color: transparent;
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    background-color: none;
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.nav-cta, .nav-cta:active, .nav-cta:focus, .nav-cta:active:focus {
+    background-color: #0094A3;
+    border-color: #0094A3;
+    color: #ffffff !important;
+    margin-right: 15px;
+}
+
+.nav-cta:hover {
+	background-color: #ff3f45;
+    border-color: #ff3f45;
+    color: #ffffff !important;
+}
+
+/* END Navbar*/
+
+h1, h2, h3 {
+    line-height: 1.8;
+}
+
+.xl-space {
+    height: 70px;
+}
+
+/*.intro-cover {
+    width: 100%;
+    background-color: #4D72A6;
+    background-image: url('../images/cb-cover.jpg');
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    margin-top: 50px;
+    padding: 40px 0;
+    text-align: center;
+    color: white;
+}*/
+
+.intro-cover {
+    width: 100%;
+    margin: 120px 0 0 0;
+    text-align: center;
+}
+
+.wide-img {
+    width: 100%;
+    height: auto;
+}
+
+.present-light {
+    padding: 100px 15px;
+    text-align: center;
+}
+
+.present-dark {
+    background-color: #0094A3;
+    text-align: center;
+    padding: 100px 15px;
+    color: #ffffff;
+}
+
+.cta-dark {
+    background-color: #0094A3;
+    font-size: 18px;
+    line-height: 1;
+    border: 1px solid #0094A3;
+    padding: 12px 40px;
+    margin-top: 20px;
+}
+
+.cta-dark:hover {
+    background-color: #00A1B3;
+    border: 1px solid #00A1B3;
+}
+
+.cta-dark:active, .cta-dark:focus, .cta-dark:active:focus {
+    background-color: #0094A3;
+    border: 1px solid #0094A3;
+}
+
+.cta-light {
+    background-color: transparent;
+    font-size: 18px;
+    line-height: 1;
+    border: 1px solid #ffffff;
+    padding: 12px 40px;
+    margin-top: 20px;
+}
+
+.cta-light:hover {
+    background-color: #00A1B3;
+    border: 1px solid #ffffff;
+}
+
+.cta-light:active, .cta-light:focus, .cta-light:active:focus {
+    background-color: #0094A3;
+    border: 1px solid #ffffff;
+}
+
+.intro-cover .title {
+    margin: 80px 0 0 0;
+}
+
+.intro-cover .sub-title {
+    margin-top: 10px;
+}
+
+.intro-cover .description {
+    margin-top: 20px;
+    font-size: 21px;
+}
+
+.intro-cover_cta {
+    background-color: #0094A3;
+    font-size: 18px;
+    line-height: 1;
+    border: 1px solid #0094A3;
+    padding: 12px 40px;
+    margin-top: 20px;
+}
+
+.intro-cover_cta:hover, .intro-cover_cta:active, .intro-cover_cta:focus, .intro-cover_cta:active:focus {
+    background-color: #ff3f45;
+    border-color: #ff3f45;
+    color: #ffffff;
+}
+
+.img-cover {
+    width: 342px;
+    height: auto;
+    position: relative;
+    top: 40px;
+}
+
+.features {
+    margin-top: 70px;
+}
+   
+.features-description {
+    margin: 100px 0 0 0;
+    text-align: center;
+}
+
+.features-img {
+    max-width: 100%;
+    width: 450px;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+.wide-section {
+    background-color: #4D72A6;
+    background-image: url('../images/cb-cover.jpg');
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    padding: 80px 15px;
+    text-align: center;
+    color: white;
+}
+
+.btn-demo, .btn-demo:active, .btn-demo:focus, .btn-demo:active:focus {
+    background-color: #0094A3;
+    border: 1px solid #0094A3;
+    padding: 10px 30px;
+    margin: 15px;
+    font-size: 16px;
+    line-height: 1.2;
+}
+
+.btn-demo:hover {
+    background-color: #00A1B3;
+    border: 1px solid #00A1B3;
+    color: #ffffff;
+}
+
+/* Doc page style */
+
+.intro-doc {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.center-title {
+    font-size: 30px;
+    text-align: center;
+    font-weight: normal;
+    margin-bottom: 30px;
+}
+
+.inline-list {
+    list-style: none;
+    padding: initial;
+    margin-left: 0;
+}
+
+.inline-list li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.box-cnt {
+    text-align: center;
+}
+
+.light-box {
+    display: inline-block;
+    width: 300px;
+    border: 1px solid #A4C1E3;
+    border-radius: 4px;
+    margin: 30px;
+    text-align: center;
+    vertical-align: top;
+}
+
+.light-box-empty {
+    display: inline-block;
+    width: 300px;
+    margin: 30px 30px 0 30px;
+    vertical-align: top;
+}
+
+.light-box-header {
+    padding: 16px 0 0 0;
+    border-bottom: 1px solid #A4C1E3;
+}
+
+.light-box-header img {
+    margin-bottom: 8px;
+}
+
+.light-box-title {
+    font-size: 15px;
+}
+
+.light-box-description {
+    padding: 20px 0 8px 0;
+}
+
+.light-box-description a {
+    font-size: 14px;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.light-box-space {
+    margin: 0 0 12px 0;
+    border: none;
+    height: 24.71px;
+    display: none;
+}
+
+.btn-ghost {
+    color: #4990E2;
+    background-clip: white;
+    padding: 10px 30px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #4990E2;
+}
+
+.btn-ghost:hover, .btn-ghost:active, .btn-ghost:focus, .btn-ghost:active:focus {
+     color: white;
+     background-color: #4990E2;
+ }
+
+ /* END */
+
+.footer-links {
+    list-style: none;
+    margin: 12px auto 0 auto;
+    text-align: center;
+}
+
+.footer-links a {
+    font-size: 12px;
+    color: #818486;
+    padding: 10px;
+    display: inline-block;
+}
+
+.footer-links div {
+    font-size: 12px;
+    color: #818486;
+    padding: 10px;
+    display: inline-block;
+}
+
+footer {
+    padding: 24px 0;
+    background-color: white;
+    font-size: 12px;
+    color: #4a4a4a;
+    text-align: center;
+}
+
+.footer-logo {
+    display: block;
+    margin: 24px auto 16px auto;
+}
+
+.footer-social-link {
+    text-align: center;
+    margin: 16px 0;
+}
+
+.footer-social-link a {
+    margin: 0 4px;
+}
+
+footer p {
+    margin: 0;
+}
+
+
+/* Medias */
+
+@media (max-width: 767px) {
+
+    body {
+        font-size: 15px;
+    }
+
+    .xl-space {
+        height: 50px;
+    }
+
+    .intro-cover .title {
+        margin-top: 0;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    .features {
+        margin-top: 50px;
+    }
+
+    .features-description {
+        margin: 20px 0 0 0;
+        line-height: 2;
+    } 
+
+    .navbar-transparent {
+	    background-color: #0187AA;
+	    position: fixed;
+	    top: 0;
+	    width: 100%;
+	    z-index: 9999;
+	}
+
+	.navbar-nav {
+		font-size: 17px;
+	}
+
+	.nav>li {
+		margin-bottom: 10px;
+	}
+
+	.navbar-btn {
+		width: 95px;
+		font-size: 17px;
+	}
+}
+
+ @media (max-width: 480px) {
+    .light-box {
+        width: 100%;
+        margin: 20px auto;
+    }
+}
+
+ @media (max-width: 1200px) and (min-width: 480px) {
+    .light-box-space {
+        display: inline-block;
+    }
+}

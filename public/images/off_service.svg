@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="58px" height="57px" viewBox="0 0 58 57" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>A1A6896F-E3D7-474F-A01B-51723BF2362C</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M40,0.207 L16,0.207 C7.178,0.207 0,7.385 0,16.207 L0,30.207 C0,38.692 6.644,45.636 15,46.156 L15,55.793 L18,53 C23.306,47.695 30.718,46.207 38.219,46.207 L40,46.207 C48.822,46.207 56,39.029 56,30.207 L56,16.207 C56,7.385 48.822,0.207 40,0.207 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="56" height="55.586" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <ellipse id="path-3" cx="12" cy="12.223" rx="12" ry="12"></ellipse>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="24" height="24" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="VAS-landing-page" transform="translate(-834.000000, -1820.000000)">
+            <g id="off-service" transform="translate(834.000000, 1820.583926)">
+                <g id="Capa_1">
+                    <g id="Group">
+                        <use id="Shape" stroke="#FFFFFF" mask="url(#mask-2)" stroke-width="2" fill="#50B748" xlink:href="#path-1"></use>
+                        <g transform="translate(34.000000, 30.000000)">
+                            <use id="Oval" stroke="#FFFFFF" mask="url(#mask-4)" stroke-width="2" fill="#ED7161" xlink:href="#path-3"></use>
+                            <path d="M13.414,12.223 L16.95,8.687 C17.341,8.296 17.341,7.664 16.95,7.273 C16.559,6.882 15.927,6.882 15.536,7.273 L12,10.809 L8.464,7.273 C8.073,6.882 7.441,6.882 7.05,7.273 C6.659,7.664 6.659,8.296 7.05,8.687 L10.586,12.223 L7.05,15.759 C6.659,16.15 6.659,16.782 7.05,17.173 C7.245,17.368 7.501,17.466 7.757,17.466 C8.013,17.466 8.269,17.368 8.464,17.173 L12,13.637 L15.536,17.173 C15.731,17.368 15.987,17.466 16.243,17.466 C16.499,17.466 16.755,17.368 16.95,17.173 C17.341,16.782 17.341,16.15 16.95,15.759 L13.414,12.223 L13.414,12.223 Z" id="Shape" fill="#FFFFFF"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

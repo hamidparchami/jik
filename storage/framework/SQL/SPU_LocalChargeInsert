@@ -1,0 +1,86 @@
+/*******************************************
+
+
+    in sp data haye payment ro migire to yek jadval mirize hamrah ba point va productitemid
+
+
+
+*******************************************/
+
+USE [Appson_Staging]
+GO
+
+/****** Object:  StoredProcedure [SFC].[SPU_LocalChargeInsert]    Script Date: 8/22/2017 4:31:07 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [SFC].[SPU_LocalChargeInsert]
+--( @ProductItemCode		VARCHAR(500) )
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	DECLARE @TempTable		TABLE
+	(
+		AccountID			VARCHAR(50),
+		TransactionCode		VARCHAR(50),
+		Date				DATETIME
+	);
+	DECLARE @ind		INT		= 1
+
+	DECLARE @now datetime = getdate()
+	DECLARE @from DATETIME = DATEADD(HOUR, -2, @now)
+
+	DECLARE @ProductCode NVARCHAR(300)
+			,@point BIGINT
+
+	DECLARE MY_CURSOR CURSOR
+	  LOCAL STATIC READ_ONLY FORWARD_ONLY
+	FOR
+	SELECT DISTINCT [ProductItemCode], Point
+	FROM [SFC].[ProductItemCode_List]
+
+	OPEN MY_CURSOR
+	FETCH NEXT FROM MY_CURSOR INTO @ProductCode, @point
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		EXEC SFC.[spGetChargesForProductItem] @ProductCode, @from, @now
+
+		WHILE @ind <> 0
+		BEGIN
+			WITH CTE AS(
+							SELECT TOP 1 [AccountID],[TransactionCode],[Date]
+							FROM [SFC].[ChargeForProductItem]
+						)
+			DELETE FROM CTE
+			OUTPUT deleted.[AccountID], Deleted.[TransactionCode], Deleted.[Date] INTO @TempTable;
+
+			SELECT @ind = COUNT(*) FROM @TempTable
+
+			IF @ind <> 0
+			BEGIN
+				BEGIN TRY
+					INSERT INTO [SFC].[ALL_ChargeForProductItem]([AccountID], [TransactionCode], [Date], [ProductItemCode], Point)
+					SELECT TOP 1 [AccountID], [TransactionCode], [Date], @ProductCode, @Point FROM @TempTable;
+
+				END TRY
+				BEGIN CATCH
+				END CATCH
+			END
+
+			DELETE TOP (1) FROM @TempTable;
+
+		END
+		FETCH NEXT FROM MY_CURSOR INTO @ProductCode, @point
+	END
+	CLOSE MY_CURSOR
+	DEALLOCATE MY_CURSOR
+
+END
+GO
+
+

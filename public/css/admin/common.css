@@ -1,0 +1,207 @@
+@import url(../fontiran.css);
+body{
+    font-family: IRANSans, tahoma !important;
+}
+h1, h2, h3, h4, h5, h6,input, textarea {
+    font-family: IRANSans, tahoma !important;
+}
+.main-container {
+    min-height: 540px;
+    margin-bottom: 50px;
+}
+.form-row {
+    margin-bottom: 20px;
+}
+.grid-row{
+    margin-bottom: 10px;
+}
+.rtl {
+    direction: rtl;
+    text-align: right;
+}
+.admin-textfield {
+    width: 50%;
+}
+.appson-navbar-brand{
+    float:left;
+    padding:14px 15px;
+    font-size:13px;
+    line-height:22px;
+    height:50px
+}
+.loading {
+    background: #f1f1f1;
+    width: 100%;
+    height: 100%;
+    display: none;
+    padding-top: 10%;
+    position: absolute;
+    text-align: center;
+    color: #000000;
+    font-size: 24px;
+    opacity: 0.5;
+    z-index: 9999;
+}
+.loading div {
+    position: fixed;
+    text-align: center;
+    direction: rtl;
+    width: 100%;
+}
+.dataTable {
+
+}
+.dataTable th, td {
+    text-align: center;
+}
+/************** Start Switch *************/
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+/************** End Switch *************/
+
+/* Start Over Writes */
+.dataTable th {
+    background-color: #f1f1f1;
+}
+.table-bordered>thead>tr>td, .table-bordered>thead>tr>th, .table-bordered>thead>tr>td, .table-bordered>tfoot>tr>th {
+    background-color: #ffffff;
+    border: 0px;
+}
+.table-bordered>thead>tr>th[name='right-direction'], .table-bordered>thead>tr>th[name='right-direction'], .table-bordered>thead>tr>td[name='right-direction'], .table-bordered>tfoot>tr>th[name='right-direction'] {
+    text-align: right;
+}
+
+
+.table-bordered,
+.table-bordered>tbody>tr>td,
+.table-bordered>tbody>tr>th,
+.table-bordered>tfoot>tr>td,
+.table-bordered>tfoot>tr>th,
+.table-bordered>thead>tr>td,
+.table-bordered>thead>tr>th {
+    border: 1px solid #d3e0e9;
+}
+.ms-ctn .ms-trigger .ms-trigger-ico {
+    margin-right: 8px;
+}
+/* End Over Writes */
+.vertical-text{
+    writing-mode: tb-rl;
+    font-weight: bold;
+    width: 20%;
+    height: 100%;
+    vertical-align: middle;
+    display: inline-block;
+    padding-left: 15px;
+}
+.pointer {
+    cursor: pointer;
+}
+.collapse-row {
+    font-size: 20px;
+}
+.none-decoration, .none-decoration:hover {
+    text-decoration: none;
+}
+.line-through, .line-through:hover {
+text-decoration: line-through;
+}
+#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+#sortable li span { position: absolute; margin-left: -1.3em; }
+
+.drag {
+    border-radius:2px;
+    padding:5px;
+    color:#777777;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 60px;
+    width: 100%;
+    height: 100%;
+    text-align: right;
+}
+.rf-ind-drag.default {
+    padding-right: 20px !important;
+    background-color: #f1f1f1;
+}
+.sortable-item-title {
+    /*cursor: row-resize;*/
+}
+.menu-children-container {
+    padding-right: 12px;
+    line-height: 30px;
+}
+.sub-menu-icon {
+    float: right;
+    margin-left: 8px;
+    vertical-align: baseline;
+}
+.service-content-container {
+    border: 1px solid #d3e0e9;
+    border-radius: 5px;
+    box-shadow: 2px 4px 5px #cccccc;
+    padding: 12px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+    text-align: right !important;
+}
