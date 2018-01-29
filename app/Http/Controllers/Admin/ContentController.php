@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Content;
+use App\Service;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -18,12 +20,18 @@ class ContentController extends Controller
 
     public function getCreate()
     {
-        return view('admin.content.content_create');
+        $services = Service::where('is_active', 1)
+                    ->where('date_start', '<=', Carbon::today()->format('Y-m-d'))
+                    ->where('date_end', '>=', Carbon::today()->format('Y-m-d'))
+                    ->get();
+
+        return view('admin.content.content_create', compact('services'));
     }
 
     public function postCreate(Request $request)
     {
         $rules = [
+            'service_id'    => 'required|numeric|digits_between:0,11',
             'type'          => 'required|max:50',
             'send_type'     => 'required|max:50',
             'text'          => 'required_if:type,text|max:2000',
@@ -46,14 +54,20 @@ class ContentController extends Controller
 
     public function getEdit($id)
     {
+        $services = Service::where('is_active', 1)
+                    ->where('date_start', '<=', Carbon::today()->format('Y-m-d'))
+                    ->where('date_end', '>=', Carbon::today()->format('Y-m-d'))
+                    ->get();
+
         $content = Content::find($id);
 
-        return view('admin.content.content_edit', compact('content'));
+        return view('admin.content.content_edit', compact('content', 'services'));
     }
 
     public function postEdit(Request $request)
     {
         $rules = [
+            'service_id'    => 'required|numeric|digits_between:0,11',
             'type'          => 'required|max:50',
             'send_type'     => 'required|max:50',
             'text'          => 'required_if:type,text|max:2000',

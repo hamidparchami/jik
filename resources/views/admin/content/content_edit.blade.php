@@ -25,6 +25,18 @@
                             {{ csrf_field() }}
                             <div class="row form-row">
                                 <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <select name="service_id" class="form-control rtl" id="sel1">
+                                        @foreach($services as $service)
+                                            <option value="{{ $service->id }}" @if(isset($content) && ($service->id == $content->catalog_id || $service->id == old('service_id'))) selected @endif>{{ $service->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-4">سرویس</div>
+                            </div>
+
+                            <div class="row form-row">
+                                <div class="col-md-4"></div>
                                 <div class="col-md-2">
                                     <select name="send_type" id="send_type" class="form-control rtl">
                                         <option value="pull" @if((isset($content->send_type) && $content->send_type == 'pull') || (old('send_type') == 'pull')) selected @endif>ترتیبی - درخواستی</option>
