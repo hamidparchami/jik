@@ -121,6 +121,14 @@
                             <div class="row form-row">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
+                                    <input name="reference" type="text" class="form-control" value="{{ old('reference') }}">
+                                </div>
+                                <div class="col-md-4">مرجع</div>
+                            </div>
+
+                            <div class="row form-row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
                                     <div class="checkbox checkbox-success">
                                         <input id="checkbox" class="styled" type="checkbox" name="is_active" @if(($content->is_active == '1' && is_null(old('is_active'))) || (old('is_active') == 1 || old('is_active') == 'on')) checked @endif>
                                         <label for="checkbox"></label>

@@ -40,6 +40,7 @@ class ContentController extends Controller
             'audio_url'     => 'required_if:type,audio|max:255',
             'order'         => 'required_if:send_type,pull|numeric|digits_between:0,11',
             'score'         => 'numeric|digits_between:0,11',
+            'reference'     => 'sometimes|max:255',
             'publish_time'  => 'required_if:send_type,push|date_format:Y/m/d H:i',
         ];
 
@@ -76,6 +77,7 @@ class ContentController extends Controller
             'audio_url'     => 'required_if:type,audio|max:255',
             'order'         => 'required_if:send_type,pull|numeric|digits_between:0,11',
             'score'         => 'numeric|digits_between:0,11',
+            'reference'     => 'sometimes|max:255',
             'publish_time'  => 'required_if:send_type,push|date_format:Y/m/d H:i',
         ];
 
