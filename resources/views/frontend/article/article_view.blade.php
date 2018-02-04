@@ -18,8 +18,12 @@
 <body>
 <div class="container main-container">
     <div class="row">
-        <div class="col-md-12 rtl"><h1>{{ $article->title }}</h1></div>
-        <div class="col-md-12 rtl">{!! $article->content !!}</div>
+        <div class="col-md-12 rtl">
+            <div id="article_title"><h1>{{ $article->title }}</h1></div>
+        </div>
+        <div class="col-md-12 rtl">
+            <div id="article_content">{!! $article->content !!}</div>
+        </div>
     </div>
 </div>
 </body>
