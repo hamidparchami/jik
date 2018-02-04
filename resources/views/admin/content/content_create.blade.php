@@ -57,7 +57,7 @@
                             <div class="row form-row">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
-                                    <textarea name="text" class="form-control rtl" rows="4">{{ old('text') }}</textarea>
+                                    <textarea name="text" class="form-control rtl" rows="6">{{ old('text') }}</textarea>
                                 </div>
                                 <div class="col-md-4">متن</div>
                             </div>
