@@ -91,6 +91,20 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'user.role', 'user.a
     Route::get('/slider/edit/id/{id}', 'Admin\SliderController@getEdit');
     Route::post('/slider/edit/id/{id}', 'Admin\SliderController@postEdit');
     Route::get('/slider/delete/id/{id}', 'Admin\SliderController@getDelete');
+    //Article Category
+    Route::get('/article-category/manage', 'Admin\ArticleCategoryController@index');
+    Route::get('/article-category/create', 'Admin\ArticleCategoryController@getCreate');
+    Route::post('/article-category/create', 'Admin\ArticleCategoryController@postCreate');
+    Route::get('/article-category/edit/id/{id}', 'Admin\ArticleCategoryController@getEdit');
+    Route::post('/article-category/edit/id/{id}', 'Admin\ArticleCategoryController@postEdit');
+    Route::get('/article-category/delete/id/{id}', 'Admin\ArticleCategoryController@getDelete');
+    //Article
+    Route::get('/article/manage', 'Admin\ArticleController@index');
+    Route::get('/article/create', 'Admin\ArticleController@getCreate');
+    Route::post('/article/create', 'Admin\ArticleController@postCreate');
+    Route::get('/article/edit/id/{id}', 'Admin\ArticleController@getEdit');
+    Route::post('/article/edit/id/{id}', 'Admin\ArticleController@postEdit');
+    Route::get('/article/delete/id/{id}', 'Admin\ArticleController@getDelete');
 });
 
 
@@ -114,3 +128,5 @@ Route::get('service/award/{award_id}/page', 'ServiceController@getServiceAwardSt
 Route::get('/all-awards', 'SiteController@getAllAwards');
 Route::get('/all-delivered-awards', 'SiteController@getAllDeliveredAwards');
 Route::post('/general/submit-piqo-payment-result', 'SiteController@getSubmitPiqoPaymentResult');
+
+Route::get('/article/{id}', 'SiteController@getArticle');
