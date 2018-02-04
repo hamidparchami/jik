@@ -110,9 +110,9 @@
                                     <li>
                                         <a href="{{ url('/admin/slider/manage') }}">مدیریت اسلایدر</a>
                                     </li>
-                                    <li>
+                                    {{--<li>
                                         <a href="{{ url('/admin/slider/create') }}">افزودن اسلاید</a>
-                                    </li>
+                                    </li>--}}
                                 @endif
 
                                 @if (in_array('admin/award/manage', session('allowed_URLs')))
@@ -120,9 +120,30 @@
                                     <li>
                                         <a href="{{ url('/admin/award/manage') }}">مدیریت جایزه ها</a>
                                     </li>
-                                    <li>
+                                    {{--<li>
                                         <a href="{{ url('/admin/award/create') }}">تعریف جایزه</a>
+                                    </li>--}}
+                                @endif
+
+                                @if (in_array('admin/article-category/manage', session('allowed_URLs')) || in_array('admin/article/manage', session('allowed_URLs')))
+                                    <hr style="margin: 0">
+                                    @if (in_array('admin/article-category/manage', session('allowed_URLs')))
+                                    <li>
+                                        <a href="{{ url('/admin/article-category/manage') }}">دسته بندی مطالب</a>
                                     </li>
+                                    @endif
+
+                                    @if (in_array('admin/article/manage', session('allowed_URLs')))
+                                    <li>
+                                        <a href="{{ url('/admin/article/manage') }}">مدیریت مطالب</a>
+                                    </li>
+                                    @endif
+
+                                    @if (in_array('admin/article/create', session('allowed_URLs')))
+                                    <li>
+                                        <a href="{{ url('/admin/article/create') }}">مطلب جدید</a>
+                                    </li>
+                                    @endif
                                 @endif
                             </ul>
                         </li>

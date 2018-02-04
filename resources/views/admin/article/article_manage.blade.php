@@ -24,7 +24,7 @@
             <tr>
                 <th>عملیات</th>
                 <th>انتشار یافته</th>
-                <th>Slug</th>
+                <th>لینک</th>
                 <th name="right-direction">عنوان مطلب</th>
             </tr>
             </thead>
@@ -32,7 +32,7 @@
             <tr>
                 <th>عملیات</th>
                 <th>انتشار یافته</th>
-                <th>Slug</th>
+                <th>لینک</th>
                 <th name="right-direction">عنوان مطلب</th>
             </tr>
             </tfoot>
@@ -44,7 +44,7 @@
                         <a class="delete" href="/admin/article/delete/id/{{ $article->id }}">حذف</a>
                     </td>
                     <td>@if($article->is_active == 1) بلی @else خیر @endif</td>
-                    <td>{{ $article->slug }}</td>
+                    <td>{{ url('/') }}/article/{{ $article->id }}</td>
                     <td @if($article->is_important) style="font-weight: bold;" @endif><a href="/article/{{ $article->id }}" target="_blank">{{ $article->title }}</a></td>
                 </tr>
             @endforeach
