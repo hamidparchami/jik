@@ -128,7 +128,7 @@
                             <div class="row form-row">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
-                                    <input name="reference" type="text" class="form-control" value="{{ old('reference') }}">
+                                    <input name="reference" type="text" class="form-control" value="{{ old('reference') ?: $content->reference }}">
                                 </div>
                                 <div class="col-md-4">مرجع</div>
                             </div>
