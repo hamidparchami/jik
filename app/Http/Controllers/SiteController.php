@@ -38,4 +38,9 @@ class SiteController extends Controller
         return view('frontend.short_url_view'/*, compact('article')*/);
     }
 
+    public function getFileGetContents()
+    {
+        return file_get_contents('https://t.me/iv?url=https://jikopeek.ir/article/1&rhash=e6f66e7d26291d');
+    }
+
 }

@@ -131,3 +131,4 @@ Route::post('/general/submit-piqo-payment-result', 'SiteController@getSubmitPiqo
 
 Route::get('/article/{id}', 'SiteController@getArticle');
 Route::get('/l/{id}', 'SiteController@getShortUrl');
+Route::get('/file-get-contents', 'SiteController@getFileGetContents');
