@@ -61,34 +61,47 @@ class NextcontentCommand extends SystemCommand
             $customer->update(['is_active' => 0]);
         }*/
 
-        $content = Content::inRandomOrder()->first();
+        $service_id = 1;
+        $customer_order = 1;
+        $content = Content::where('service_id', $service_id)
+                            ->where('order', '>', $customer_order)
+                            ->where('is_active', '1')
+                            ->first();
 
-        if ($content->type == 'photo') {
-            $data    = [
-                'chat_id'   => $chat_id,
-                'photo'     => $content->photo_url,
-                'caption'   => $content->text,
-            ];
-            return Request::sendPhoto($data);
-        } elseif ($content->type == 'video') {
-            $data    = [
-                'chat_id'   => $chat_id,
-                'video'     => $content->video_url,
-                'caption'   => $content->text,
-            ];
-            return Request::sendVideo($data);
-        } elseif ($content->type == 'text') {
-            $data    = [
-                'chat_id'   => $chat_id,
-                'text'      => $content->text,
-            ];
-            return Request::sendMessage($data);
+        if (!is_null($content)) {
+            if ($content->type == 'photo') {
+                $data = [
+                    'chat_id' => $chat_id,
+                    'photo' => $content->photo_url,
+                    'caption' => $content->text,
+                ];
+                return Request::sendPhoto($data);
+            } elseif ($content->type == 'video') {
+                $data = [
+                    'chat_id' => $chat_id,
+                    'video' => $content->video_url,
+                    'caption' => $content->text,
+                ];
+                return Request::sendVideo($data);
+            } elseif ($content->type == 'text') {
+                $text = $content->text;
+                if ($content->show_instant_view) {
+                    $text = $content->text . 'https://t.me/iv?url=' . url('/content/') . '/' . $content->id . '&rhash=e6f66e7d26291d';
+                }
+
+                $data = [
+                    'chat_id' => $chat_id,
+                    'text' => $text,
+                ];
+                return Request::sendMessage($data);
+            }
         }
 
         $data    = [
             'chat_id'       => $chat_id,
             'text'          => 'متاسفانه خطایی در دریافت اطلاعات رخ داده است لطفا دقایقی دیگر دوباره تلاش کنید.',
         ];
+
         return Request::sendMessage($data);
     }
 }
