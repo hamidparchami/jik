@@ -32,4 +32,10 @@ class SiteController extends Controller
         return view('frontend.article.article_view', compact('article'));
     }
 
+    public function getShortUrl($id)
+    {
+//        $article = Article::where('id', $id)->where('is_active', 1)->get()->first();
+        return view('frontend.short_url_view'/*, compact('article')*/);
+    }
+
 }
