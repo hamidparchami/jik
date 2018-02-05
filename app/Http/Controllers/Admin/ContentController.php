@@ -35,6 +35,7 @@ class ContentController extends Controller
             'type'          => 'required|max:50',
             'send_type'     => 'required|max:50',
             'text'          => 'required_if:type,text|max:2000',
+            'full_content'  => 'required_if:type,text|max:10000',
             'photo_url'     => 'required_if:type,photo|max:255',
             'video_url'     => 'required_if:type,video|max:255',
             'audio_url'     => 'required_if:type,audio|max:255',
@@ -48,6 +49,7 @@ class ContentController extends Controller
 
         $request['user_id']     = Auth::id();
         $request['is_active']   = ($request['is_active'] == 'on' || $request['is_active'] == '1') ? 1 : 0;
+        $request['show_instant_view']   = ($request['show_instant_view'] == 'on' || $request['show_instant_view'] == '1') ? 1 : 0;
         Content::create($request->all());
 
         return redirect('/admin/content/manage')->with('message', 'محتوا با موفقیت ذخیره شد.');
@@ -72,6 +74,7 @@ class ContentController extends Controller
             'type'          => 'required|max:50',
             'send_type'     => 'required|max:50',
             'text'          => 'required_if:type,text|max:2000',
+            'full_content'  => 'required_if:type,text|max:10000',
             'photo_url'     => 'required_if:type,photo|max:255',
             'video_url'     => 'required_if:type,video|max:255',
             'audio_url'     => 'required_if:type,audio|max:255',
@@ -84,6 +87,7 @@ class ContentController extends Controller
         Validator::make($request->all(), $rules)->validate();
 
         $request['is_active']   = ($request['is_active'] == 'on' || $request['is_active'] == '1') ? 1 : 0;
+        $request['show_instant_view']   = ($request['show_instant_view'] == 'on' || $request['show_instant_view'] == '1') ? 1 : 0;
 
         $content = Content::find($request->id);
         $content->update($request->all());
@@ -95,5 +99,14 @@ class ContentController extends Controller
     {
         Content::destroy($id);
         return redirect('/admin/content/manage')->with('message', 'محتوا با موفقیت حذف شد.');
+    }
+
+    public function getLastContentOrder($service_id, $content_id=null)
+    {
+        $content = Content::where('service_id', $service_id)->where('id', '!=', $content_id)->orderBy('id', 'desc')->get()->first();
+//        (is_null($content_id)) ?: $content->where('id', '!=', $content_id);
+//        $content->orderBy('id', 'desc')->get()->first();
+
+        return $content;
     }
 }

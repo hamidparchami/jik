@@ -14,7 +14,9 @@ class AddReferenceToContentsTable extends Migration
     public function up()
     {
         Schema::table('contents', function (Blueprint $table) {
+            $table->text('full_content')->nullable()->after('text');
             $table->text('reference')->nullable()->after('order');
+            $table->tinyInteger('show_instant_view')->default(0)->after('state');
         });
     }
 
@@ -26,7 +28,9 @@ class AddReferenceToContentsTable extends Migration
     public function down()
     {
         Schema::table('contents', function (Blueprint $table) {
+            $table->dropColumn('full_content');
             $table->dropColumn('reference');
+            $table->dropColumn('show_instant_view');
         });
     }
 }

@@ -26,7 +26,7 @@
                             <div class="row form-row">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
-                                    <select name="service_id" class="form-control rtl" id="sel1">
+                                    <select name="service_id" id="service_id" class="form-control rtl">
                                         @foreach($services as $service)
                                             <option value="{{ $service->id }}" @if(isset($content) && ($service->id == $content->catalog_id || $service->id == old('service_id'))) selected @endif>{{ $service->name }}</option>
                                         @endforeach
@@ -60,6 +60,13 @@
                                     <textarea name="text" class="form-control rtl" rows="6">{{ old('text') ?: $content->text }}</textarea>
                                 </div>
                                 <div class="col-md-4">متن</div>
+                            </div>
+
+                            <div class="row form-row" id="full_content_container" style="display: none;">
+                                <div class="col-md-8">
+                                    <textarea name="full_content" class="form-control rtl" rows="4">{{ (old('full_content')) ?: $content->full_content }}</textarea>
+                                </div>
+                                <div class="col-md-4">متن کامل</div>
                             </div>
 
                             <div class="row form-row" id="photo_url_container" style="display: none;">
@@ -103,7 +110,7 @@
                             </div>
 
                             <div class="row form-row" id="order">
-                                <div class="col-md-4"></div>
+                                <div class="col-md-4 rtl">ترتیب آخرین محتوا: <span id="last-content-order"></span></div>
                                 <div class="col-md-4">
                                     <input name="order" type="text" class="form-control" value="{{ old('order') ?: $content->order }}">
                                 </div>
@@ -127,7 +134,13 @@
                             </div>
 
                             <div class="row form-row">
-                                <div class="col-md-4"></div>
+                                <div class="col-md-2">
+                                    <div class="checkbox checkbox-success">
+                                        <input id="checkbox" class="styled" type="checkbox" name="show_instant_view" @if(($content->show_instant_view == '1' && is_null(old('show_instant_view'))) || (old('show_instant_view') == 1 || old('show_instant_view') == 'on')) checked @endif>
+                                        <label for="checkbox"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 rtl">نمایش Instant View</div>
                                 <div class="col-md-4">
                                     <div class="checkbox checkbox-success">
                                         <input id="checkbox" class="styled" type="checkbox" name="is_active" @if(($content->is_active == '1' && is_null(old('is_active'))) || (old('is_active') == 1 || old('is_active') == 'on')) checked @endif>
@@ -174,8 +187,15 @@
             }
         });
         $(document).ready(function () {
+            var content_id = {{ $content->id }};
+
             checkType();
             checkSendType();
+            getLastContentOrder($('#service_id').val(), content_id);
+
+            $('#service_id').change(function () {
+                getLastContentOrder($('#service_id').val(), content_id);
+            });
 
             $('#send_type').change(function () {
                 checkSendType();
@@ -197,22 +217,57 @@
 
             function checkType() {
                 if ($('#type').val() == 'text') {
+                    $('#full_content_container').show();
                     $('#photo_url_container').hide();
                     $('#video_url_container').hide();
                     // $('#audio_url').hide();
                 } else if ($('#type').val() == 'photo') {
+                    $('#full_content_container').hide();
                     $('#photo_url_container').show();
                     $('#video_url_container').hide();
                     // $('#audio_url').hide();
                 } else if ($('#type').val() == 'video') {
+                    $('#full_content_container').hide();
                     $('#photo_url_container').hide();
                     $('#video_url_container').show();
                     // $('#audio_url').hide();
                 } else if ($('#type').val() == 'audio') {
+                    $('#full_content_container').hide();
                     $('#photo_url_container').hide();
                     $('#video_url_container').hide();
                     // $('#audio_url').show();
                 }
+            }
+
+            function getLastContentOrder(service_id, content_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "/admin/content/last-content-order/service_id/"+service_id+"/content_id/"+content_id,
+                    data: {'_token': $('input[name=_token]').val()},
+                    success:function(data){
+                        // window.location.href = '/admin/service/manage';
+                        console.log(data);
+                        $("#last-content-order").html(data.order);
+                    }, error:function(jqXhr){
+                        // $("#loading-mask").hide();
+                        if(jqXhr.status === 401) //redirect if not authenticated user.
+                            $(location).prop('pathname', 'auth/login');
+                        if(jqXhr.status === 422) {
+                            $("html, body").animate({ scrollTop: 0 }, "slow");
+                            setTimeout(function () {
+                                $('#form-errors').fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
+                            }, 1000);
+
+                            var errors = jqXhr.responseJSON; //this will get the errors response data.
+                            errorsHtml = '<div class="alert alert-danger"><ul>';
+                            $.each(errors, function(key, value) {
+                                errorsHtml += '<li>' + value[0] + '</li>'; //showing only the first error.
+                            });
+                            errorsHtml += '</ul></di>';
+                            $('#form-errors').html(errorsHtml);
+                        }
+                    }
+                });
             }
         })
     </script>
@@ -221,5 +276,20 @@
     <script>
         $('#image-selector').filemanager('image');
         $('#video-selector').filemanager('file');
+    </script>
+
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
+        var ckeditor = {
+            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token={{csrf_token()}}',
+            filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+            filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token={{csrf_token()}}',
+            contentsLangDirection: 'rtl',
+            enterMode: CKEDITOR.ENTER_BR,
+            allowedContent: true,
+        };
+
+        CKEDITOR.replace( 'full_content', ckeditor);
     </script>
 @endsection

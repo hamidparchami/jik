@@ -54,6 +54,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'user.role', 'user.a
     Route::get('/content/edit/id/{id}', 'Admin\ContentController@getEdit');
     Route::post('/content/edit/id/{id}', 'Admin\ContentController@postEdit');
     Route::get('/content/delete/id/{id}', 'Admin\ContentController@getDelete');
+    Route::get('/content/last-content-order/service_id/{service_id}/content_id/{content_id}', 'Admin\ContentController@getLastContentOrder');
     //Catalog
     Route::get('/catalog/manage/{parent_id?}', 'Admin\CatalogController@index');
     Route::get('/catalog/create/{parent_id?}', 'Admin\CatalogController@getCreate');
@@ -130,5 +131,6 @@ Route::get('/all-delivered-awards', 'SiteController@getAllDeliveredAwards');
 Route::post('/general/submit-piqo-payment-result', 'SiteController@getSubmitPiqoPaymentResult');
 
 Route::get('/article/{id}', 'SiteController@getArticle');
+Route::get('/content/{id}', 'SiteController@getContent');
 Route::get('/l/{id}', 'SiteController@getShortUrl');
 Route::get('/file-get-contents', 'SiteController@getFileGetContents');

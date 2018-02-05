@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Award;
 use App\Catalog;
+use App\Content;
 use App\Event;
 use App\Service;
 use App\SliderImages;
@@ -32,15 +33,16 @@ class SiteController extends Controller
         return view('frontend.article.article_view', compact('article'));
     }
 
+    public function getContent($id)
+    {
+        $content = Content::where('id', $id)->where('is_active', 1)->get()->first();
+        return view('frontend.content.content_view', compact('content'));
+    }
+
     public function getShortUrl($id)
     {
 //        $article = Article::where('id', $id)->where('is_active', 1)->get()->first();
         return view('frontend.short_url_view'/*, compact('article')*/);
-    }
-
-    public function getFileGetContents()
-    {
-        return file_get_contents('https://t.me/iv?url=https://jikopeek.ir/article/1&rhash=e6f66e7d26291d');
     }
 
 }
