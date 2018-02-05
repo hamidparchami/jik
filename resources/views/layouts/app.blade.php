@@ -99,7 +99,7 @@
                         </li>
 
                         <li class="dropdown">
-                            @if (in_array('admin/slider/manage', session('allowed_URLs')) || in_array('admin/award/manage', session('allowed_URLs')))
+                            @if (in_array('admin/slider/manage', session('allowed_URLs')) || in_array('admin/award/manage', session('allowed_URLs')) || in_array('admin/article-category/manage', session('allowed_URLs')))
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     محتوای پایه<span class="caret"></span>
                                 </a>
