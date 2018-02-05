@@ -86,7 +86,7 @@ class NextcontentCommand extends SystemCommand
             } elseif ($content->type == 'text') {
                 $text = $content->text;
                 if ($content->show_instant_view) {
-                    $text = $content->text . '\nمتن کامل را در instant view ببینید:\n'.'https://t.me/iv?url=' . url('/content/') . '/' . $content->id . '&rhash=e6f66e7d26291d';
+                    $text = $content->text . "\nمتن کامل را در instant view ببینید:\n".'https://t.me/iv?url=' . url('/content/') . '/' . $content->id . '&rhash=e6f66e7d26291d';
                 }
 
                 $data = [
