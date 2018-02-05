@@ -60,4 +60,8 @@ class Content extends Model
         $this->attributes['publish_time'] = ($value == '') ? null : $value;
     }
 
+    public function service()
+    {
+        return $this->belongsTo('App\Service');
+    }
 }

@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    {{--<title>{{ $content->title }}</title>--}}
+    <title>{{ $content->service->name }}</title>
 
     <!-- Styles -->
     <link href="/css/app.css?v=0.1" rel="stylesheet">
@@ -18,6 +18,9 @@
 <body>
 <div class="container main-container">
     <div class="row">
+        <div class="col-md-12 rtl">
+            <div id="article_title"><h1>{{ $content->service->name }}</h1></div>
+        </div>
         <div class="col-md-12 rtl">
             <div id="article_content">{!! $content->full_content !!}</div>
         </div>
