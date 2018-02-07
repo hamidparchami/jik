@@ -109,7 +109,7 @@ class ContentController extends Controller
 
     public function getLastContentOrder($category_id, $content_id=null)
     {
-        $content = Content::where('category_id', $category_id)->where('id', '!=', $content_id)->orderBy('id', 'desc')->get()->first();
+        $content = Content::where('category_id', $category_id)->where('id', '<', $content_id)->where('id', '!=', $content_id)->orderBy('id', 'desc')->get()->first();
 //        (is_null($content_id)) ?: $content->where('id', '!=', $content_id);
 //        $content->orderBy('id', 'desc')->get()->first();
 
