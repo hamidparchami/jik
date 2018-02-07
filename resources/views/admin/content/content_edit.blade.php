@@ -122,7 +122,7 @@
                             </div>
 
                             <div class="row form-row" id="order">
-                                <div class="col-md-4 rtl">ترتیب آخرین محتوا: <span id="last-content-order"></span></div>
+                                <div class="col-md-4 rtl">ترتیب محتوا قبلی: <span id="last-content-order"></span></div>
                                 <div class="col-md-4">
                                     <input name="order" type="text" class="form-control" value="{{ old('order') ?: $content->order }}">
                                 </div>
