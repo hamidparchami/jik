@@ -35,13 +35,13 @@ class ContentController extends Controller
             'type'          => 'required|max:50',
             'send_type'     => 'required|max:50',
             'text'          => 'required_if:type,text|max:2000',
-            'full_content'  => 'required_if:type,text|max:10000',
+            'full_content'  => 'required_if:type,text|max:50000',
             'photo_url'     => 'required_if:type,photo|max:255',
             'video_url'     => 'required_if:type,video|max:255',
             'audio_url'     => 'required_if:type,audio|max:255',
             'order'         => 'required_if:send_type,pull|numeric|digits_between:0,11',
             'score'         => 'numeric|digits_between:0,11',
-            'reference'     => 'sometimes|max:255',
+            'reference'     => 'sometimes|max:4080',
             'publish_time'  => 'required_if:send_type,push|date_format:Y/m/d H:i',
         ];
 
@@ -74,13 +74,13 @@ class ContentController extends Controller
             'type'          => 'required|max:50',
             'send_type'     => 'required|max:50',
             'text'          => 'required_if:type,text|max:2000',
-            'full_content'  => 'required_if:type,text|max:10000',
+            'full_content'  => 'required_if:type,text|max:50000',
             'photo_url'     => 'required_if:type,photo|max:255',
             'video_url'     => 'required_if:type,video|max:255',
             'audio_url'     => 'required_if:type,audio|max:255',
             'order'         => 'required_if:send_type,pull|numeric|digits_between:0,11',
             'score'         => 'numeric|digits_between:0,11',
-            'reference'     => 'sometimes|max:255',
+            'reference'     => 'sometimes|max:4080',
             'publish_time'  => 'required_if:send_type,push|date_format:Y/m/d H:i',
         ];
 
