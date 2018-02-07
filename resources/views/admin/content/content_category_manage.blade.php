@@ -12,10 +12,10 @@
         @endif
         <div class="row">
             <div class="col-md-6">
-                <a class="btn btn-primary" href="/admin/content/create">ایجاد محتوا</a>
+                <a class="btn btn-primary" href="/admin/content-category/create">دسته جدید</a>
             </div>
             <div class="col-md-6 text-right rtl">
-                <h4>لیست محتوا</h4>
+                <h4>لیست دسته‌ها</h4>
             </div>
         </div>
         <hr>
@@ -23,35 +23,26 @@
             <thead>
             <tr>
                 <th>عملیات</th>
-                <th>نحوع ارسال</th>
-                <th>نوع محتوا</th>
-                <th name="right-direction">متن</th>
+                <th>وضعیت</th>
+                <th name="right-direction">نام دسته</th>
             </tr>
             </thead>
             <tfoot>
             <tr>
                 <th>عملیات</th>
-                <th>نحوع ارسال</th>
-                <th>نوع محتوا</th>
-                <th name="right-direction">متن</th>
+                <th>وضعیت</th>
+                <th name="right-direction">نام دسته</th>
             </tr>
             </tfoot>
             <tbody>
-            @foreach($contents as $content)
+            @foreach($categories as $category)
                 <tr>
                     <td>
-                        <a href="/admin/content/edit/id/{{ $content->id }}">ویرایش</a> |
-                        <a class="delete" href="/admin/content/delete/id/{{ $content->id }}">حذف</a>
+                        <a href="/admin/content-category/edit/id/{{ $category->id }}">ویرایش</a> |
+                        <a class="delete" href="/admin/content-category/delete/id/{{ $category->id }}">حذف</a>
                     </td>
-                    <td>{{ $content->send_type }}</td>
-                    <td>{{ $content->type }}</td>
-                    <td class="rtl">
-                        @if($content->is_active)
-                            {{ str_limit($content->text, $limit = 100, $end = '...') }}
-                        @else
-                            <div style="text-decoration: line-through;">{{ str_limit($content->text, $limit = 100, $end = '...') }}</div>
-                        @endif
-                    </td>
+                    <td>@if($category->is_active == 1) بلی @else خیر @endif</td>
+                    <td @if($category->is_important) style="font-weight: bold;" @endif>{{ $category->name }}</td>
                 </tr>
             @endforeach
             </tbody>
@@ -69,10 +60,9 @@
                 "language": {
                     "url": "/js/dataTables/i18n/Persian.json"
                 },
-                "pageLength": 20,
                 "columnDefs": [
-                    { "width": "10%", "targets": [0] },
-                    // { className: "text-right", "targets": [ 1 ] }
+                    { "width": "20%", "targets": [0,1] },
+                    { className: "text-right", "targets": [ 2 ] }
                 ]
             });
 

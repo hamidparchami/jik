@@ -166,12 +166,23 @@
 
                                 @if (in_array('admin/content/manage', session('allowed_URLs')))
                                     <hr style="margin: 0;">
+                                    @if (in_array('admin/content-category/manage', session('allowed_URLs')))
+                                        <li>
+                                            <a href="{{ url('/admin/content-category/manage') }}">دسته بندی محتوا</a>
+                                        </li>
+                                    @endif
+
+                                    @if (in_array('admin/content/manage', session('allowed_URLs')))
                                     <li>
                                         <a href="{{ url('/admin/content/manage') }}">مدیریت محتوا</a>
                                     </li>
+                                    @endif
+
+                                    @if (in_array('admin/content/create', session('allowed_URLs')))
                                     <li>
                                         <a href="{{ url('/admin/content/create') }}">ایجاد محتوا</a>
                                     </li>
+                                    @endif
                                 @endif
                             </ul>
                         </li>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Content;
+use App\ContentCategory;
 use App\Service;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -25,13 +26,16 @@ class ContentController extends Controller
                     ->where('date_end', '>=', Carbon::today()->format('Y-m-d'))
                     ->get();
 
-        return view('admin.content.content_create', compact('services'));
+        $categories = ContentCategory::where('is_active', 1)->get();
+
+        return view('admin.content.content_create', compact('services', 'categories'));
     }
 
     public function postCreate(Request $request)
     {
         $rules = [
             'service_id'    => 'required|numeric|digits_between:0,11',
+            'category_id'   => 'required|numeric|digits_between:0,11',
             'type'          => 'required|max:50',
             'send_type'     => 'required|max:50',
             'text'          => 'required_if:type,text|max:2000',
@@ -62,15 +66,17 @@ class ContentController extends Controller
                     ->where('date_end', '>=', Carbon::today()->format('Y-m-d'))
                     ->get();
 
+        $categories = ContentCategory::where('is_active', 1)->get();
         $content = Content::find($id);
 
-        return view('admin.content.content_edit', compact('content', 'services'));
+        return view('admin.content.content_edit', compact('content', 'services', 'categories'));
     }
 
     public function postEdit(Request $request)
     {
         $rules = [
             'service_id'    => 'required|numeric|digits_between:0,11',
+            'category_id'   => 'required|numeric|digits_between:0,11',
             'type'          => 'required|max:50',
             'send_type'     => 'required|max:50',
             'text'          => 'required_if:type,text|max:2000',
@@ -101,9 +107,9 @@ class ContentController extends Controller
         return redirect('/admin/content/manage')->with('message', 'محتوا با موفقیت حذف شد.');
     }
 
-    public function getLastContentOrder($service_id, $content_id=null)
+    public function getLastContentOrder($category_id, $content_id=null)
     {
-        $content = Content::where('service_id', $service_id)->where('id', '!=', $content_id)->orderBy('id', 'desc')->get()->first();
+        $content = Content::where('category_id', $category_id)->where('id', '!=', $content_id)->orderBy('id', 'desc')->get()->first();
 //        (is_null($content_id)) ?: $content->where('id', '!=', $content_id);
 //        $content->orderBy('id', 'desc')->get()->first();
 

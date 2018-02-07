@@ -28,11 +28,23 @@
                                 <div class="col-md-4">
                                     <select name="service_id" id="service_id" class="form-control rtl">
                                         @foreach($services as $service)
-                                            <option value="{{ $service->id }}" @if(isset($content) && ($service->id == $content->catalog_id || $service->id == old('service_id'))) selected @endif>{{ $service->name }}</option>
+                                            <option value="{{ $service->id }}" @if(isset($content) && ($service->id == $content->service_id || $service->id == old('service_id'))) selected @endif>{{ $service->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-4">سرویس</div>
+                            </div>
+
+                            <div class="row form-row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <select name="category_id" id="category_id" class="form-control rtl">
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}" @if(isset($content) && ($category->id == $content->category_id || $category->id == old('category_id'))) selected @endif>{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-4">دسته</div>
                             </div>
 
                             <div class="row form-row">

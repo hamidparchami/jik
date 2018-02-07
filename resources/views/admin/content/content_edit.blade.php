@@ -37,6 +37,18 @@
 
                             <div class="row form-row">
                                 <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <select name="category_id" id="category_id" class="form-control rtl">
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}" @if(isset($content) && ($category->id == $content->category_id || $category->id == old('category_id'))) selected @endif>{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-4">دسته</div>
+                            </div>
+
+                            <div class="row form-row">
+                                <div class="col-md-4"></div>
                                 <div class="col-md-2">
                                     <select name="send_type" id="send_type" class="form-control rtl">
                                         <option value="pull" @if((isset($content->send_type) && $content->send_type == 'pull') || (old('send_type') == 'pull')) selected @endif>ترتیبی - درخواستی</option>
@@ -191,10 +203,10 @@
 
             checkType();
             checkSendType();
-            getLastContentOrder($('#service_id').val(), content_id);
+            getLastContentOrder($('#category_id').val(), content_id);
 
-            $('#service_id').change(function () {
-                getLastContentOrder($('#service_id').val(), content_id);
+            $('#category_id').change(function () {
+                getLastContentOrder($('#category_id').val(), content_id);
             });
 
             $('#send_type').change(function () {
@@ -239,10 +251,10 @@
                 }
             }
 
-            function getLastContentOrder(service_id, content_id) {
+            function getLastContentOrder(category_id, content_id) {
                 $.ajax({
                     type: "GET",
-                    url: "/admin/content/last-content-order/service_id/"+service_id+"/content_id/"+content_id,
+                    url: "/admin/content/last-content-order/category_id/"+category_id+"/content_id/"+content_id,
                     data: {'_token': $('input[name=_token]').val()},
                     success:function(data){
                         // window.location.href = '/admin/service/manage';

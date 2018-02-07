@@ -47,6 +47,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'user.role', 'user.a
     Route::post('/url/edit/id/{id}', 'Admin\UrlController@postEdit');
     Route::get('/url/delete/id/{id}', 'Admin\UrlController@getDelete');
     Route::get('/url/create-url', 'Admin\UrlController@createUrl');
+    //Content Category
+    Route::get('/content-category/manage', 'Admin\ContentCategoryController@index');
+    Route::get('/content-category/create', 'Admin\ContentCategoryController@getCreate');
+    Route::post('/content-category/create', 'Admin\ContentCategoryController@postCreate');
+    Route::get('/content-category/edit/id/{id}', 'Admin\ContentCategoryController@getEdit');
+    Route::post('/content-category/edit/id/{id}', 'Admin\ContentCategoryController@postEdit');
+    Route::get('/content-category/delete/id/{id}', 'Admin\ContentCategoryController@getDelete');
     //Content
     Route::get('/content/manage', 'Admin\ContentController@index');
     Route::get('/content/create', 'Admin\ContentController@getCreate');
@@ -54,7 +61,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'user.role', 'user.a
     Route::get('/content/edit/id/{id}', 'Admin\ContentController@getEdit');
     Route::post('/content/edit/id/{id}', 'Admin\ContentController@postEdit');
     Route::get('/content/delete/id/{id}', 'Admin\ContentController@getDelete');
-    Route::get('/content/last-content-order/service_id/{service_id}/content_id/{content_id}', 'Admin\ContentController@getLastContentOrder');
+    Route::get('/content/last-content-order/category_id/{category_id}/content_id/{content_id}', 'Admin\ContentController@getLastContentOrder');
     //Catalog
     Route::get('/catalog/manage/{parent_id?}', 'Admin\CatalogController@index');
     Route::get('/catalog/create/{parent_id?}', 'Admin\CatalogController@getCreate');

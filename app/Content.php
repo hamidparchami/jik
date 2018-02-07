@@ -16,7 +16,7 @@ class Content extends Model
      * @var array
      */
     protected $fillable = [
-        'service_id', 'user_id', 'text', 'full_content', 'photo_url', 'video_url', 'score', 'publish_time', 'type', 'order', 'reference', 'show_instant_view', 'is_active'
+        'service_id', 'category_id', 'user_id', 'text', 'full_content', 'photo_url', 'video_url', 'score', 'publish_time', 'type', 'order', 'reference', 'show_instant_view', 'is_active'
     ];
 
     /** convert send_time to Jalali
