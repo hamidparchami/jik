@@ -67,13 +67,8 @@ class NextcontentCommand extends SystemCommand
 
         //get customer categories
         $customer_categories = CustomerCategory::where('customer_id', $customer_id)->get(['category_id'])->implode('category_id', ',');
-        if(strpos($customer_categories, ',')) {
-            $customer_categories = explode(',', $customer_categories);
-        } else {
-            $customer_categories = str_split($customer_categories, 1);
-        }
 
-        if (count($customer_categories) == 0) {
+        if (count($customer_categories) == 0 || strlen($customer_categories) == 0) {
             //then warn customer to select at least one category
             $text = sprintf("برای استفاده از امکانات ابتدا دستور %s را وارد کنید و از قسمت مدیریت علاقه مندی ها حداقل یک دسته را انتخاب کنید.", '/keyboard');
             $data = [
@@ -82,6 +77,12 @@ class NextcontentCommand extends SystemCommand
             ];
 
             return Request::sendMessage($data);
+        }
+
+        if(strpos($customer_categories, ',')) {
+            $customer_categories = explode(',', $customer_categories);
+        } else {
+            $customer_categories = str_split($customer_categories, 1);
         }
 
         //get 1. content with customer categories 2. customer has not get it yet 3. order by order asc
