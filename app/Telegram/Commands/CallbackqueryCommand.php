@@ -72,11 +72,10 @@ class CallbackqueryCommand extends SystemCommand
 
         $inline_keyboard_categories = [];
         foreach ($categories as $category) {
-//            array_push($inline_keyboard_categories, new InlineKeyboardButton(['text' => $category->name, 'callback_data' => 'identifier']));
             array_push($inline_keyboard_categories, new InlineKeyboardButton(['text' => ((in_array($category['id'], $customer_categories)) ? '✅ ' : ' ') . $category['name'], 'callback_data' => 'category_'.$category['id']]));
         }
 
-        $inline_keyboard = new InlineKeyboard($inline_keyboard_categories);
+        $inline_keyboard = new InlineKeyboard(...$inline_keyboard_categories);
 
         $data = [
             'chat_id'      => $customer_id,
@@ -86,13 +85,5 @@ class CallbackqueryCommand extends SystemCommand
         ];
 
         Request::editMessageText($data);
-
-        /*$data = [
-            'callback_query_id' => $callback_query_id,
-            'text'              => 'Hello World!',
-            'show_alert'        => $callback_data === 'thumb up',
-            'cache_time'        => 5,
-        ];
-        return Request::answerCallbackQuery($data);*/
     }
 }
