@@ -159,7 +159,7 @@ class NextcontentCommand extends SystemCommand
             } elseif ($content->type == 'text') {
                 $text = $content->text;
                 if ($content->show_instant_view) {
-                    $text = $content->text . PHP_EOL . sprintf("محتوای کامل را در Instant View ببینید: ". PHP_EOL ." https://t.me/iv?url=%s/&rhash=e6f66e7d26291d", url('/content/'), $content->id);
+                    $text = $content->text . PHP_EOL . sprintf("محتوای کامل را در Instant View ببینید: ". PHP_EOL ." https://t.me/iv?url=%s/%d&rhash=e6f66e7d26291d", url('/content/'), $content->id);
                 }
 
                 $data = [
