@@ -64,4 +64,9 @@ class Content extends Model
     {
         return $this->belongsTo('App\Service');
     }
+
+    public function category()
+    {
+        return $this->belongsTo('App\ContentCategory');
+    }
 }

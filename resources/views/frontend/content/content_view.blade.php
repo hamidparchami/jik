@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css?v=0.1" rel="stylesheet">
+    <link href="/css/common.css?v=0.2" rel="stylesheet">
     <meta name="developer" content="Hamid Parchami">
 </head>
 <body>
