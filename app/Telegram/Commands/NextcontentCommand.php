@@ -70,7 +70,7 @@ class NextcontentCommand extends SystemCommand
 
         if (count($customer_categories) == 0 || strlen($customer_categories) == 0) {
             //then warn customer to select at least one category
-            $text = sprintf("برای استفاده از امکانات ابتدا دستور %s را وارد کنید و از قسمت مدیریت علاقه مندی ها حداقل یک دسته را انتخاب کنید.", '/keyboard');
+            $text = sprintf("برای استفاده از امکانات ابتدا از طریق کیبورد بات در قسمت مدیریت علاقه‌مندی‌ها حداقل یک دسته را انتخاب کنید. \n  راهنما: برای مشاهده کیبورد بات دستور %s را وارد کنید.", '/keyboard');
             $data = [
                 'chat_id' => $chat_id,
                 'text'    => $text,
@@ -159,7 +159,7 @@ class NextcontentCommand extends SystemCommand
             } elseif ($content->type == 'text') {
                 $text = $content->text;
                 if ($content->show_instant_view) {
-                    $text = $content->text . "\nمحتوای کامل را در Instant View ببینید:\n".'https://t.me/iv?url=' . url('/content/') . '/' . $content->id . '&rhash=e6f66e7d26291d';
+                    $text = $content->text . PHP_EOL . sprintf("محتوای کامل را در Instant View ببینید: ". PHP_EOL ." https://t.me/iv?url=%s/&rhash=e6f66e7d26291d", url('/content/'), $content->id);
                 }
 
                 $data = [

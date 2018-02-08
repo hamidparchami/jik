@@ -74,7 +74,7 @@ class FavoriteCategoriesCommand extends SystemCommand
             array_push($inline_keyboard_categories, new InlineKeyboardButton(['text' => ((in_array($category['id'], $customer_categories)) ? '✅ ' : ' ') . $category['name'], 'callback_data' => 'category_'.$category['id']]));
         }
 
-        $inline_keyboard = new InlineKeyboard($inline_keyboard_categories);
+        $inline_keyboard = new InlineKeyboard(...$inline_keyboard_categories);
         $inline_keyboard->setResizeKeyboard(true);
 
         $data = [

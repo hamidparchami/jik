@@ -82,7 +82,7 @@ class GenericmessageCommand extends SystemCommand
             return Request::sendMessage($data);
         }
 
-        $commands = ['register' => 'ثبت نام', 'revoke' => 'لغو اشتراک', 'nextcontent' => 'مطلب بعدی', 'favoritecategories' => 'ویرایش علاقه‌مندی‌ها',];
+        $commands = ['register' => 'ثبت نام', 'revoke' => 'لغو اشتراک', 'nextcontent' => 'مطلب بعدی', 'favoritecategories' => 'مدیریت علاقه‌مندی‌ها',];
         $command = 'keyboard';
 
         if ($entered_key = array_search($message->getText(), $commands)) {

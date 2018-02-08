@@ -68,7 +68,7 @@ class KeyboardCommand extends SystemCommand
 
         $keyboard = new Keyboard(
             ['text' => 'مطلب بعدی'],
-            'ویرایش علاقه‌مندی‌ها',
+            'مدیریت علاقه‌مندی‌ها',
             ['امتیاز', 'لغو اشتراک']
         );
         $text = 'یکی از عملیات های زیر را انتخاب کنید:';
