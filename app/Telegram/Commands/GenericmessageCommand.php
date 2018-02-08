@@ -82,18 +82,11 @@ class GenericmessageCommand extends SystemCommand
             return Request::sendMessage($data);
         }
 
+        $commands = ['register' => 'ثبت نام', 'revoke' => 'لغو اشتراک', 'nextcontent' => 'مطلب بعدی', 'favoritecategories' => 'ویرایش علاقه‌مندی‌ها',];
         $command = 'keyboard';
 
-        if ($message->getText() == 'ثبت نام') {
-            $command = 'register';
-        }
-
-        if ($message->getText() == 'لغو اشتراک') {
-            $command = 'revoke';
-        }
-
-        if ($message->getText() == 'مطلب بعدی') {
-            $command = 'nextcontent';
+        if ($entered_key = array_search($message->getText(), $commands)) {
+            $command = $entered_key;
         }
 
         return $this->getTelegram()->executeCommand($command);
