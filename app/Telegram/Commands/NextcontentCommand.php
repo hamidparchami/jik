@@ -70,6 +70,13 @@ class NextcontentCommand extends SystemCommand
         $customer_categories = explode(',', $customer_categories);
         if (count($customer_categories) == 0) {
             //then warn customer to select at least one category
+            $text = sprintf("برای استفاده از امکانات ابتدا دستور %s را وارد کنید و از قسمت مدیریت علاقه مندی ها حداقل یک دسته را انتخاب کنید.", '/keyboard');
+            $data = [
+                'chat_id' => $chat_id,
+                'text'    => $text,
+            ];
+
+            return Request::sendMessage($data);
         }
 
         //get 1. content with customer categories 2. customer has not get it yet 3. order by order asc

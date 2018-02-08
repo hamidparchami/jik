@@ -75,6 +75,7 @@ class FavoriteCategoriesCommand extends SystemCommand
         }
 
         $inline_keyboard = new InlineKeyboard($inline_keyboard_categories);
+        $inline_keyboard->setResizeKeyboard(true);
 
         $data = [
             'chat_id'      => $chat_id,
