@@ -67,7 +67,12 @@ class NextcontentCommand extends SystemCommand
 
         //get customer categories
         $customer_categories = CustomerCategory::where('customer_id', $customer_id)->get(['category_id'])->implode('category_id', ',');
-        $customer_categories = explode(',', $customer_categories);
+        if(strpos($customer_categories, ',')) {
+            $customer_categories = explode(',', $customer_categories);
+        } else {
+            $customer_categories = str_split($customer_categories, 1);
+        }
+
         if (count($customer_categories) == 0) {
             //then warn customer to select at least one category
             $text = sprintf("برای استفاده از امکانات ابتدا دستور %s را وارد کنید و از قسمت مدیریت علاقه مندی ها حداقل یک دسته را انتخاب کنید.", '/keyboard');
@@ -96,7 +101,7 @@ class NextcontentCommand extends SystemCommand
                                             ->implode('category_id', ',');
 
         if (count($content_in_categories) == 0 || strlen($content_in_categories) == 0) {
-            $text = 'دیگر محتوایی برای شما وحود ندارد.';
+            $text = 'دیگر محتوایی برای شما وجود ندارد.';
             $data = [
                 'chat_id' => $chat_id,
                 'text' => $text,
