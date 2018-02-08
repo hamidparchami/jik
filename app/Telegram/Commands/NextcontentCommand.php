@@ -91,7 +91,13 @@ class NextcontentCommand extends SystemCommand
         $customer_received_contents = CustomerReceivedContent::where('customer_id', $customer_id)
                                                                 ->get(['content_id'])
                                                                 ->implode('content_id', ',');
-        $customer_received_contents = explode(',', $customer_received_contents);
+        //$customer_received_contents = explode(',', $customer_received_contents);
+ 	if(strpos($customer_received_contents, ',')) {
+            $customer_received_contents = explode(',', $customer_received_contents);
+        } else {
+            $customer_received_contents = array($customer_received_contents);
+        }
+
 
         $content_in_categories = Content::where('service_id', $service_id)
                                             ->whereIn('category_id', $customer_categories)
@@ -121,12 +127,13 @@ class NextcontentCommand extends SystemCommand
 
         /*$data = [
             'chat_id' => $chat_id,
-            'text' => 'sdafdsf ' . json_encode($content_in_categories[$category_to_query]),
+            'text' => 'sdafdsf ' . json_encode($customer_received_contents),
         ];
         return Request::sendMessage($data);*/
 
         $content = Content::where('service_id', $service_id)
                             ->where('category_id', $content_in_categories[$category_to_query])
+			    ->whereNotIn('id', $customer_received_contents)
                             ->where('is_active', '1')
                             ->orderBy('order', 'asc')
                             ->get()
@@ -134,7 +141,7 @@ class NextcontentCommand extends SystemCommand
 
         if (!is_null($content)) {
             //log customer received content
-            CustomerReceivedContent::create(['customer_id' => $customer_id, 'content_id' => $content->id]);
+            CustomerReceivedContent::firstOrCreate(['customer_id' => $customer_id, 'content_id' => $content->id]);
             if ($content->type == 'photo') {
                 $data = [
                     'chat_id' => $chat_id,
