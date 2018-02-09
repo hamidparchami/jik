@@ -19,7 +19,7 @@
 <div class="container main-container">
     <div class="row">
         <div class="col-md-12 rtl">
-            <div id="article_title"><h1>{{ $content->category->name }} ({{ $content->order }})</h1></div>
+            <div id="article_title"><h1 style="font-size: 14px; font-weight: bold;">{{ $content->category->name }} (مطلب شماره {{ $content->order }})</h1></div>
         </div>
         <div class="col-md-12 rtl">
             <div id="article_content">{!! $content->full_content !!}</div>
