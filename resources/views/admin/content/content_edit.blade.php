@@ -16,6 +16,10 @@
                 </ul>
             </div>
         @endif
+
+        @if (Session::has('message'))
+            <div class="alert alert-success text-right rtl">{{ Session::get('message') }}</div>
+        @endif
         <form id="form1" method="post">
             <div class="row">
                 <div class="col-md-12 text-right">

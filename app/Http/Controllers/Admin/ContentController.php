@@ -137,7 +137,7 @@ class ContentController extends Controller
             ];
             TelegramRequest::sendMessage($data);
 
-            return redirect('/admin/content/manage')->with('message', 'محتوا با موفقیت ارسال شد.');
+            return Redirect::back()->with('message', 'محتوا با موفقیت ارسال شد.');
         } else {
             return Redirect::back()->withInput()->withErrors(['اطلاعات مورد نیاز در بانک اطلاعاتی یافت نشد.']);
         }
