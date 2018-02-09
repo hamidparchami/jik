@@ -194,9 +194,9 @@
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 text-right" style="line-height: 2em;">
                                     ارسال محتوا به:
-                                    <div><a href="/admin/content/send-to-admin/id/{{ $content->id }}/username/hamidparchami" target="_blank">Hamid Parchami</a></div>
-                                    <div><a href="/admin/content/send-to-admin/id/{{ $content->id }}/username/Hshokrzadeh" target="_blank">Hamid Shokrzadeh</a></div>
-                                    <div><a href="/admin/content/send-to-admin/id/{{ $content->id }}/username/sepid_star" target="_blank">Sepideh Moosavi</a></div>
+                                    <div><a href="/admin/content/send-to-admin/id/{{ $content->id }}/username/hamidparchami">Hamid Parchami</a></div>
+                                    <div><a href="/admin/content/send-to-admin/id/{{ $content->id }}/username/Hshokrzadeh">Hamid Shokrzadeh</a></div>
+                                    <div><a href="/admin/content/send-to-admin/id/{{ $content->id }}/username/sepid_star">Sepideh Moosavi</a></div>
                                 </div>
                             </div>
                         </div>
