@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Content;
 use App\ContentCategory;
+use App\Customer;
 use App\Service;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Longman\TelegramBot\Request as TelegramRequest;
 use Validator;
 
 class ContentController extends Controller
@@ -114,5 +116,25 @@ class ContentController extends Controller
 //        $content->orderBy('id', 'desc')->get()->first();
 
         return $content;
+    }
+
+    public function getSendContentToAdmin($id, $username)
+    {
+        // Add bot's API key and name
+        $bot_api_key  = config('telegram.api_key');
+        $bot_username = config('telegram.username');
+        $telegram = new \Longman\TelegramBot\Telegram($bot_api_key, $bot_username);
+
+        $content    = Content::find($id);
+        $customer   = Customer::where('username', $username)->first();
+
+        $text = $content->text . PHP_EOL . sprintf("محتوای کامل را در Instant View ببینید: ". PHP_EOL ." https://t.me/iv?url=%s/%d&rhash=e6f66e7d26291d", url('/content/'), $content->id);
+        $data = [
+            'chat_id' => $customer->chat_id,
+            'text' => $text,
+        ];
+        TelegramRequest::sendMessage($data);
+
+        return redirect('/admin/content/manage')->with('message', 'محتوا با موفقیت ارسال شد.');
     }
 }

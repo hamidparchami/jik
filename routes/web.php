@@ -62,6 +62,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'user.role', 'user.a
     Route::post('/content/edit/id/{id}', 'Admin\ContentController@postEdit');
     Route::get('/content/delete/id/{id}', 'Admin\ContentController@getDelete');
     Route::get('/content/last-content-order/category_id/{category_id}/content_id/{content_id}', 'Admin\ContentController@getLastContentOrder');
+    Route::get('/content/send-to-admin/id/{id}/username/{username}', 'Admin\ContentController@getSendContentToAdmin');
     //Catalog
     Route::get('/catalog/manage/{parent_id?}', 'Admin\CatalogController@index');
     Route::get('/catalog/create/{parent_id?}', 'Admin\CatalogController@getCreate');
