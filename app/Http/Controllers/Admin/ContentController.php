@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Longman\TelegramBot\Request as TelegramRequest;
 use Validator;
 
@@ -128,13 +129,17 @@ class ContentController extends Controller
         $content    = Content::find($id);
         $customer   = Customer::where('username', $username)->first();
 
-        $text = $content->text . PHP_EOL . sprintf("محتوای کامل را در Instant View ببینید: ". PHP_EOL ." https://t.me/iv?url=%s/%d&rhash=e6f66e7d26291d", url('/content/'), $content->id);
-        $data = [
-            'chat_id' => $customer->chat_id,
-            'text' => $text,
-        ];
-        TelegramRequest::sendMessage($data);
+        if (!is_null($content) && !is_null($customer)) {
+            $text = $content->text . PHP_EOL . sprintf("محتوای کامل را در Instant View ببینید: " . PHP_EOL . " https://t.me/iv?url=%s/%d&rhash=e6f66e7d26291d", url('/content/'), $content->id);
+            $data = [
+                'chat_id' => $customer->chat_id,
+                'text' => $text,
+            ];
+            TelegramRequest::sendMessage($data);
 
-        return redirect('/admin/content/manage')->with('message', 'محتوا با موفقیت ارسال شد.');
+            return redirect('/admin/content/manage')->with('message', 'محتوا با موفقیت ارسال شد.');
+        } else {
+            return Redirect::back()->withInput()->withErrors(['اطلاعات مورد نیاز در بانک اطلاعاتی یافت نشد.']);
+        }
     }
 }
