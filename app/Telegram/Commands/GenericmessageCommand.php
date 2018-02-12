@@ -72,11 +72,17 @@ class GenericmessageCommand extends SystemCommand
             $contact = $message->getContact();
             $customer = Customer::firstOrCreate(['account_id' => $message->getFrom()->getId(), 'phone_number' => $contact->getPhoneNumber(), 'first_name' => $contact->getFirstName(), 'last_name' => $contact->getLastName(), 'username' => $message->getChat()->getUsername(), 'chat_id' => $chat_id]);
             $customer->update(['is_active' => 1]);
-            $text = sprintf("سپاس %s عزیز\nشما با موفقیت ثبت نام شدید.\n برای مشاهده امکانات دستور %s را وارد کنید.", $contact->getFirstName(), '/keyboard');
+            $text = sprintf("سپاس %s عزیز\nشما با موفقیت ثبت نام شدید.\n برای استفاده از امکانات ابتدا از طریق منو علاقه مندی های خود را انتخاب کنید:".PHP_EOL."/keyboard", $contact->getFirstName());
+            $keyboard = new Keyboard(
+                ['text' => 'مطلب بعدی'],
+                'مدیریت علاقه‌مندی‌ها',
+                ['امتیاز من', 'لغو اشتراک']
+            );
 
             $data = [
                 'chat_id' => $chat_id,
                 'text'    => $text,
+                'reply_markup' => $keyboard,
             ];
 
             return Request::sendMessage($data);
