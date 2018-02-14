@@ -67,8 +67,8 @@ class KeyboardCommand extends SystemCommand
         $chat_id = $message->getChat()->getId();
 
         $keyboard = new Keyboard(
-            [':arrow_forward: مشاهده مطالب مجله', ':heart: مدیریت علاقه‌مندی‌ها'],
-            [':moneybag: امتیاز من', ':no_entry_sign: لغو اشتراک']
+            [ "\xE2\x9D\xA4 مدیریت علاقه‌مندی‌ها", "\xE2\x9E\xA1 مشاهده مطالب مجله"],
+            ["\xF0\x9F\x9A\xAB لغو اشتراک", "\xF0\x9F\x92\xB0 امتیاز من"]
         );
         $keyboard->setResizeKeyboard(true);
         $text = 'یکی از عملیات های زیر را انتخاب کنید:';
