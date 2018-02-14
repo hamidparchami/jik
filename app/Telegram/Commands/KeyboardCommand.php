@@ -67,10 +67,10 @@ class KeyboardCommand extends SystemCommand
         $chat_id = $message->getChat()->getId();
 
         $keyboard = new Keyboard(
-            ['text' => 'مطلب بعدی'],
-            'مدیریت علاقه‌مندی‌ها',
-            ['امتیاز من', 'لغو اشتراک']
+            [':arrow_forward: مشاهده مطالب مجله', ':heart: مدیریت علاقه‌مندی‌ها'],
+            [':moneybag: امتیاز من', ':no_entry_sign: لغو اشتراک']
         );
+        $keyboard->setResizeKeyboard(true);
         $text = 'یکی از عملیات های زیر را انتخاب کنید:';
 
         $customer = Customer::where('account_id', $message->getFrom()->getId())->where('is_active', 1)->get()->first();

@@ -62,7 +62,7 @@ class RegisterCommand extends SystemCommand
 
         $data    = [
             'chat_id'      => $chat_id,
-            'text'         => 'برای ثبت نام با شماره تلفن خود، کلید زیر را لمس کنید:',
+            'text'         => 'برای ثبت نام در مجله، کلید زیر (ثبت شماره تلفن) را لمس کرده و سپس OK را انتخاب نمایید:',
             'reply_markup' => $keyboard,
         ];
         return Request::sendMessage($data);

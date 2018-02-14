@@ -55,7 +55,8 @@ class RevokeCommand extends SystemCommand
 
         $customer = Customer::where('account_id', $message->getFrom()->getId())->where('is_active', 1)->get()->first();
         if (is_null($customer)) {
-            $text = "اشتراکی با این حساب کاربری یافت نشد!\n برای اطلاعات بیشتر دستور /support را وارد کنید.";
+//            $text = "اشتراکی با این حساب کاربری یافت نشد!\n برای اطلاعات بیشتر دستور /support را وارد کنید.";
+            $text = "اشتراکی با این حساب کاربری یافت نشد!";
         } else {
             $customer->update(['is_active' => 0]);
         }
