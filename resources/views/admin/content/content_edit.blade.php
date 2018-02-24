@@ -321,6 +321,7 @@
             contentsLangDirection: 'rtl',
             enterMode: CKEDITOR.ENTER_BR,
             allowedContent: true,
+            extraPlugins: 'html5video',
         };
 
         CKEDITOR.replace( 'full_content', ckeditor);
