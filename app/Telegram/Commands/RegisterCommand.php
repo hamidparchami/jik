@@ -52,7 +52,7 @@ class RegisterCommand extends SystemCommand
 
         //(bots version 2.0)
         $keyboard = new Keyboard([
-            ['text' => 'ثبت شماره تلفن', 'request_contact' => true],
+            ['text' => "\xF0\x9F\x91\x88 ثبت شماره تلفن \xF0\x9F\x91\x89", 'request_contact' => true],
 //            ['text' => 'Send my location', 'request_location' => true],
         ]);
         //Return a random keyboard.
@@ -62,7 +62,7 @@ class RegisterCommand extends SystemCommand
 
         $data    = [
             'chat_id'      => $chat_id,
-            'text'         => 'برای ثبت نام در مجله، کلید زیر (ثبت شماره تلفن) را لمس کرده و سپس OK را انتخاب نمایید:',
+            'text'         => 'برای ثبت نام در مجله، کلید زیر (ثبت شماره تلفن) را لمس کرده و سپس OK یا Share را انتخاب نمایید:',
             'reply_markup' => $keyboard,
         ];
         return Request::sendMessage($data);

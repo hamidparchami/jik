@@ -74,9 +74,8 @@ class GenericmessageCommand extends SystemCommand
             $customer->update(['is_active' => 1]);
             $text = sprintf("سپاس %s عزیز\nشما با موفقیت ثبت نام شدید.\n برای استفاده از امکانات ابتدا از طریق منو علاقه مندی های خود را انتخاب کنید:".PHP_EOL."/keyboard", $contact->getFirstName());
             $keyboard = new Keyboard(
-                ['text' => 'مطلب بعدی'],
-                'مدیریت علاقه‌مندی‌ها',
-                ['امتیاز من', 'لغو اشتراک']
+                [ "\xE2\x9D\xA4 مدیریت علاقه‌مندی‌ها", "\xE2\x9E\xA1 مشاهده مطالب مجله"],
+                ["\xF0\x9F\x9A\xAB لغو اشتراک", "\xF0\x9F\x92\xB0 امتیاز من"]
             );
 
             $data = [
