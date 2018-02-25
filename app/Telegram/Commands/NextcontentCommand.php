@@ -162,7 +162,7 @@ class NextcontentCommand extends SystemCommand
                 ];
                 return Request::sendVideo($data);
             } elseif ($content->type == 'text') {
-                $header = "\xF0\x9F\x8C\xB9 	با کلیک بر \xF0\x9F\x91\x88 @jikopeek_bot \xF0\x9F\x91\x89 عضو مجله سلامت جیک و پیک شده و در‌ قرعه کشی های ماهانه‌ ما برنده جوایز نفیس شوید. \xF0\x9F\x8C\xB9	".PHP_EOL;
+                $header = "\xF0\x9F\x8C\xB9 	با لمس \xF0\x9F\x91\x88 @jikopeek_bot \xF0\x9F\x91\x89 عضو مجله سلامت جیک و پیک شده و در‌ قرعه کشی های ماهانه‌ ما برنده جوایز نفیس شوید. \xF0\x9F\x8C\xB9".PHP_EOL."---------------".PHP_EOL;
                 $text = $header.$content->text;
                 if ($content->show_instant_view) {
                     $text .= PHP_EOL . sprintf("محتوای کامل را در Instant View ببینید: ". PHP_EOL ." https://t.me/iv?url=%s/%d&rhash=e6f66e7d26291d", url('/content/'), $content->id);
