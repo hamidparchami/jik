@@ -75,10 +75,6 @@ class KeyboardCommand extends SystemCommand
 
         $customer = Customer::where('account_id', $message->getFrom()->getId())->where('is_active', 1)->get()->first();
         if (is_null($customer)) {
-            /*$text = 'برای استفاده از امکانات ابتدا ثبت نام کنید:';
-            $keyboard = new Keyboard(
-                ['text' => 'ثبت شماره تلفن', 'request_contact' => true]
-            );*/
             return $this->getTelegram()->executeCommand('register');
         }
 

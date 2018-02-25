@@ -63,7 +63,7 @@ class RevokeCommand extends SystemCommand
 
         //(bots version 2.0)
         $keyboard = new Keyboard([
-            ['text' => 'ثبت شماره تلفن', 'request_contact' => true],
+            ['text' => '\xF0\x9F\x91\x88 ثبت شماره تلفن \xF0\x9F\x91\x89', 'request_contact' => true],
         ]);
 
         $keyboard->setResizeKeyboard(true);
