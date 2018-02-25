@@ -138,26 +138,29 @@ class ContentController extends Controller
         if (!is_null($content) && !is_null($customer)) {
 		$chat_id = $customer->chat_id;
 		if ($content->type == 'photo') {
-		        $data = [
-		            'chat_id' 	=> $chat_id,
-		            'photo' 	=> $content->photo_url,
-		            'caption' 	=> $content->text,
-		        ];
+            $data = [
+                'chat_id' 	=> $chat_id,
+                'photo' 	=> $content->photo_url,
+                'caption' 	=> $content->text,
+            ];
+
 			TelegramRequest::sendPhoto($data);
 		} elseif ($content->type == 'video') {
-		        $data = [
-		            'chat_id' 	=> $chat_id,
-		            'video' 	=> $content->video_url,
-		            'caption' 	=> $content->text,
-		        ];
-		        TelegramRequest::sendVideo($data);
+            $data = [
+                'chat_id' 	=> $chat_id,
+                'video' 	=> $content->video_url,
+                'caption' 	=> $content->text,
+            ];
+
+            TelegramRequest::sendVideo($data);
 		} elseif ($content->type == 'text') {
-		    	$text = $content->text . PHP_EOL . sprintf("محتوای کامل را در Instant View ببینید: " . PHP_EOL . " https://t.me/iv?url=%s/%d&rhash=e6f66e7d26291d", url('/content/'), $content->id);
-		    	$data = [
-		        'chat_id' 	=> $chat_id,
-		        'text' 		=> $text,
-		    	];
-		    	TelegramRequest::sendMessage($data);
+            $text = $content->text . PHP_EOL . sprintf("محتوای کامل را در Instant View ببینید: " . PHP_EOL . " https://t.me/iv?url=%s/%d&rhash=e6f66e7d26291d", url('/content/'), $content->id);
+            $data = [
+            'chat_id' 	=> $chat_id,
+            'text' 		=> $text,
+            ];
+
+            TelegramRequest::sendMessage($data);
 		}
             return Redirect::back()->with('message', 'محتوا با موفقیت ارسال شد.');
         } else {

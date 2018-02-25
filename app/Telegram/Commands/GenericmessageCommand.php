@@ -83,11 +83,7 @@ class GenericmessageCommand extends SystemCommand
             $text = sprintf("سپاس %s عزیز\nشما با موفقیت ثبت نام شدید.\n برای استفاده از امکانات ابتدا از طریق منو علاقه مندی های خود را انتخاب کنید:".PHP_EOL."/keyboard", $contact->getFirstName());
             $keyboard = new Keyboard(
                 [ "\xE2\x9D\xA4 مدیریت علاقه‌مندی‌ها", "\xE2\x9E\xA1 مشاهده مطالب مجله"],
-<<<<<<< HEAD
             	["\xF0\x9F\x9A\xAB لغو اشتراک", "\xF0\x9F\x92\xB0 امتیاز من"]
-=======
-                ["\xF0\x9F\x9A\xAB لغو اشتراک", "\xF0\x9F\x92\xB0 امتیاز من"]
->>>>>>> ed1666711c692c28ad33e939e2c3cd03a7183699
             );
 	    $keyboard->setResizeKeyboard(true);
 
