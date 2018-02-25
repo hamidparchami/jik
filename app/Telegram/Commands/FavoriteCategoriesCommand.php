@@ -53,7 +53,8 @@ class FavoriteCategoriesCommand extends SystemCommand
         $message        = $this->getMessage();
         $chat_id        = $message->getChat()->getId();
         $customer_id    = $message->getFrom()->getId();
-        $text           = 'به چه موضوعی تو زیبایی علاقه داری؟'.PHP_EOL.' هر‌چند تا می خوای‌ از موارد زير انتخاب کن بعدش از طریق منو دکمه «\xE2\x9E\xA1 مشاهده مطالب مجله» رو بزن.';
+        $text           = "به چه موضوعی تو زیبایی علاقه داری؟".PHP_EOL;
+        $text           .= " هر‌چند تا می خوای‌ از موارد زير انتخاب کن بعدش از طریق منو دکمه «\xE2\x9E\xA1 مشاهده مطالب مجله» رو بزن.";
 
         /*$text = "اشتراک شما لغو شد و زین پس دیگر مطلبی دریافت نخواهید کرد.\n برای اشتراک مجدد دستور /register را وارد کنید.";
 
