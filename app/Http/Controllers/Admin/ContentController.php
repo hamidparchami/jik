@@ -112,7 +112,13 @@ class ContentController extends Controller
 
     public function getLastContentOrder($category_id, $content_id=null)
     {
-        $content = Content::where('category_id', $category_id)->where('id', '<', $content_id)->where('id', '!=', $content_id)->orderBy('id', 'desc')->get()->first();
+        $content_query = Content::query();
+	$content_query->where('category_id', $category_id);
+	if (!is_null($content_id) && $content_id != 'null') {
+	$content_query->where('id', '<', $content_id)->where('id', '!=', $content_id);
+	}
+	$content_query->orderBy('id', 'desc');
+	$content = $content_query->get()->first();
 //        (is_null($content_id)) ?: $content->where('id', '!=', $content_id);
 //        $content->orderBy('id', 'desc')->get()->first();
 
@@ -130,13 +136,29 @@ class ContentController extends Controller
         $customer   = Customer::where('username', $username)->first();
 
         if (!is_null($content) && !is_null($customer)) {
-            $text = $content->text . PHP_EOL . sprintf("محتوای کامل را در Instant View ببینید: " . PHP_EOL . " https://t.me/iv?url=%s/%d&rhash=e6f66e7d26291d", url('/content/'), $content->id);
-            $data = [
-                'chat_id' => $customer->chat_id,
-                'text' => $text,
-            ];
-            TelegramRequest::sendMessage($data);
-
+		$chat_id = $customer->chat_id;
+		if ($content->type == 'photo') {
+		        $data = [
+		            'chat_id' 	=> $chat_id,
+		            'photo' 	=> $content->photo_url,
+		            'caption' 	=> $content->text,
+		        ];
+			TelegramRequest::sendPhoto($data);
+		} elseif ($content->type == 'video') {
+		        $data = [
+		            'chat_id' 	=> $chat_id,
+		            'video' 	=> $content->video_url,
+		            'caption' 	=> $content->text,
+		        ];
+		        TelegramRequest::sendVideo($data);
+		} elseif ($content->type == 'text') {
+		    	$text = $content->text . PHP_EOL . sprintf("محتوای کامل را در Instant View ببینید: " . PHP_EOL . " https://t.me/iv?url=%s/%d&rhash=e6f66e7d26291d", url('/content/'), $content->id);
+		    	$data = [
+		        'chat_id' 	=> $chat_id,
+		        'text' 		=> $text,
+		    	];
+		    	TelegramRequest::sendMessage($data);
+		}
             return Redirect::back()->with('message', 'محتوا با موفقیت ارسال شد.');
         } else {
             return Redirect::back()->withInput()->withErrors(['اطلاعات مورد نیاز در بانک اطلاعاتی یافت نشد.']);

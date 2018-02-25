@@ -204,10 +204,10 @@
 
             checkType();
             checkSendType();
-            getLastContentOrder($('#service_id').val(), content_id);
+            getLastContentOrder($('#category_id').val(), content_id);
 
-            $('#service_id').change(function () {
-                getLastContentOrder($('#service_id').val(), content_id);
+            $('#category_id').change(function () {
+                getLastContentOrder($('#category_id').val(), content_id);
             });
 
             $('#send_type').change(function () {
@@ -252,10 +252,10 @@
                 }
             }
 
-            function getLastContentOrder(service_id, content_id) {
+            function getLastContentOrder(category_id, content_id) {
                 $.ajax({
                     type: "GET",
-                    url: "/admin/content/last-content-order/service_id/"+service_id+"/content_id/"+content_id,
+                    url: "/admin/content/last-content-order/category_id/"+category_id+"/content_id/"+content_id,
                     data: {'_token': $('input[name=_token]').val()},
                     success:function(data){
                         // window.location.href = '/admin/service/manage';

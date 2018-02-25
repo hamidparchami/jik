@@ -70,14 +70,22 @@ class GenericmessageCommand extends SystemCommand
 
         if ($message->getContact()) {
             $contact = $message->getContact();
-            $customer = Customer::firstOrCreate(['account_id' => $message->getFrom()->getId(), 'phone_number' => $contact->getPhoneNumber(), 'first_name' => $contact->getFirstName(), 'last_name' => $contact->getLastName(), 'username' => $message->getChat()->getUsername(), 'chat_id' => $chat_id]);
-            $customer->update(['is_active' => 1]);
+            /*$customer = Customer::firstOrCreate(['account_id' => $message->getFrom()->getId(), 'phone_number' => $contact->getPhoneNumber(), 'first_name' => $contact->getFirstName(), 'last_name' => $contact->getLastName(), 'username' => $message->getChat()->getUsername(), 'chat_id' => $chat_id]);
+            $customer->update(['is_active' => 1]);*/
+		Customer::updateOrCreate(
+		    [
+			'account_id' => $message->getFrom()->getId(),
+		    ],
+		    [
+			'phone_number' => $contact->getPhoneNumber(), 'first_name' => $contact->getFirstName(), 'last_name' => $contact->getLastName(), 'username' => $message->getChat()->getUsername(), 'chat_id' => $chat_id, 'is_active' => 1
+		    ]
+		);
             $text = sprintf("سپاس %s عزیز\nشما با موفقیت ثبت نام شدید.\n برای استفاده از امکانات ابتدا از طریق منو علاقه مندی های خود را انتخاب کنید:".PHP_EOL."/keyboard", $contact->getFirstName());
             $keyboard = new Keyboard(
-                ['text' => 'مطلب بعدی'],
-                'مدیریت علاقه‌مندی‌ها',
-                ['امتیاز من', 'لغو اشتراک']
+                [ "\xE2\x9D\xA4 مدیریت علاقه‌مندی‌ها", "\xE2\x9E\xA1 مشاهده مطالب مجله"],
+            	["\xF0\x9F\x9A\xAB لغو اشتراک", "\xF0\x9F\x92\xB0 امتیاز من"]
             );
+	    $keyboard->setResizeKeyboard(true);
 
             $data = [
                 'chat_id' => $chat_id,
@@ -88,7 +96,7 @@ class GenericmessageCommand extends SystemCommand
             return Request::sendMessage($data);
         }
 
-        $commands = ['register' => 'ثبت نام', 'revoke' => 'لغو اشتراک', 'nextcontent' => 'مطلب بعدی', 'favoritecategories' => 'مدیریت علاقه‌مندی‌ها', 'score' => 'امتیاز من',];
+        $commands = ['register' => 'ثبت نام', 'revoke' => "\xF0\x9F\x9A\xAB لغو اشتراک", 'nextcontent' => "\xE2\x9E\xA1 مشاهده مطالب مجله", 'favoritecategories' => "\xE2\x9D\xA4 مدیریت علاقه‌مندی‌ها", 'score' => "\xF0\x9F\x92\xB0 امتیاز من",];
         $command = 'keyboard';
 
         if ($entered_key = array_search($message->getText(), $commands)) {
