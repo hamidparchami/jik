@@ -70,13 +70,17 @@ class NextcontentCommand extends SystemCommand
 
         if (count($customer_categories) == 0 || strlen($customer_categories) == 0) {
             //then warn customer to select at least one category
-            $text = sprintf("برای استفاده از امکانات ابتدا از طریق کیبورد بات در قسمت مدیریت علاقه‌مندی‌ها حداقل یک دسته را انتخاب کنید. \n  راهنما: برای مشاهده کیبورد بات دستور %s را وارد کنید.", '/keyboard');
+            $command = "favoritecategories";
+            $text = "برای استفاده از امکانات ابتدا علاقه‌مندی‌هات رو از طریق زیر مشخص کن.";
             $data = [
                 'chat_id' => $chat_id,
                 'text'    => $text,
             ];
 
-            return Request::sendMessage($data);
+
+            Request::sendMessage($data);
+
+            return $this->getTelegram()->executeCommand($command);
         }
 
         if(strpos($customer_categories, ',')) {
@@ -144,16 +148,16 @@ class NextcontentCommand extends SystemCommand
             CustomerReceivedContent::firstOrCreate(['customer_id' => $customer_id, 'content_id' => $content->id]);
             if ($content->type == 'photo') {
                 $data = [
-                    'chat_id' => $chat_id,
-                    'photo' => $content->photo_url,
-                    'caption' => $content->text,
+                    'chat_id'   => $chat_id,
+                    'photo'     => $content->photo_url,
+                    'caption'   => $content->text,
                 ];
                 return Request::sendPhoto($data);
             } elseif ($content->type == 'video') {
                 $data = [
-                    'chat_id' => $chat_id,
-                    'video' => $content->video_url,
-                    'caption' => $content->text,
+                    'chat_id'   => $chat_id,
+                    'video'     => $content->video_url,
+                    'caption'   => $content->text,
                 ];
                 return Request::sendVideo($data);
             } elseif ($content->type == 'text') {
@@ -163,8 +167,8 @@ class NextcontentCommand extends SystemCommand
                 }
 
                 $data = [
-                    'chat_id' => $chat_id,
-                    'text' => $text,
+                    'chat_id'   => $chat_id,
+                    'text'      => $text,
                 ];
                 return Request::sendMessage($data);
             }
