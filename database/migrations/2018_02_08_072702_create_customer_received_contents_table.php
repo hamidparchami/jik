@@ -17,6 +17,7 @@ class CreateCustomerReceivedContentsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('customer_id');
             $table->unsignedInteger('content_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

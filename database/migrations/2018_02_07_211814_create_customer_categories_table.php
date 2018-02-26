@@ -17,6 +17,7 @@ class CreateCustomerCategoriesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('customer_id');
             $table->unsignedInteger('category_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

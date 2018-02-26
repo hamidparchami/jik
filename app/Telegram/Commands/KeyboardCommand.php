@@ -71,7 +71,7 @@ class KeyboardCommand extends SystemCommand
             ["\xF0\x9F\x9A\xAB لغو اشتراک", "\xF0\x9F\x92\xB0 امتیاز من"]
         );
         $keyboard->setResizeKeyboard(true);
-        $text = 'یکی از عملیات های زیر را انتخاب کنید:';
+        $text = 'از طریق منو زیر یکی از گزینه ها رو انتخاب کن:';
 
         $customer = Customer::where('account_id', $message->getFrom()->getId())->where('is_active', 1)->get()->first();
         if (is_null($customer)) {

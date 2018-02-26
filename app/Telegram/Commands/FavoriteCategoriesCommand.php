@@ -56,15 +56,6 @@ class FavoriteCategoriesCommand extends SystemCommand
         $text           = "به چه موضوعی تو زیبایی علاقه داری؟".PHP_EOL;
         $text           .= " هر‌چند تا می خوای‌ از موارد زير انتخاب کن بعدش از طریق منو دکمه «\xE2\x9E\xA1 مشاهده مطالب مجله» رو بزن.";
 
-        /*$text = "اشتراک شما لغو شد و زین پس دیگر مطلبی دریافت نخواهید کرد.\n برای اشتراک مجدد دستور /register را وارد کنید.";
-
-        $customer = Customer::where('account_id', $message->getFrom()->getId())->where('is_active', 1)->get()->first();
-        if (is_null($customer)) {
-            $text = "اشتراکی با این حساب کاربری یافت نشد!\n برای اطلاعات بیشتر دستور /support را وارد کنید.";
-        } else {
-            $customer->update(['is_active' => 0]);
-        }*/
-
         $categories = ContentCategory::where('is_active', 1)->get();
 
         $customer_categories = CustomerCategory::where('customer_id', $customer_id)->get(['category_id'])->implode('category_id', ',');
