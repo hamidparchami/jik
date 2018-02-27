@@ -82,7 +82,7 @@ class GenericmessageCommand extends SystemCommand
                 $text   = "شما قبلا عضو سرویس بوده اید. لطفا یکی از گزینه های زیر را انتخاب کنید:".PHP_EOL;
                 $inline_keyboard_options = [];
                 array_push($inline_keyboard_options, new InlineKeyboardButton(['text' => "\xF0\x9F\x9A\xAB میخواهم همه مطالب را از ابتدا دریافت کنم", 'callback_data' => 'history_clear']));
-                array_push($inline_keyboard_options, new InlineKeyboardButton(['text' => "\xF0\x9F\x86\x95 میخواهم تنها مطالب جدید را دریافت کنم", 'callback_data' => 'start_continue']));
+                array_push($inline_keyboard_options, new InlineKeyboardButton(['text' => "\xE2\xAD\x90 میخواهم تنها مطالب جدید را دریافت کنم", 'callback_data' => 'start_continue']));
 
                 $inline_keyboard = new InlineKeyboard(...$inline_keyboard_options);
                 $inline_keyboard->setResizeKeyboard(true);
