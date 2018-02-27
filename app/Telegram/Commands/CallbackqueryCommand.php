@@ -10,6 +10,7 @@
 namespace Longman\TelegramBot\Commands\SystemCommands;
 use App\ContentCategory;
 use App\CustomerCategory;
+use App\CustomerReceivedContent;
 use Longman\TelegramBot\Commands\SystemCommand;
 use Longman\TelegramBot\Entities\InlineKeyboard;
 use Longman\TelegramBot\Entities\InlineKeyboardButton;
@@ -93,10 +94,10 @@ class CallbackqueryCommand extends SystemCommand
         } elseif ($callback_data[0] == "history") {
             if ($callback_data[1] == "clear") {
                 //clear user history
-                CustomerCategory::where('customer_id', $customer_id)->destroy();
+                CustomerReceivedContent::where('customer_id', $customer_id)->delete();
                 //send message
                 $command = "keyboard";
-                $text = "تاریخچه محتوای دریافتی پاک شد و حالا میتونی محتوایی که قبلا هم دریافت کرده بودی رو دوباره داشته باشی.";
+                $text = "\xE2\x9C\x85 تاریخچه محتوای دریافتی پاک شد و حالا میتونی محتوایی که قبلا هم دریافت کرده بودی رو دوباره داشته باشی. \xF0\x9F\x94\x84";
                 $data = [
                     'chat_id' => $customer_id,
                     'text'    => $text,
