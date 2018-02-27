@@ -13,6 +13,7 @@ use App\CustomerCategory;
 use Longman\TelegramBot\Commands\SystemCommand;
 use Longman\TelegramBot\Entities\InlineKeyboard;
 use Longman\TelegramBot\Entities\InlineKeyboardButton;
+use Longman\TelegramBot\Entities\Update;
 use Longman\TelegramBot\Request;
 /**
  * Callback query command
@@ -102,20 +103,42 @@ class CallbackqueryCommand extends SystemCommand
                 ];
 
                 Request::sendMessage($data);
-                return $this->getTelegram()->executeCommand($command);
+                return $this->executeCommandHack($command);
             }
 
         } elseif ($callback_data[0] == "favoritecategories") {
             //execute favorite categories command
             $command = "favoritecategories";
-            return $this->getTelegram()->executeCommand($command);
+            return $this->executeCommandHack($command);
 
         } elseif ($callback_data[0] == "start") {
             if ($callback_data[1] == "continue") {
                 //send how to use bot message
                 $command = "keyboard";
-                return $this->getTelegram()->executeCommand($command);
+                return $this->executeCommandHack($command);
             }
         }
+    }
+
+    public function executeCommandHack($command)
+    {
+        $callback_query = $this->getCallbackQuery();
+        $callback_query_id  = $callback_query->getId();
+
+        if ($command_object = $this->getTelegram()->getCommandObject($command)) {
+            // Get the message array.
+            $new_message_array = json_decode($callback_query->getMessage()->toJson(), true);
+
+            // Override from so that it looks like we're the ones who sent the message.
+            $new_message_array['from'] = $new_message_array['chat'];
+
+            $new_update = new Update(
+                ['update_id' => '-1', 'message' => $new_message_array],
+                $callback_query->getBotName()
+            );
+            $command_object->setUpdate($new_update)->preExecute();
+        }
+
+        return Request::answerCallbackQuery(['callback_query_id' => $callback_query_id]);
     }
 }
