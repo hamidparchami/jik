@@ -11,6 +11,8 @@ namespace Longman\TelegramBot\Commands\SystemCommands;
 use App\Customer;
 use Longman\TelegramBot\Commands\SystemCommand;
 use Longman\TelegramBot\Conversation;
+use Longman\TelegramBot\Entities\InlineKeyboard;
+use Longman\TelegramBot\Entities\InlineKeyboardButton;
 use Longman\TelegramBot\Entities\Keyboard;
 use Longman\TelegramBot\Request;
 /**
@@ -72,33 +74,56 @@ class GenericmessageCommand extends SystemCommand
             $contact = $message->getContact();
             /*$customer = Customer::firstOrCreate(['account_id' => $message->getFrom()->getId(), 'phone_number' => $contact->getPhoneNumber(), 'first_name' => $contact->getFirstName(), 'last_name' => $contact->getLastName(), 'username' => $message->getChat()->getUsername(), 'chat_id' => $chat_id]);
             $customer->update(['is_active' => 1]);*/
-		Customer::updateOrCreate(
-		    [
-			'account_id' => $message->getFrom()->getId(),
-		    ],
-		    [
-			'phone_number' => $contact->getPhoneNumber(), 'first_name' => $contact->getFirstName(), 'last_name' => $contact->getLastName(), 'username' => $message->getChat()->getUsername(), 'chat_id' => $chat_id, 'is_active' => 1
-		    ]
-		);
-//            $text = sprintf("سپاس %s عزیز\nشما با موفقیت ثبت نام شدید.\n برای استفاده از امکانات ابتدا از طریق منو علاقه مندی های خود را انتخاب کنید:".PHP_EOL."/keyboard", $contact->getFirstName());
-            $command = "favoritecategories";
-            $text = sprintf("سپاس %s عزیز".PHP_EOL."ثبت نام شما با موفقیت انجام شد.".PHP_EOL, $contact->getFirstName());
-            $text .= "حالا برای استفاده از امکانات ابتدا علاقه‌مندی‌هایت رو از طریق زیر مشخص کن.";
+            $customer = Customer::where('account_id', $message->getFrom()->getId())->first();
+            //if the customer already exists in database
+            if (!is_null($customer)) {
+                $customer->update(['is_active' => 1]);
 
-            $keyboard = new Keyboard(
-                [ "\xE2\x9D\xA4 مدیریت علاقه‌مندی‌ها", "\xE2\x9E\xA1 مشاهده مطالب مجله"],
-            	["\xF0\x9F\x9A\xAB لغو اشتراک", "\xF0\x9F\x92\xB0 امتیاز من"]
-            );
-	        $keyboard->setResizeKeyboard(true);
+                $text   = "شما قبلا عضو سرویس بوده اید. لطفا یکی از گزینه های زیر را انتخاب کنید:".PHP_EOL;
+                $inline_keyboard_options = [];
+                array_push($inline_keyboard_options, new InlineKeyboardButton(['text' => "\xF0\x9F\x9A\xAB میخواهم همه مطالب از ابتدا برای من ارسال شود", 'callback_data' => 'history_clear']));
+                array_push($inline_keyboard_options, new InlineKeyboardButton(['text' => "\xE2\x9D\xA4 میخواهم تنها مطالب جدید را دریافت کنم", 'callback_data' => 'start_continue']));
 
-            $data = [
-                'chat_id' => $chat_id,
-                'text'    => $text,
-                'reply_markup' => $keyboard,
-            ];
+                $inline_keyboard = new InlineKeyboard(...$inline_keyboard_options);
+                $inline_keyboard->setResizeKeyboard(true);
 
-            Request::sendMessage($data);
-            return $this->getTelegram()->executeCommand($command);
+                $data = [
+                    'chat_id'      => $chat_id,
+                    'text'         => $text,
+                    'reply_markup' => $inline_keyboard,
+                ];
+                return Request::sendMessage($data);
+            //if the customer is new
+            } else {
+                Customer::updateOrCreate(
+                    [
+                        'account_id' => $message->getFrom()->getId(),
+                    ],
+                    [
+                        'phone_number' => $contact->getPhoneNumber(), 'first_name' => $contact->getFirstName(), 'last_name' => $contact->getLastName(), 'username' => $message->getChat()->getUsername(), 'chat_id' => $chat_id, 'is_active' => 1
+                    ]
+                );
+
+                $command = "favoritecategories";
+                $text = sprintf("سپاس %s عزیز".PHP_EOL."ثبت نام شما با موفقیت انجام شد.".PHP_EOL, $contact->getFirstName());
+                $text .= "حالا برای استفاده از امکانات ابتدا علاقه‌مندی‌هایت رو از طریق زیر مشخص کن.";
+
+                $keyboard = new Keyboard(
+                    [ "\xE2\x9D\xA4 مدیریت علاقه‌مندی‌ها", "\xE2\x9E\xA1 مشاهده مطالب مجله"],
+                    ["\xF0\x9F\x9A\xAB لغو اشتراک", "\xF0\x9F\x92\xB0 امتیاز من"]
+                );
+                $keyboard->setResizeKeyboard(true);
+
+                $data = [
+                    'chat_id' => $chat_id,
+                    'text'    => $text,
+                    'reply_markup' => $keyboard,
+                ];
+
+                Request::sendMessage($data);
+                return $this->getTelegram()->executeCommand($command);
+            }
+
         }
 
         $commands = ['register' => 'ثبت نام', 'revoke' => "\xF0\x9F\x9A\xAB لغو اشتراک", 'nextcontent' => "\xE2\x9E\xA1 مشاهده مطالب مجله", 'favoritecategories' => "\xE2\x9D\xA4 مدیریت علاقه‌مندی‌ها", 'score' => "\xF0\x9F\x92\xB0 امتیاز من",];
