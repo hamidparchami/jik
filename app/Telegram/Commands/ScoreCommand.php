@@ -60,7 +60,8 @@ class ScoreCommand extends SystemCommand
             $customer_score = $customer_registration_days*20;
 
             $text = "تبریک میگم".
-                    PHP_EOL.sprintf("با ‌توجه به اینکه شما %d روز است که مشترک ویژه مجله جیک و پیک هستید امتیاز شما ‌برای برنده شدن در‌ قرعه کشی ماهانه یک گوشی‌ آیفون و جایزه ویژه نوروز سفر به کشور تایلند  برابر %d میباشد.".PHP_EOL."(نسخه آزمایشی)", $customer_registration_days, $customer_score);
+                    //PHP_EOL.sprintf("با ‌توجه به اینکه شما %d روز است که مشترک ویژه مجله جیک و پیک هستید امتیاز شما ‌برای برنده شدن در‌ قرعه کشی ماهانه یک گوشی‌ آیفون و جایزه ویژه نوروز سفر به کشور تایلند  برابر %d میباشد.".PHP_EOL."(نسخه آزمایشی)", $customer_registration_days, $customer_score);
+                    PHP_EOL.sprintf("با ‌توجه به اینکه شما %d روز است که مشترک ویژه مجله جیک و پیک هستید امتیاز شما برابر %d میباشد.".PHP_EOL."(نسخه آزمایشی)", $customer_registration_days, $customer_score);
         }
 
         $data    = [
