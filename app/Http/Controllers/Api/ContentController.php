@@ -10,6 +10,6 @@ class ContentController extends Controller
 {
     public function getContent($id)
     {
-        return Content::where('id', $id)->where('is_active', 1)->get();
+        return Content::where('id', $id)->where('is_active', 1)->first();
     }
 }

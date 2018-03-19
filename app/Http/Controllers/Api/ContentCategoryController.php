@@ -11,7 +11,7 @@ class ContentCategoryController extends Controller
 {
     public function getCategoryContents($id)
     {
-        return ContentCategory::where('id', $id)->where('is_active', 1)->with('contents')->get();
+        return ContentCategory::where('id', $id)->where('is_active', 1)->with('contents')->first();
     }
 
     public function getCustomerCategories($customer_id)
