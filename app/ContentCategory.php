@@ -17,4 +17,9 @@ class ContentCategory extends Model
     protected $fillable = [
         'name', 'parent_id', 'is_active', 'is_important',
     ];
+
+    public function contents()
+    {
+        return $this->hasMany('App\Content', 'category_id');
+    }
 }
