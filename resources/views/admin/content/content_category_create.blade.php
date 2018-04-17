@@ -26,6 +26,18 @@
                             <div class="row form-row">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
+                                    <select name="catalog_id" class="form-control rtl">
+                                        @foreach($catalogs as $catalog)
+                                            <option value="{{ $catalog->id }}" @if($catalog->id == old('catalog_id')) selected @endif>{{ $catalog->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-4">کاتالوگ</div>
+                            </div>
+
+                            <div class="row form-row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
                                     <select name="parent_id" class="form-control rtl">
                                         <option value="0" @if(old('parent_id') == 0) selected @endif>----------</option>
                                         @foreach($categories as $category)

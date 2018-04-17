@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Article;
+use App\Catalog;
 use App\ContentCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,15 +20,17 @@ class ContentCategoryController extends Controller
 
     public function getCreate()
     {
+        $catalogs   = Catalog::all();
         $categories = ContentCategory::where('parent_id', 0)->where('is_active', 1)->orderBy('order', 'desc')->get();
-        return view('admin.content.content_category_create', compact('categories'));
+        return view('admin.content.content_category_create', compact('catalogs', 'categories'));
     }
 
     public function postCreate(Request $request)
     {
         $rules = [
-            'parent_id' => 'numeric',
-            'name'      => 'required|max:255',
+            'catalog_id'    => 'numeric',
+            'parent_id'     => 'numeric',
+            'name'          => 'required|max:255',
         ];
 
         $request['is_active']    = ($request['is_active']    == 'on' || $request['is_active']    == '1') ? 1 : 0;
@@ -42,17 +45,19 @@ class ContentCategoryController extends Controller
 
     public function getEdit($id)
     {
+        $catalogs   = Catalog::all();
         $categories = ContentCategory::where('parent_id', 0)->where('is_active', 1)->orderBy('order', 'desc')->get();
         $category   = ContentCategory::find($id);
 
-        return view('admin.content.content_category_edit', compact('categories', 'category'));
+        return view('admin.content.content_category_edit', compact('catalogs', 'categories', 'category'));
     }
 
     public function postEdit(Request $request)
     {
         $rules = [
-            'parent_id' => 'numeric',
-            'name'      => 'required|max:255',
+            'catalog_id'    => 'numeric',
+            'parent_id'     => 'numeric',
+            'name'          => 'required|max:255',
         ];
 
         $request['is_active']    = ($request['is_active']    == 'on' || $request['is_active']    == '1') ? 1 : 0;
