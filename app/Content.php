@@ -10,6 +10,7 @@ class Content extends Model
 {
     use SoftDeletes;
 
+    protected $appends = ['published_at'];
     /**
      * The attributes that are mass assignable.
      *
@@ -19,6 +20,26 @@ class Content extends Model
         'service_id', 'category_id', 'user_id', 'text', 'full_content', 'photo_url', 'video_url', 'score', 'publish_time', 'type', 'order', 'reference', 'show_instant_view', 'is_active'
     ];
 
+    public function convertNumberToFa($value)
+    {
+        $persian_digits = array('۰','۱','۲','۳','۴','۵','۶','۷','۸','۹');
+        $english_digits = array('0','1','2','3','4','5','6','7','8','9');
+        $value          = str_replace($english_digits, $persian_digits, $value);
+        return $value;
+    }
+
+    /** convert created_at to Jalali and return as published_at
+     * @param $value
+     * @return mixed
+     */
+    public function getPublishedAtAttribute() {
+        $value = $this->created_at;
+
+        if (!is_null($value) && $value != '') {
+            $send_time_attr_time_part = explode(' ', $value);
+            return $this->convertNumberToFa(jDateTime::strftime('Y/m/d', strtotime($value)) .' '. $send_time_attr_time_part[1]);
+        }
+    }
     /** convert send_time to Jalali
      * @param $value
      * @return mixed
