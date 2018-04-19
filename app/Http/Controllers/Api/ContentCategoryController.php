@@ -22,12 +22,19 @@ class ContentCategoryController extends Controller
 
     public function getUserCategories($user_id)
     {
-//        $categories = ContentCategory::where('is_active', 1)->get();
+        $categories = ContentCategory::where('is_active', 1)->get();
 
         $user_categories = CustomerCategory::where('customer_id', $user_id)->get(['category_id'])->implode('category_id', ',');
         $user_categories = explode(',', $user_categories);
 
-        return compact('user_categories');
+        $categories->map(function ($category) use ($user_categories) {
+            if (in_array($category['id'], $user_categories)) {
+                $category['is_favorite'] = true;
+            }
+            return $category;
+        });
+
+        return compact('categories');
     }
 
     public function putUserCategory($user_id, $category_id)
