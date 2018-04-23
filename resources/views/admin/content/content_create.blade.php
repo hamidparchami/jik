@@ -113,6 +113,22 @@
                                 <div class="col-md-4">ویدئو</div>
                             </div>
 
+                            <hr />
+                            <div class="row form-row">
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                  <span class="input-group-btn">
+                                    <a id="main-image-selector" data-input="main_image" data-preview="main-image-holder" class="btn btn-primary">
+                                      <i class="fa fa-picture-o"></i> انتخاب
+                                    </a>
+                                  </span>
+                                        <input id="main_image" class="form-control" type="text" name="main_image" value="{{ old('main_image', (isset($content->main_image)) ? $content->main_image : '') }}">
+                                    </div>
+                                    <img id="main-image-holder" style="margin-top:15px;max-height:100px;" src="{{ old('main_image', (isset($content->main_image)) ? $content->main_image : '') }}">
+                                </div>
+                                <div class="col-md-4">عکس اصلی</div>
+                            </div>
+
                             <div class="row form-row" id="publish_time" style="display:none;">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
@@ -286,6 +302,7 @@
 
     <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
     <script>
+        $('#main-image-selector').filemanager('image');
         $('#image-selector').filemanager('image');
         $('#video-selector').filemanager('file');
     </script>

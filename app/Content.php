@@ -17,7 +17,7 @@ class Content extends Model
      * @var array
      */
     protected $fillable = [
-        'service_id', 'category_id', 'user_id', 'text', 'full_content', 'photo_url', 'video_url', 'score', 'publish_time', 'type', 'order', 'reference', 'show_instant_view', 'is_active'
+        'service_id', 'category_id', 'user_id', 'text', 'main_image', 'full_content', 'photo_url', 'video_url', 'score', 'publish_time', 'type', 'order', 'reference', 'show_instant_view', 'is_active'
     ];
 
     public function convertNumberToFa($value)
