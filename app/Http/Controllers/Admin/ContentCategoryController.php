@@ -31,6 +31,7 @@ class ContentCategoryController extends Controller
             'catalog_id'    => 'numeric',
             'parent_id'     => 'numeric',
             'name'          => 'required|max:255',
+            'image'         => 'required|max:255',
         ];
 
         $request['is_active']    = ($request['is_active']    == 'on' || $request['is_active']    == '1') ? 1 : 0;
@@ -58,6 +59,7 @@ class ContentCategoryController extends Controller
             'catalog_id'    => 'numeric',
             'parent_id'     => 'numeric',
             'name'          => 'required|max:255',
+            'image'         => 'required|max:255',
         ];
 
         $request['is_active']    = ($request['is_active']    == 'on' || $request['is_active']    == '1') ? 1 : 0;

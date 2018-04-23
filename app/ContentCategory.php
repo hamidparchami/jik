@@ -15,7 +15,7 @@ class ContentCategory extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'catalog_id', 'parent_id', 'is_active', 'is_important',
+        'name', 'catalog_id', 'parent_id', 'image', 'is_active', 'is_important',
     ];
 
     public function contents()

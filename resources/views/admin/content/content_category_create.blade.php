@@ -58,6 +58,21 @@
                             <br />
 
                             <div class="row form-row">
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                      <span class="input-group-btn">
+                                        <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                          <i class="fa fa-picture-o"></i> انتخاب
+                                        </a>
+                                      </span>
+                                        <input id="thumbnail" class="form-control" type="text" name="image" value="{{ (old('image', (isset($category->image) ? $category->image : ''))) }}">
+                                    </div>
+                                    <img id="holder" style="margin-top:15px;max-height:100px;" src="{{ (old('image', (isset($category->image) ? $category->image : ''))) }}">
+                                </div>
+                                <div class="col-md-4">عکس دسته</div>
+                            </div>
+
+                            <div class="row form-row">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
                                     <div class="checkbox checkbox-success">
@@ -118,21 +133,6 @@
 
     <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
     <script>
-        $('#image-selector').filemanager('image');
-    </script>
-
-    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-    <script>
-        var ckeditor = {
-            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
-            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token={{csrf_token()}}',
-            filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
-            filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token={{csrf_token()}}',
-            contentsLangDirection: 'rtl',
-            enterMode: CKEDITOR.ENTER_BR,
-        };
-
-        CKEDITOR.replace( 'short_content', ckeditor);
-        CKEDITOR.replace( 'content', ckeditor);
+        $('#lfm').filemanager('image');
     </script>
 @endsection
