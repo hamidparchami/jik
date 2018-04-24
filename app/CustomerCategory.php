@@ -17,4 +17,8 @@ class CustomerCategory extends Model
     protected $fillable = [
         'customer_id', 'category_id',
     ];
+
+    public function customer() {
+    	return $this->belongsTo('App\Customer');
+    }
 }

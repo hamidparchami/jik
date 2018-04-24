@@ -32,6 +32,6 @@ Route::group(['prefix' => 'v1'], function () {
     //Content resource
     Route::get('/content/list-by-category/{category_id}', 'Api\ContentController@getContentListByCategory')->where('category_id', '[0-9]+');
     Route::get('/content/view/{id}', 'Api\ContentController@getContentView');
-    Route::get('/content/user-feed/{user_id}', 'Api\ContentController@getUserFeed');
+    Route::get('/content/user-feed/{user_id}/catalog/{catalog_id}/{offset?}', 'Api\ContentController@getUserFeed');
 
 });
