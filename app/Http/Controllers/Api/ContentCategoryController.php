@@ -10,14 +10,16 @@ use App\Http\Controllers\Controller;
 
 class ContentCategoryController extends Controller
 {
-    public function getCategoryListByCatalog($catalog_id)
+    public function getCategoryListByCatalog($catalog_id, $offset)
     {
-        return ContentCategory::where('catalog_id', $catalog_id)->where('is_active', 1)->get();
+        $default_limit = 10;
+        return ContentCategory::where('catalog_id', $catalog_id)->where('is_active', 1)->offset($offset)->limit($default_limit)->get();
     }
 
-    public function getCategoryContents($id)
+    public function getCategoryContents($id, $offset)
     {
-        return ContentCategory::where('id', $id)->where('is_active', 1)->with('contents')->first();
+        $default_limit = 10;
+        return ContentCategory::where('id', $id)->where('is_active', 1)->with('contents')->offset($offset)->limit($default_limit)->first();
     }
 
     public function getUserCategories($user_id)

@@ -25,8 +25,8 @@ Route::group(['prefix' => 'v1'], function () {
     //Catalog resource
     Route::get('/catalog/list', 'Api\CatalogController@getCatalogList');
     //Category resource
-    Route::get('/category/contents/{id}', 'Api\ContentCategoryController@getCategoryContents')->where('id', '[0-9]+');
-    Route::get('/category/list-by-catalog/{catalog_id}', 'Api\ContentCategoryController@getCategoryListByCatalog')->where('catalog_id', '[0-9]+');
+    Route::get('/category/contents/{id}/offset/{offset}', 'Api\ContentCategoryController@getCategoryContents')->where('id', '[0-9]+');
+    Route::get('/category/list-by-catalog/{catalog_id}/offset/{offset}', 'Api\ContentCategoryController@getCategoryListByCatalog')->where('catalog_id', '[0-9]+');
     Route::get('/category/user-favorite/{user_id}', 'Api\ContentCategoryController@getUserCategories');
     Route::put('/category/user-favorite/{user_id}/toggle/{category_id}', 'Api\ContentCategoryController@putUserCategory')->where('category_id', '[0-9]+');
     //Content resource
