@@ -19,7 +19,12 @@ class ContentCategoryController extends Controller
     public function getCategoryContents($id, $offset)
     {
         $default_limit = 10;
-        return ContentCategory::where('id', $id)->where('is_active', 1)->with('contents')->offset($offset)->limit($default_limit)->first();
+        return ContentCategory::where('id', $id)
+                                ->where('is_active', 1)
+                                ->with(array('contents' => function($query) use($default_limit, $offset) {
+                                                $query->offset($offset)->limit($default_limit);
+                                            }))
+                                ->first();
     }
 
     public function getUserCategories($user_id)
