@@ -17,7 +17,7 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::group(['prefix' => 'v1'], function () {
+Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
     //Request resource
     Route::post('/request/reception', 'Api\RequestController@postReceiveRequests');
     Route::get('/request/display-error', 'Api\RequestController@getDisplayError')->name('display-error');
