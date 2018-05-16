@@ -40,4 +40,9 @@ class Catalog extends Model
     {
         return $this->hasMany('App\Catalog', 'parent_id');
     }
+
+    public function category()
+    {
+        return $this->hasMany('App\ContentCategory');
+    }
 }
