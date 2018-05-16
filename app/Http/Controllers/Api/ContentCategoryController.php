@@ -29,7 +29,15 @@ class ContentCategoryController extends Controller
 
     public function getUserCategories($user_id)
     {
-        $categories = ContentCategory::where('is_active', 1)->get();
+        $last_login_date = '2018-05-01';
+
+        $categories = ContentCategory::where('is_active', 1)
+                                        ->withCount([
+                                            'contents' => function ($query) use($last_login_date) {
+                                                $query->whereDate('updated_at', '>', $last_login_date);
+                                            }
+                                        ])
+                                        ->get();
 
         $user_categories = CustomerCategory::where('customer_id', $user_id)->get(['category_id'])->implode('category_id', ',');
         $user_categories = explode(',', $user_categories);
