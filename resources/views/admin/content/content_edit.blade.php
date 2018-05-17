@@ -112,7 +112,12 @@
                                   </span>
                                         <input id="video_url" class="form-control" type="text" name="video_url" value="{{ old('video_url', (isset($content->video_url)) ? $content->video_url : '') }}">
                                     </div>
-                                    <img id="holder" style="margin-top:15px;max-height:100px;" src="{{ old('video_url', (isset($content->video_url)) ? $content->video_url : '') }}">
+                                    {{--<img id="holder" style="margin-top:15px;max-height:100px;" src="{{ old('video_url', (isset($content->video_url)) ? $content->video_url : '') }}">--}}
+
+                                    <div class="checkbox checkbox-success rtl">
+                                        <input id="checkbox" class="styled" type="checkbox" name="generate_video_thumbnail">
+                                        <label for="checkbox">ساخت Thumbnail برای ویدئو</label>
+                                    </div>
                                 </div>
                                 <div class="col-md-4">ویدئو</div>
                             </div>

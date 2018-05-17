@@ -12,7 +12,7 @@ class ContentController extends Controller
 {
     const FEED_CONTENTS_CHUNK_SIZE = 10;
 
-    public function getContentListByCategory($category_id, $order='asc')
+    public function getContentListByCategory($category_id, $order='desc')
     {
         return Content::where('category_id', $category_id)->where('is_active', 1)->orderBy('id', $order)->get();
     }

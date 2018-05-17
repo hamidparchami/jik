@@ -108,7 +108,12 @@
                                   </span>
                                         <input id="video_url" class="form-control" type="text" name="video_url" value="{{ old('video_url') }}">
                                     </div>
-                                    <img id="holder" src="{{ old('video_url') }}" style="margin-top:15px;max-height:100px;">
+                                    {{--<img id="holder" src="{{ old('video_url') }}" style="margin-top:15px;max-height:100px;">--}}
+
+                                    <div class="checkbox checkbox-success rtl">
+                                        <input id="checkbox" class="styled" type="checkbox" name="generate_video_thumbnail">
+                                        <label for="checkbox">ساخت Thumbnail برای ویدئو</label>
+                                    </div>
                                 </div>
                                 <div class="col-md-4">ویدئو</div>
                             </div>

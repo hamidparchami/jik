@@ -1,4 +1,4 @@
-    {
+{
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
@@ -13,7 +13,8 @@
         "morilog/jalali": "^2.2",
         "firebase/php-jwt": "^4.0",
         "doctrine/dbal": "^2.5",
-        "longman/telegram-bot": "^0.52.0"
+        "longman/telegram-bot": "^0.52.0",
+        "lakshmaji/thumbnail": "^1.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

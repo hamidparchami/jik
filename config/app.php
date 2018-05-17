@@ -186,6 +186,8 @@ return [
         Unisharp\Ckeditor\ServiceProvider::class,
         //jDate
         Morilog\Jalali\JalaliServiceProvider::class,
+        //video thumbnail
+        Lakshmaji\Thumbnail\ThumbnailServiceProvider::class,
     ],
 
     /*
@@ -236,7 +238,9 @@ return [
         //file manager
         'Image' => Intervention\Image\Facades\Image::class,
         //jDate
-        'jDate' => Morilog\Jalali\Facades\jDate::class
+        'jDate' => Morilog\Jalali\Facades\jDate::class,
+        //video thumbnail
+        'Thumbnail' => Lakshmaji\Thumbnail\Facade\Thumbnail::class,
     ],
 
 ];

@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Lakshmaji\Thumbnail\Facade\Thumbnail;
 use Longman\TelegramBot\Request as TelegramRequest;
 use Validator;
 
@@ -58,7 +59,18 @@ class ContentController extends Controller
         $request['user_id']     = Auth::id();
         $request['is_active']   = ($request['is_active'] == 'on' || $request['is_active'] == '1') ? 1 : 0;
         $request['show_instant_view']   = ($request['show_instant_view'] == 'on' || $request['show_instant_view'] == '1') ? 1 : 0;
-        Content::create($request->all());
+        $request['generate_video_thumbnail']   = ($request['generate_video_thumbnail'] == 'on' || $request['generate_video_thumbnail'] == '1') ? 1 : 0;
+
+        $content = Content::create($request->all());
+
+        if (!empty($request['video_url']) && $request['generate_video_thumbnail']) {
+            $video_path             = $request['video_url'];
+            $thumbnail_path_prefix  = storage_path().'/app/public';
+            $thumbnail_path_suffix  = '/images/video_thumbnail';
+            $thumbnail_image        = 'content_'.$content->id.'.jpg';
+            Thumbnail::getThumbnail($video_path, $thumbnail_path_prefix.$thumbnail_path_suffix, $thumbnail_image);
+            $content->update(['main_image' => url('/').'/storage'.$thumbnail_path_suffix.'/'.$thumbnail_image]);
+        }
 
         return redirect('/admin/content/manage')->with('message', 'محتوا با موفقیت ذخیره شد.');
     }
@@ -99,8 +111,19 @@ class ContentController extends Controller
 
         $request['is_active']   = ($request['is_active'] == 'on' || $request['is_active'] == '1') ? 1 : 0;
         $request['show_instant_view']   = ($request['show_instant_view'] == 'on' || $request['show_instant_view'] == '1') ? 1 : 0;
+        $request['generate_video_thumbnail']   = ($request['generate_video_thumbnail'] == 'on' || $request['generate_video_thumbnail'] == '1') ? 1 : 0;
 
         $content = Content::find($request->id);
+
+        if (!empty($request['video_url']) && $request['generate_video_thumbnail']) {
+            $video_path             = $request['video_url'];
+            $thumbnail_path_prefix  = storage_path().'/app/public';
+            $thumbnail_path_suffix  = '/images/video_thumbnail';
+            $thumbnail_image        = 'content_'.$content->id.'.jpg';
+            Thumbnail::getThumbnail($video_path, $thumbnail_path_prefix.$thumbnail_path_suffix, $thumbnail_image);
+            $request['main_image'] = url('/').'/storage'.$thumbnail_path_suffix.'/'.$thumbnail_image;
+        }
+
         $content->update($request->all());
 
         return redirect('/admin/content/manage')->with('message', 'محتوا با موفقیت ذخیره شد.');

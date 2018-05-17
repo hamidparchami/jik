@@ -22,6 +22,7 @@ class ContentCategoryController extends Controller
         return ContentCategory::where('id', $id)
                                 ->where('is_active', 1)
                                 ->with(array('contents' => function($query) use($default_limit, $offset) {
+                                                $query->orderBy('updated_at', 'desc');
                                                 $query->offset($offset)->limit($default_limit);
                                             }))
                                 ->first();
