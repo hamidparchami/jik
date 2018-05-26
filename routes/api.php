@@ -27,11 +27,13 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
     //Category resource
     Route::get('/category/contents/{id}/offset/{offset}', 'Api\ContentCategoryController@getCategoryContents')->where('id', '[0-9]+');
     Route::get('/category/list-by-catalog/{catalog_id}/offset/{offset}', 'Api\ContentCategoryController@getCategoryListByCatalog')->where('catalog_id', '[0-9]+');
-    Route::get('/category/user-favorite/{user_id}', 'Api\ContentCategoryController@getUserCategories');
-    Route::put('/category/user-favorite/{user_id}/toggle/{category_id}', 'Api\ContentCategoryController@putUserCategory')->where('category_id', '[0-9]+');
+    Route::get('/category/user-favorite/{account_id}', 'Api\ContentCategoryController@getUserCategories');
+    Route::put('/category/user-favorite/{account_id}/toggle/{category_id}', 'Api\ContentCategoryController@putUserCategory')->where('category_id', '[0-9]+');
     //Content resource
     Route::get('/content/list-by-category/{category_id}', 'Api\ContentController@getContentListByCategory')->where('category_id', '[0-9]+');
     Route::get('/content/view/{id}', 'Api\ContentController@getContentView');
-    Route::get('/content/user-feed/{user_id}/catalog/{catalog_id}/{offset?}', 'Api\ContentController@getUserFeed');
-
+    Route::get('/content/user-feed/{account_id}/catalog/{catalog_id}/{offset?}', 'Api\ContentController@getUserFeed');
+    //OTP
+    Route::post('/customer/generate-otp', 'Api\CustomerController@postGenerateOtp');
+    Route::put('/customer/verify-otp', 'Api\CustomerController@putVerifyOTP');
 });

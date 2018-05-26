@@ -28,10 +28,10 @@ class ContentCategoryController extends Controller
                                 ->first();
     }
 
-    public function getUserCategories($user_id)
+    public function getUserCategories($account_id)
     {
         $last_login_date = '2018-05-01';
-
+        $customer = Customer::where('account_id', $account_id)->first();
         $categories = ContentCategory::where('is_active', 1)
                                         ->withCount([
                                             'contents' => function ($query) use($last_login_date) {
@@ -40,7 +40,7 @@ class ContentCategoryController extends Controller
                                         ])
                                         ->get();
 
-        $user_categories = CustomerCategory::where('customer_id', $user_id)->get(['category_id'])->implode('category_id', ',');
+        $user_categories = CustomerCategory::where('customer_id', $customer->id)->get(['category_id'])->implode('category_id', ',');
         $user_categories = explode(',', $user_categories);
 
         $categories->map(function ($category) use ($user_categories) {
@@ -53,9 +53,9 @@ class ContentCategoryController extends Controller
         return compact('categories');
     }
 
-    public function putUserCategory($user_id, $category_id)
+    public function putUserCategory($account_id, $category_id)
     {
-        $customer = Customer::find($user_id);
+        $customer = Customer::where('account_id', $account_id)->first();
         $customer->categories()->toggle([$category_id]);
 
         $result = ['success' => 'true'];
