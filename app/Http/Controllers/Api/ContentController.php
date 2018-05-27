@@ -22,7 +22,7 @@ class ContentController extends Controller
         return Content::where('id', $id)->where('is_active', 1)->first();
     }
 
-    public function getUserFeed($account_id, $catalog_id, $offset=1)
+    public function getUserFeed($account_id, $catalog_id, $offset=0)
     {
         //get all categories in requested catalog
         $catalog_categories = ContentCategory::where('catalog_id', $catalog_id)->get(['id'])->implode('id', ',');

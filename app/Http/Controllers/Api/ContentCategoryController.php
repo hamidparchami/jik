@@ -28,11 +28,12 @@ class ContentCategoryController extends Controller
                                 ->first();
     }
 
-    public function getUserCategories($account_id)
+    public function getUserCategories($account_id, $catalog_id)
     {
         $last_login_date = '2018-05-01';
         $customer = Customer::where('account_id', $account_id)->first();
-        $categories = ContentCategory::where('is_active', 1)
+        $categories = ContentCategory::where('catalog_id', $catalog_id)
+                                        ->where('is_active', 1)
                                         ->withCount([
                                             'contents' => function ($query) use($last_login_date) {
                                                 $query->whereDate('updated_at', '>', $last_login_date);
