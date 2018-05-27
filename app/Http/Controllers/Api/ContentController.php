@@ -50,13 +50,13 @@ class ContentController extends Controller
         }
 
         //get all contents in customer categories
-        $take = $offset*self::FEED_CONTENTS_CHUNK_SIZE;
-        $skip = ($offset > 1) ? $take-self::FEED_CONTENTS_CHUNK_SIZE : 0;
+        /*$take = $offset*self::FEED_CONTENTS_CHUNK_SIZE;
+        $skip = ($offset > 1) ? $take-self::FEED_CONTENTS_CHUNK_SIZE : 0;*/
         $contents = Content::whereIn('category_id', $user_categories)
                             ->where('is_active', '1')
-                            ->orderBy('order', 'desc')
-                            ->skip($skip)
-                            ->take($take)
+                            ->orderBy('updated_at', 'desc')
+                            ->skip($offset)
+                            ->take(self::FEED_CONTENTS_CHUNK_SIZE)
                             ->get();
 
         return compact('contents');
