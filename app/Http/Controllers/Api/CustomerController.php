@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Customer;
 use App\Lib\GeneralFunctions;
+use App\Lib\Sms_SendMessage;
 use App\Token;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,6 +13,44 @@ use Validator;
 
 class CustomerController extends Controller
 {
+    const APIKey = "4948d274cc9acecd62ced274";
+    const SecretKey = "L)6H[.XjN_q3xT'Z";
+    const LineNumber = "30004747474882";
+
+/*    public function getSMSToken()
+    {
+        try {
+
+            date_default_timezone_set("Asia/Tehran");
+
+            $SmsIR_GetToken = new Sms_GetToken(self::APIKey, self::SecretKey);
+            $GetToken = $SmsIR_GetToken->GetToken();
+            return $GetToken->TokenKey;
+
+        } catch (Exeption $e) {
+            echo 'Error GetToken : '.$e->getMessage();
+        }
+
+    }*/
+
+    public function sendSMS($mobile_numbers, $messages)
+    {
+        try {
+            date_default_timezone_set("Asia/Tehran");
+
+            // sending date
+            @$SendDateTime = date("Y-m-d")."T".date("H:i:s");
+
+            $SmsIR_SendMessage = new Sms_SendMessage(self::APIKey, self::SecretKey, self::LineNumber);
+            $SendMessage = $SmsIR_SendMessage->SendMessage($mobile_numbers, $messages, $SendDateTime);
+            var_dump($SendMessage);
+
+        } catch (Exeption $e) {
+            echo 'Error SendMessage : '.$e->getMessage();
+        }
+
+    }
+
     public function postGenerateOTP(Request $request)
     {
         //validate phone number
@@ -37,7 +76,8 @@ class CustomerController extends Controller
         $otp = rand(1000, 9999);
         //store OTP
         Token::create(['customer_id' => $customer->id, 'otp' => $otp]);
-        //send OTP via SMS @TODO
+        //send OTP via SMS @TODO TEST
+        $this->sendSMS($customer->phone_number, $otp);
         //return result
         $success = true;
         return compact('success', 'account_id');
