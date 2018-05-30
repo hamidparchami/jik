@@ -8,17 +8,10 @@
 
 namespace App\Lib;
 
-
-/**
- * @author Pejman Kheyri
-
- * @author Pejman Kheyri <pejmankheyri@gmail.com>
- * @copyright © 2018 The Ide Pardazan (ipe.ir) PHP Group. All rights reserved.
- * @link http://sms.ir/ Documentation of sms.ir RESTful API PHP sample.
- * @version 1.2
- */
-
 class Sms_SendMessage {
+    public $APIKey        = "";
+    public $SecretKey     = "";
+    public $LineNumber    = "";
 
 	/**
 	* gets API Message Send Url.
@@ -156,21 +149,11 @@ class Sms_SendMessage {
 
 		$postString = json_encode($postData);
 
-		$ch = curl_init($url);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        $client = new CurlRequest();
+        $client->setCurlHeaders('Content-Type: application/json');
+        $client->setCurlHeaders('x-sms-ir-secure-token: '.$token);
 
-											'Content-Type: application/json',
-											'x-sms-ir-secure-token: '.$token
-											));
-		curl_setopt($ch, CURLOPT_HEADER, false);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-		curl_setopt($ch, CURLOPT_POST, count($postString));
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $postString);
-
-		$result = curl_exec($ch);
-		curl_close($ch);
-
-		return $result;
+        $result = $client->sendCurlRequest($url, 'post', $postString);
+        return $result;
 	}
 }

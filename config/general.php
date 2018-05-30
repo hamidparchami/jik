@@ -41,4 +41,7 @@ H8z7w4bI325ECqc8PnOQR7HPZaHD6OQr7rfnkT/eKpTgfSsYzrA7z4jgHJr+R/7A
 6wIDAQAB
 -----END PUBLIC KEY-----'),
 
+    'sms_ir_APIKey'     => env('SMS_IR_APIKEY', '4948d274cc9acecd62ced274'),
+    'sms_ir_SecretKey'  => env('SMS_IR_SECRETKEY', "L)6H[.XjN_q3xT'Z"),
+    'sms_ir_LineNumber' => env('SMS_IR_LINENUMBER', '30004747474882'),
 ];
