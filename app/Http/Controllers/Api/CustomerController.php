@@ -9,6 +9,7 @@ use App\Token;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Validator;
 
 class CustomerController extends Controller
@@ -55,7 +56,7 @@ class CustomerController extends Controller
         $this->sendSMS($customer->phone_number, $otp_message);
         //return result
         $success = true;
-        return compact('success', 'account_id');
+        return compact('success', 'account_id', 'otp');
     }
 
     public function putVerifyOTP(Request $request)
@@ -66,7 +67,11 @@ class CustomerController extends Controller
             'otp'           => 'required|numeric|digits:4',
         ];
 
-        $validator = Validator::make($request->all(), $rules);
+        $messages = [
+            'otp.required' => 'لطفا کد دریافتی از طریق پیامک را وارد کنید.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
             return response()->json(['success' => false, 'error_code' => '1020', 'error' => $validator->errors()]);
         }
