@@ -34,7 +34,11 @@ class CustomerController extends Controller
             'phone_number'  => ['required', 'regex:/09(0[1-2]|1[0-9]|3[0-9]|2[0-1])-?[0-9]{3}-?[0-9]{4}/'],
         ];
 
-        $validator = Validator::make($request->all(), $rules);
+        $messages = [
+            'phone_number.required' => 'لطفا شماره موبایل خود را وارد کنید.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
             return response()->json(['success' => false, 'error_code' => '1010',  'error' => $validator->errors()]);
         }
