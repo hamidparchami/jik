@@ -29,6 +29,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
     Route::get('/category/list-by-catalog/{catalog_id}/offset/{offset}', 'Api\ContentCategoryController@getCategoryListByCatalog')->where('catalog_id', '[0-9]+');
     Route::get('/category/user-favorite/{account_id}/catalog/{catalog_id}', 'Api\ContentCategoryController@getUserCategories');
     Route::put('/category/user-favorite/{account_id}/toggle/{category_id}', 'Api\ContentCategoryController@putUserCategory')->where('category_id', '[0-9]+');
+    Route::post('/category/visit-log', 'Api\ContentCategoryController@postCategoryVisitLog');
     //Content resource
     Route::get('/content/list-by-category/{category_id}', 'Api\ContentController@getContentListByCategory')->where('category_id', '[0-9]+');
     Route::get('/content/view/{id}', 'Api\ContentController@getContentView');

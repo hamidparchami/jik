@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\CategoryVisitLog;
 use App\ContentCategory;
 use App\Customer;
 use App\CustomerCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class ContentCategoryController extends Controller
 {
@@ -31,23 +33,23 @@ class ContentCategoryController extends Controller
 
     public function getUserCategories($account_id, $catalog_id)
     {
-        $last_login_date = '2018-05-01';
+        $default_last_visit_category_date = '2018-05-01';
         $customer = Customer::where('account_id', $account_id)->first();
-        $categories = ContentCategory::where('catalog_id', $catalog_id)
-                                        ->where('is_active', 1)
-                                        ->withCount([
-                                            'contents' => function ($query) use($last_login_date) {
-                                                $query->whereDate('updated_at', '>', $last_login_date);
-                                            }
-                                        ])
-                                        ->get();
+
+        $categories = DB::table('content_categories')
+                            ->select('content_categories.*')
+                            ->selectRaw("(select count(*) from `contents` where `contents`.`category_id` = `content_categories`.`id` and date(`updated_at`) > IFNULL((select category_visit_logs.created_at from category_visit_logs where category_visit_logs.category_id=contents.category_id), ?) and `contents`.`deleted_at` is null) as `contents_count`", [$default_last_visit_category_date])
+                            ->where('catalog_id', $catalog_id)
+                            ->where('is_active', 1)
+                            ->whereNull('deleted_at')
+                            ->get();
 
         $user_categories = CustomerCategory::where('customer_id', $customer->id)->get(['category_id'])->implode('category_id', ',');
         $user_categories = explode(',', $user_categories);
 
         $categories->map(function ($category) use ($user_categories) {
-            if (in_array($category['id'], $user_categories)) {
-                $category['is_favorite'] = true;
+            if (in_array($category->id, $user_categories)) {
+                $category->is_favorite = true;
             }
             return $category;
         });
@@ -62,5 +64,21 @@ class ContentCategoryController extends Controller
 
         $result = ['success' => 'true'];
         return compact('result');
+    }
+
+    public function postCategoryVisitLog(Request $request)
+    {
+        $rules = [
+            'account_id'    => 'sometimes|min:32|max:64',
+            'category_id'   => 'required|numeric|digits_between:1,11',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'error_code' => '1100',  'error' => $validator->errors()]);
+        }
+
+        $customer = Customer::where('account_id', $request->account_id)->first();
+        CategoryVisitLog::create(['category_id' => $request->category_id, 'customer_id' => $customer->id]);
     }
 }
