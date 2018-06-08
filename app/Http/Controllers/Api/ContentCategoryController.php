@@ -38,7 +38,7 @@ class ContentCategoryController extends Controller
 
         $categories = DB::table('content_categories')
                             ->select('content_categories.*')
-                            ->selectRaw("(select count(*) from `contents` where `contents`.`category_id` = `content_categories`.`id` and date(`updated_at`) > IFNULL((select category_visit_logs.created_at from category_visit_logs where category_visit_logs.category_id=contents.category_id), ?) and `contents`.`deleted_at` is null) as `contents_count`", [$default_last_visit_category_date])
+                            ->selectRaw("(select count(*) from `contents` where `contents`.`category_id` = `content_categories`.`id` and date(`updated_at`) > IFNULL((select category_visit_logs.created_at from category_visit_logs where category_visit_logs.category_id=contents.category_id AND category_visit_logs.customer_id = ?), ?) and `contents`.`deleted_at` is null) as `contents_count`", [$customer->id, $default_last_visit_category_date])
                             ->where('catalog_id', $catalog_id)
                             ->where('is_active', 1)
                             ->whereNull('deleted_at')

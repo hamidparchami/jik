@@ -23,7 +23,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
     Route::get('/request/display-error', 'Api\RequestController@getDisplayError')->name('display-error');
     Route::get('/request/display-menu', 'Api\RequestController@getDisplayMenu')->name('display-menu');
     //Catalog resource
-    Route::get('/catalog/list', 'Api\CatalogController@getCatalogList');
+    Route::get('/catalog/list/account_id/{account_id}', 'Api\CatalogController@getCatalogList');
     //Category resource
     Route::get('/category/contents/{id}/offset/{offset}', 'Api\ContentCategoryController@getCategoryContents')->where('id', '[0-9]+');
     Route::get('/category/list-by-catalog/{catalog_id}/offset/{offset}', 'Api\ContentCategoryController@getCategoryListByCatalog')->where('catalog_id', '[0-9]+');
