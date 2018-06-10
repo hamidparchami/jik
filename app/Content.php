@@ -81,6 +81,10 @@ class Content extends Model
         $this->attributes['publish_time'] = ($value == '') ? null : $value;
     }
 
+    public function getMainImageAttribute($value)
+    {
+        return str_replace('https://www.', '', $value);
+    }
     public function service()
     {
         return $this->belongsTo('App\Service');
