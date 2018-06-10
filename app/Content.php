@@ -83,7 +83,7 @@ class Content extends Model
 
     public function getMainImageAttribute($value)
     {
-        return str_replace('https://www.', '', $value);
+        return str_replace('https://www.', 'https://', $value);
     }
     public function service()
     {
