@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class CatalogController extends Controller
 {
-    public function getCatalogList($account_id)
+    public function getCatalogList(Request $request)
     {
         $last_login_date = '2018-05-01';
 

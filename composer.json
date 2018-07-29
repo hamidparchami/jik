@@ -14,7 +14,8 @@
         "firebase/php-jwt": "^4.0",
         "doctrine/dbal": "^2.5",
         "longman/telegram-bot": "^0.52.0",
-        "lakshmaji/thumbnail": "^1.4"
+        "lakshmaji/thumbnail": "^1.4",
+        "jenssegers/mongodb": "3.2.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

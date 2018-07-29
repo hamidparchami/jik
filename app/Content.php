@@ -10,7 +10,7 @@ class Content extends Model
 {
     use SoftDeletes;
 
-    protected $appends = ['published_at'];
+    protected $appends = ['published_at', 'view_count', 'like_count'];
     /**
      * The attributes that are mass assignable.
      *
@@ -37,9 +37,38 @@ class Content extends Model
 
         if (!is_null($value) && $value != '') {
             $send_time_attr_time_part = explode(' ', $value);
-            return $this->convertNumberToFa(jDateTime::strftime('Y/m/d', strtotime($value)) .' '. $send_time_attr_time_part[1]);
+            return $this->convertNumberToFa(jDateTime::strftime('Y/m/d', strtotime($value)) .' '. substr($send_time_attr_time_part[1], 0, -3));
         }
     }
+
+    /**
+     * @return int
+     */
+    public function getViewCountAttribute() {
+        $contentViewCount = ContentViewCount::where('content_id', $this->id)->first();
+        if(is_null($contentViewCount)) {
+            $ViewCount = rand(100, 999);
+            ContentViewCount::create(['content_id' => $this->id, 'count' => $ViewCount, 'original_count' => 1]);
+        } else {
+            $ViewCount = $contentViewCount->count;
+        }
+        return $this->convertNumberToFa($ViewCount);
+    }
+
+    /**
+     * @return int
+     */
+    public function getLikeCountAttribute() {
+        $contentLikeCount = ContentLikeCount::where('content_id', $this->id)->first();
+        if(is_null($contentLikeCount)) {
+            $likeCount = rand(10, 99);
+            ContentLikeCount::create(['content_id' => $this->id, 'count' => $likeCount, 'original_count' => 1]);
+        } else {
+            $likeCount = $contentLikeCount->count;
+        }
+        return $this->convertNumberToFa($likeCount);
+    }
+
     /** convert send_time to Jalali
      * @param $value
      * @return mixed

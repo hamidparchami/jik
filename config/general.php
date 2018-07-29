@@ -44,4 +44,7 @@ H8z7w4bI325ECqc8PnOQR7HPZaHD6OQr7rfnkT/eKpTgfSsYzrA7z4jgHJr+R/7A
     'sms_ir_APIKey'     => env('SMS_IR_APIKEY', '4948d274cc9acecd62ced274'),
     'sms_ir_SecretKey'  => env('SMS_IR_SECRETKEY', "L)6H[.XjN_q3xT'Z"),
     'sms_ir_LineNumber' => env('SMS_IR_LINENUMBER', '30004747474882'),
+
+    'feed_contents_chunk_size'      => env('FEED_CONTENTS_CHUNK_SIZE', 10),
+    'allowed_view_content_count'    => env('ALLOWED_VIEW_CONTENT_COUNT', 10),
 ];

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Customer;
 use App\Lib\GeneralFunctions;
 use App\Lib\Sms_SendMessage;
+use App\TemporaryToken;
 use App\Token;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -103,5 +104,17 @@ class CustomerController extends Controller
             $error      = (object)['otp' => 'OTP is not correct.'];
             return compact('success', 'error_code', 'error');
         }
+    }
+
+    public function postStartTrial()
+    {
+        //generate temporary token and set viewed contents count to 0
+        $success            = true;
+        $generated_token    = md5(str_random(12).microtime()); //generate token
+        $remaining_trial_contents_count = config('general.allowed_view_content_count');
+        //store token
+        TemporaryToken::create(['token' => $generated_token, 'is_valid' => 1, 'viewed_contents_count' => 0]);
+        //return token
+        return compact('success', 'generated_token', 'remaining_trial_contents_count');
     }
 }
