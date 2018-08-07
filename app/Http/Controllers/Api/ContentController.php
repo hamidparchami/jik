@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Content;
 use App\ContentCategory;
 use App\ContentLikeLog;
-use App\ContentLikeCount;
-use App\ContentViewCount;
 use App\ContentViewLog;
 use App\Customer;
 use App\CustomerCategory;
@@ -36,12 +34,13 @@ class ContentController extends Controller
                     'message'   => 'Invalid token.'
                 ]);
             }
-            $accountStatus['isTrial'] = true;
-            $accountStatus['remainingTrialContents'] = config('general.allowed_view_content_count') - $customer_trial_token->viewed_contents_count;
+            $viewed_contents_count      = $customer_trial_token->viewed_contents_count + 1;
+            $accountStatus['isTrial']   = true;
+            $accountStatus['remainingTrialContents'] = (config('general.allowed_view_content_count') - $viewed_contents_count);
             //check if requested content has been seen before or not
             $content_view_log = ContentViewLog::where('content_id', $id)->where('temporary_token', $token)->first();
             if (is_null($content_view_log)) {
-                if ($customer_trial_token->viewed_content_counts < config('general.allowed_view_content_count')) {
+                if ($viewed_contents_count <= config('general.allowed_view_content_count')) {
                     //increase viewed contents count
                     DB::connection('mongodb')->table('temporary_tokens')->where('token', $token)->increment('viewed_contents_count');
                     //store viewed content log
