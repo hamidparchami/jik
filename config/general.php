@@ -45,6 +45,11 @@ H8z7w4bI325ECqc8PnOQR7HPZaHD6OQr7rfnkT/eKpTgfSsYzrA7z4jgHJr+R/7A
     'sms_ir_SecretKey'  => env('SMS_IR_SECRETKEY', "L)6H[.XjN_q3xT'Z"),
     'sms_ir_LineNumber' => env('SMS_IR_LINENUMBER', '30004747474882'),
 
+    'red9_base_url'         => env('RED9_BASE_URL', 'https://red9.ir'),
+    'red9_api_key'          => env('RED9_API_KEY', 'dd9c7a26-8726-4073-8282-87723a4951ff'),
+    'red9_otp_subscribe'    => env('RED9_OTP_SUBSCRIBE', '/api/app/subscriptions/otp_subscribe'),
+    'red9_otp_confirm_subscribe'    => env('RED9_OTP_CONFIRM_SUBSCRIBE', '/api/app/subscriptions/otp_confirm_subscription'),
+
     'feed_contents_chunk_size'      => env('FEED_CONTENTS_CHUNK_SIZE', 10),
     'allowed_view_content_count'    => env('ALLOWED_VIEW_CONTENT_COUNT', 10),
 ];

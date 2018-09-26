@@ -16,6 +16,6 @@ class ContentLikeCount extends Model
      * @var array
      */
     protected $fillable = [
-        'content_id', 'count'
+        'content_id', 'count', 'original_count'
     ];
 }

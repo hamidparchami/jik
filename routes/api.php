@@ -36,9 +36,11 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
     Route::get('/content/user-feed/{account_id}/catalog/{catalog_id}/offset/{offset?}', 'Api\ContentController@getUserFeed');
     Route::post('/content/view/add-count', 'Api\ContentController@postAddViewCount');
 //    Route::get('/content/view/customer-log', 'Api\ContentController@postCustomerViewLog');
-    Route::get('/content/like', 'Api\ContentController@postLike');
+    Route::post('/content/like', 'Api\ContentController@postLike');
     //OTP
     Route::post('/customer/generate-otp', 'Api\CustomerController@postGenerateOtp');
     Route::put('/customer/verify-otp', 'Api\CustomerController@putVerifyOTP');
     Route::post('/customer/start-trial', 'Api\CustomerController@postStartTrial');
+    Route::post('/customer/request-subscription-otp', 'Api\CustomerController@postRequestSubscriptionOtp');
+    Route::put('/customer/request-subscription-otp-verification', 'Api\CustomerController@postRequestSubscriptionOtpVerification');
 });

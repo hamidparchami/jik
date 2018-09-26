@@ -7,7 +7,7 @@ use Jenssegers\Mongodb\Eloquent\Model;
 class ContentLikeLog extends Model
 {
     protected $connection = 'mongodb';
-    protected $collection = 'content_likes';
+    protected $collection = 'content_like_logs';
     public $timestamps = false;
 
     /**

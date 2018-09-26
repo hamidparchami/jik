@@ -9,6 +9,7 @@ use App\ContentViewLog;
 use App\Customer;
 use App\CustomerCategory;
 use App\TemporaryToken;
+use App\Token;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +23,8 @@ class ContentController extends Controller
 
     public function getView($id, Request $request)
     {
-        $accountStatus = [];
+        $accountStatus  = [];
+        $contentId      = (int) $id;
         //check if customer is using trial mode
         if (isset($request->temporaryToken) && strlen($request->temporaryToken) == 32) {
             $token = $request->temporaryToken;
@@ -38,13 +40,13 @@ class ContentController extends Controller
             $accountStatus['isTrial']   = true;
             $accountStatus['remainingTrialContents'] = (config('general.allowed_view_content_count') - $viewed_contents_count);
             //check if requested content has been seen before or not
-            $content_view_log = ContentViewLog::where('content_id', $id)->where('temporary_token', $token)->first();
+            $content_view_log = ContentViewLog::where('content_id', $contentId)->where('temporary_token', $token)->first();
             if (is_null($content_view_log)) {
                 if ($viewed_contents_count <= config('general.allowed_view_content_count')) {
                     //increase viewed contents count
                     DB::connection('mongodb')->table('temporary_tokens')->where('token', $token)->increment('viewed_contents_count');
                     //store viewed content log
-                    ContentViewLog::create(['content_id' => $id, 'temporary_token' => $token]);
+                    ContentViewLog::create(['content_id' => $contentId, 'temporary_token' => $token]);
                 } else {
                     return response([
                         'success' => false,
@@ -54,7 +56,8 @@ class ContentController extends Controller
                 }
             }
         } else {
-            $registered_users_token = new \stdClass(); //retrieve from db and check if is still valid @TODO
+            //retrieve from db and check if is still valid @TODO
+            $registered_users_token = Token::where('account_id', $request->accountId)->where('is_valid', 1)->orderBy('created_at', 'desc')->first();
             if (is_null($registered_users_token)) {
                 return response([
                     'success'   => false,
@@ -63,17 +66,16 @@ class ContentController extends Controller
                 ]);
             }
 
-            ContentViewLog::where('content_id', $id)->where('customer_id', $registered_users_token->customer_id)->firstOrCreate(); //@TODO test
+            ContentViewLog::firstOrCreate(['content_id' => $contentId, 'customer_id' => $registered_users_token->customer_id]); //@TODO test
 
-            $contentLikeLog = ContentLikeLog::where('content_id', $id)->where('customer_id', $registered_users_token->customer_id)->first(); //@TODO test
-
+            $contentLikeLog = ContentLikeLog::where('content_id', $contentId)->where('customer_id', $registered_users_token->customer_id)->first(); //@TODO test
             if (!is_null($contentLikeLog)) {
                 $userHasLikedThisContent = true;
             }
         }
 
         $success = true;
-        $content = Content::where('id', $id)->where('is_active', 1)->first();
+        $content = Content::where('id', $contentId)->where('is_active', 1)->first();
         if (isset($userHasLikedThisContent) && $userHasLikedThisContent) {
             $content->user_has_liked_this_content = true;
         }
@@ -124,17 +126,11 @@ class ContentController extends Controller
     public function postAddViewCount(Request $request)
     {
         $content_id = $request->contentId;
-//        $like_count = ContentViewCount::where('content_id', $content_id)->first();
-
-        /*if (is_null($like_count)) {
-            ContentViewCount::create(['content_id' => $content_id, 'count' => rand(99, 999), 'original_count' => 1]);
-        } else {*/
-            $view_count = DB::connection('mongodb')
+        $view_count = DB::connection('mongodb')
                                 ->table('content_view_counts')
                                 ->where('content_id', $content_id);
-            $view_count->increment('count');
-            $view_count->increment('original_count');
-//        }
+        $view_count->increment('count');
+        $view_count->increment('original_count');
 
         return response(['success' => 'true']);
     }
@@ -147,17 +143,16 @@ class ContentController extends Controller
 
         if (is_null($likeByCustomer)) {
             ContentLikeLog::create(['content_id' => $contentId, 'customer_id' => $customer->id]);
-            /*$likeCount = ContentLikeCount::where('content_id', $contentId)->first();
-            if (is_null($likeCount)) {
-                ContentLikeCount::create(['content_id' => $contentId, 'count' => rand(99, 999), 'original_count' => 1]);
-            } else {*/
-                $addLike = DB::connection('mongodb')->table('like_counts')->where('content_id', $contentId);
-                $addLike->increment('count');
-                $addLike->increment('original_count');
-//            }
+            $addLike = DB::connection('mongodb')
+                            ->table('content_like_counts')
+                            ->where('content_id', $contentId);
+            $addLike->increment('count');
+            $addLike->increment('original_count');
         } else {
             $likeByCustomer->delete();
-            $subtractLike = DB::connection('mongodb')->table('like_counts')->where('content_id', $contentId);
+            $subtractLike = DB::connection('mongodb')
+                                ->table('content_like_counts')
+                                ->where('content_id', $contentId);
             $subtractLike->decrement('count');
             $subtractLike->decrement('original_count');
         }

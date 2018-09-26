@@ -62,7 +62,7 @@ class Content extends Model
         $contentLikeCount = ContentLikeCount::where('content_id', $this->id)->first();
         if(is_null($contentLikeCount)) {
             $likeCount = rand(10, 99);
-            ContentLikeCount::create(['content_id' => $this->id, 'count' => $likeCount, 'original_count' => 1]);
+            ContentLikeCount::create(['content_id' => $this->id, 'count' => $likeCount, 'original_count' => 0]);
         } else {
             $likeCount = $contentLikeCount->count;
         }

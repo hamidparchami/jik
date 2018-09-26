@@ -43,7 +43,7 @@ class CurlRequest
         Log::info($this->log_parameters);
     }
 
-    public function sendCurlRequest($url, $method = 'post', $params = null)
+    public function sendCurlRequest($url, $method = 'POST', $params = null)
     {
         $curl_request = curl_init($url);
         curl_setopt($curl_request, CURLOPT_SSL_VERIFYPEER, false);
@@ -53,7 +53,7 @@ class CurlRequest
         curl_setopt($curl_request, CURLOPT_CUSTOMREQUEST, $method); //set HTTP method
 
         //set curl post fields
-        if($method == 'post' && !is_null($params)) {
+        if($method == 'POST' && !is_null($params)) {
             curl_setopt($curl_request, CURLOPT_POSTFIELDS, $params);
         }
 
@@ -66,6 +66,8 @@ class CurlRequest
 
         curl_close($curl_request);
 
-        return ($this->http_code == 200) ? json_decode($this->response) : false;
+        $responseCode = substr($this->http_code, 0, 1);
+
+        return ($responseCode == 2) ? $this->response : false;
     }
 }

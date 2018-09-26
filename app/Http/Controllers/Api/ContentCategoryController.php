@@ -35,11 +35,13 @@ class ContentCategoryController extends Controller
     public function getUserCategories($accountId, $catalogId, Request $request)
     {
         $default_last_visit_category_date = '2018-05-01';
+        if (!$request->isTemporary) {
+            $customer = Customer::where('account_id', $accountId)->first();
+        }
         $categories = DB::table('content_categories')
-                            ->when(!$request->isTemporary, function ($query) use ($accountId, $default_last_visit_category_date) {
-                                $customer = Customer::where('account_id', $accountId)->first();
+                            ->when(!$request->isTemporary, function ($query) use ($customer, $default_last_visit_category_date) {
                                 $query->select('content_categories.*');
-                                $query->selectRaw("(select count(*) from `contents` where `contents`.`category_id` = `content_categories`.`id` and date(`updated_at`) > IFNULL((select category_visit_logs.created_at from category_visit_logs where category_visit_logs.category_id=contents.category_id AND category_visit_logs.customer_id = ? ORDER BY id DESC LIMIT 1), ?) and `contents`.`deleted_at` is null) as `contents_count`", [$customer->id, $default_last_visit_category_date]);
+                                return $query->selectRaw("(select count(*) from `contents` where `contents`.`category_id` = `content_categories`.`id` and date(`updated_at`) > IFNULL((select category_visit_logs.created_at from category_visit_logs where category_visit_logs.category_id=contents.category_id AND category_visit_logs.customer_id = ? ORDER BY id DESC LIMIT 1), ?) and `contents`.`deleted_at` is null) as `contents_count`", [$customer->id, $default_last_visit_category_date]);
                             })
                             ->where('catalog_id', $catalogId)
                             ->where('is_active', 1)
@@ -47,7 +49,6 @@ class ContentCategoryController extends Controller
                             ->get();
 
         if (!$request->isTemporary) {
-            $customer = Customer::where('account_id', $accountId)->first();
             $userCategories = CustomerCategory::where('customer_id', $customer->id)->get(['category_id'])->implode('category_id', ',');
             $userCategories = explode(',', $userCategories);
 

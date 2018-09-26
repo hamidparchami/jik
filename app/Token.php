@@ -2,16 +2,18 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model;
 
 class Token extends Model
 {
+    protected $connection = 'mongodb';
+    protected $collection = 'tokens';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'customer_id', 'otp', 'token', 'is_valid',
+        'customer_id', 'account_id', 'correlator', 'token', 'is_valid',
     ];
 }

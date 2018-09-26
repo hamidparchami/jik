@@ -7,10 +7,12 @@ use App\Award;
 use App\Catalog;
 use App\Content;
 use App\Event;
+use App\Like;
 use App\Service;
 use App\SliderImages;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
 class SiteController extends Controller
 {
@@ -20,11 +22,13 @@ class SiteController extends Controller
      */
     public function index()
     {
-        return 'Jikopeek.ir';
-        $slider_images = SliderImages::where('is_active', 1)->get();
-        $catalogs      = Catalog::where('is_important', 1)->get();
-
-        return view('frontend.index', compact('slider_images', 'catalogs'));
+/*        $like = Like::create(['customer_id' => 963852, 'customer_name' => 'Hamid Parchami', 'content_id' => 123654]);
+        if ($like) {
+            return 'succeed';
+        } else {
+            return 'error';
+        }*/
+        return view('frontend.index');
     }
 
     public function getArticle($id)

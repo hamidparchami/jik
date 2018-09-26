@@ -610,8 +610,11 @@ input:checked + .slider:before {
 }
 
 .main-col-container {
-    margin-top: 130px;
-    min-height: 100vh;
+    background: linear-gradient(to top, rgba(1, 70, 134, 0.1), rgba(1, 70, 134, 0));
+    padding: 100px 0;
+    text-align: center;
+    width: 100%;
+    height: 600px;
 }
 .bonus-section {
     background: #f1f1f1 url(/images/bg-bonus.png) 140px bottom no-repeat;
