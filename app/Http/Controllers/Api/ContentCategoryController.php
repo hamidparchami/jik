@@ -35,6 +35,7 @@ class ContentCategoryController extends Controller
     public function getUserCategories($accountId, $catalogId, Request $request)
     {
         $default_last_visit_category_date = '2018-05-01';
+        $customer   = '';
         if (!$request->isTemporary) {
             $customer = Customer::where('account_id', $accountId)->first();
         }
