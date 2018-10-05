@@ -142,3 +142,4 @@ Route::get('/article/{id}', 'SiteController@getArticle');
 Route::get('/content/{id}', 'SiteController@getContent');
 Route::get('/l/{id}', 'SiteController@getShortUrl');
 Route::get('/file-get-contents', 'SiteController@getFileGetContents');
+Route::get('/download', 'SiteController@getDownloadLandingPage');

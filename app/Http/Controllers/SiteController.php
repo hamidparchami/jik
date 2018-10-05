@@ -43,6 +43,11 @@ class SiteController extends Controller
         return view('frontend.content.content_view', compact('content'));
     }
 
+    public function getDownloadLandingPage()
+    {
+        return view('frontend.landing.download');
+    }
+
     public function getShortUrl($id)
     {
 //        $article = Article::where('id', $id)->where('is_active', 1)->get()->first();

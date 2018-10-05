@@ -1,0 +1,54 @@
+@import url(../fontiran.css);
+body{
+    background-color: #FFFFFF !important;
+    font-family: IRANSans, tahoma !important;
+}
+h1, h2, h3, h4, h5, h6,input, textarea {
+    font-family: IRANSans, tahoma !important;
+}
+hr.style-two {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+.main-row {
+    margin-top: 80px;
+}
+.app-screenshot {
+    max-height: 600px;
+}
+.description-container {
+    direction: rtl;
+    text-align: justify;
+    padding-top: 100px;
+    line-height: 1.8em;
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .main-row {
+        margin-top: 10px
+    }
+    .description-container {
+        padding-top: 50px;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+    .main-row {
+        margin-top: 20px
+    }
+    .description-container {
+        padding-top: 50px;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .main-row {
+        margin-top: 20px
+    }
+    .description-container {
+        padding-top: 50px;
+    }
+}
