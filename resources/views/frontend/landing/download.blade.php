@@ -16,7 +16,7 @@
     <div class="col-md-4 col-sm-12 col-xs-12 description-container">
         <div>اپلیکیشن موبایل جیک و پیک مرجعی معتبر برای اطلاعات ارزشمند و به روز در موضوعات سلامت و زیبایی، خانواده و ورزش را از لینک های زیر دریافت کنید.</div>
         <hr class="style-two">
-        <div><a href="jikopeek.ir/upload/files/shares/application/android/jikopeek_v0.0.5.apk">دریافت نسخه اندروید</a></div>
+        <div><a href="https://jikopeek.ir/upload/files/shares/application/android/jikopeek_v0_0_5.apk">دریافت نسخه اندروید</a></div>
         <div><a href="#">دریافت نسخه iOS</a></div>
     </div>
 </div>

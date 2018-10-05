@@ -52,9 +52,9 @@ return [
         'image/gif',
         'application/pdf',
         'text/plain',
-	'video/mpeg',
-	'video/mp4',
-	'application/vnd.android.package-archive',
+        'video/mpeg',
+        'video/mp4',
+        'application/zip',
     ],
 
     // file extensions array, only for showing file information, it won't affect the upload process.
