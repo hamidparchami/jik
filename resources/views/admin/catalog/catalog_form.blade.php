@@ -56,6 +56,12 @@
 
                             <div class="row form-row">
                                 <div class="col-md-4"></div>
+                                <div class="col-md-4"><input name="order" type="text" class="form-control" value="{{ old('order', (isset($current_catalog->order) ? $current_catalog->order : '')) }}"></div>
+                                <div class="col-md-4">ترتیب</div>
+                            </div>
+
+                            <div class="row form-row">
+                                <div class="col-md-4"></div>
                                 <div class="col-md-4">
                                     <div class="checkbox">
                                         <input name="is_important" type="checkbox" @if(old('is_important') == 'on' || old('is_important') == '1' || (isset($current_catalog->is_important) && $current_catalog->is_important == 1)) checked @endif>

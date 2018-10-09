@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Lib\GeneralFunctions;
 use App\Lib\SetActionLog;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -18,8 +19,17 @@ class Catalog extends Model
      * @var array
      */
     protected $fillable = [
-        'parent_id', 'name', 'image', 'is_active', 'is_important',
+        'parent_id', 'name', 'image', 'is_active', 'is_important', 'order',
     ];
+
+    /**
+     * check if order is set and is not null
+     * @param $value
+     */
+    public function setOrderAttribute($value)
+    {
+        $this->attributes['order'] = (GeneralFunctions::isSetAndIsNotNull($value)) ? $value : 0;
+    }
 
     /**
      * remove domain and protocol from image address

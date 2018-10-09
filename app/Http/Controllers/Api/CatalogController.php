@@ -23,6 +23,7 @@ class CatalogController extends Controller
                 ]);
             }
             ])
+            ->orderBy('order', 'ASC')
             ->get();
     }
 }
