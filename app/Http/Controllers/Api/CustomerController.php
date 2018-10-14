@@ -121,6 +121,9 @@ class CustomerController extends Controller
 
     public function postRequestSubscriptionOtp(Request $request)
     {
+        //normalize phone number
+        $request->merge(['phone_number' => GeneralFunctions::convertToLatinNumbers($request->phone_number)]);
+
         //validate phone number
         $rules = [
             'account_id'    => 'sometimes|min:32|max:64',
@@ -169,6 +172,9 @@ class CustomerController extends Controller
 
     public function postRequestSubscriptionOtpVerification(Request $request)
     {
+        //normalize otp
+        $request->merge(['otp' => GeneralFunctions::convertToLatinNumbers($request->otp)]);
+
         //validate otp pattern and account id
         $rules = [
             'account_id'    => 'required|min:32|max:64',

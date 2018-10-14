@@ -10,6 +10,10 @@ namespace App\Lib;
 
 class GeneralFunctions
 {
+    //arrays of persian and latin numbers for convert
+    const PERSIAN_NUMBERS   = array('۰','۱','۲','۳','۴','٤','۵','٥','۶','٦','۷','۸','۹');
+    const LATIN_NUMBERS     = array('0','1','2','3','4','4','5','5','6','6','7','8','9');
+
     /**
      * @param $width
      * @param $height
@@ -90,11 +94,12 @@ class GeneralFunctions
 
     public static function convertToPersianNumbers($value)
     {
-        //arrays of persian and latin numbers
-        $persian_numbers = array('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹');
-        $latin_numbers   = range(0, 9);
+        return str_replace(self::LATIN_NUMBERS, self::PERSIAN_NUMBERS, $value);
+    }
 
-        return str_replace($latin_numbers, $persian_numbers, $value);
+    public static function convertToLatinNumbers($value)
+    {
+        return str_replace(self::PERSIAN_NUMBERS, self::LATIN_NUMBERS, $value);
     }
 
     /**

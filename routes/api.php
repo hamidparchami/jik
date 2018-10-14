@@ -43,4 +43,8 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
     Route::post('/customer/start-trial', 'Api\CustomerController@postStartTrial');
     Route::post('/customer/request-subscription-otp', 'Api\CustomerController@postRequestSubscriptionOtp');
     Route::put('/customer/request-subscription-otp-verification', 'Api\CustomerController@postRequestSubscriptionOtpVerification');
+    //Aggregator
+    Route::post('/aggregator/mo', 'Api\AggregatorController@postMo');
+    Route::post('/aggregator/renewal', 'Api\AggregatorController@postRenewal');
+    Route::post('/aggregator/notification', 'Api\AggregatorController@postNotification');
 });
