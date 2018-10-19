@@ -39,7 +39,7 @@ class ContentCategoryController extends Controller
             $likeByCustomer = explode(',', $likeByCustomer);
 
             $categories->contents->map(function ($content) use ($likeByCustomer) {
-                if (in_array($$content->id, $likeByCustomer)) {
+                if (in_array($content->id, $likeByCustomer)) {
                     $content->user_has_liked_this_content = true;
                 }
                 return $content;
