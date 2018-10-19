@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\CategoryVisitLog;
 use App\ContentCategory;
+use App\ContentLikeLog;
 use App\Customer;
 use App\CustomerCategory;
 use Illuminate\Http\Request;
@@ -19,10 +20,10 @@ class ContentCategoryController extends Controller
         return ContentCategory::where('catalog_id', $catalog_id)->where('is_active', 1)->offset($offset)->limit($default_limit)->get();
     }
 
-    public function getCategoryContents($id, $offset)
+    public function getCategoryContents($id, $offset, Request $request)
     {
         $default_limit = 10;
-        return ContentCategory::where('id', $id)
+        $categories = ContentCategory::where('id', $id)
                                 ->where('is_active', 1)
                                 ->with(array('contents' => function($query) use($default_limit, $offset) {
                                                 $query->where('is_active', '1');
@@ -30,6 +31,21 @@ class ContentCategoryController extends Controller
                                                 $query->offset($offset)->limit($default_limit);
                                             }))
                                 ->first();
+
+        if (!$request->isTemporary) {
+            $customer       = Customer::where('account_id', $request->accountId)->first();
+            $likeByCustomer = ContentLikeLog::where('customer_id', $customer->id)->get(['content_id'])->implode('content_id', ',');
+            $likeByCustomer = explode(',', $likeByCustomer);
+
+            $categories->contents->map(function ($content) use ($likeByCustomer) {
+                if (in_array($$content->id, $likeByCustomer)) {
+                    $content->user_has_liked_this_content = true;
+                }
+                return $content;
+            });
+        }
+
+        return $categories;
     }
 
     public function getUserCategories($accountId, $catalogId, Request $request)
