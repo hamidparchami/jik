@@ -24,9 +24,16 @@ class ContentCategoryController extends Controller
     {
         $default_limit = 10;
         $offset = $request->offset;
+        $searchPhrase = (!empty($request->q)) ? $request->q : null;
         $categories = ContentCategory::where('id', $request->categoryId)
                                 ->where('is_active', 1)
-                                ->with(array('contents' => function($query) use($default_limit, $offset) {
+                                ->with(array('contents' => function($query) use($default_limit, $offset, $searchPhrase) {
+                                                if (!empty($searchPhrase)) {
+                                                    $query->where(function ($query) use($searchPhrase) {
+                                                        $query->where('text', 'like', "%$searchPhrase%");
+                                                        $query->orWhere('full_content', 'like', "%$searchPhrase%");
+                                                    });
+                                                }
                                                 $query->where('is_active', '1');
                                                 $query->orderBy('updated_at', 'desc');
                                                 $query->offset($offset)->limit($default_limit);
@@ -38,12 +45,14 @@ class ContentCategoryController extends Controller
             $likeByCustomer = ContentLikeLog::where('customer_id', $customer->id)->get(['content_id'])->implode('content_id', ',');
             $likeByCustomer = explode(',', $likeByCustomer);
 
-            $categories->contents->map(function ($content) use ($likeByCustomer) {
-                if (in_array($content->id, $likeByCustomer)) {
-                    $content->user_has_liked_this_content = true;
-                }
-                return $content;
-            });
+            if (isset($categories->contents)) {
+                $categories->contents->map(function ($content) use ($likeByCustomer) {
+                    if (in_array($content->id, $likeByCustomer)) {
+                        $content->user_has_liked_this_content = true;
+                    }
+                    return $content;
+                });
+            }
         }
 
         return $categories;
