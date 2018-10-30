@@ -210,7 +210,8 @@ class CustomerController extends Controller
         $client->sendCurlRequest($url, 'POST', json_encode($body));
 
         $responseCode = substr($client->http_code, 0, 1);
-        if ($responseCode == 2) {
+        $responseBody = json_decode($client->response);
+        if ($responseCode == 2 || ($responseCode == 5 && $responseBody->errorCode == 'SVC726')) {
             $success            = true;
             $generated_token    = Hash::make(uniqid()); //generate token
             //store token
