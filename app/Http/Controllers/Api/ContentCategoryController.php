@@ -64,6 +64,9 @@ class ContentCategoryController extends Controller
         $customer   = '';
         if (!$request->isTemporary) {
             $customer = Customer::where('account_id', $accountId)->first();
+            if (is_null($customer)) {
+                return response()->json(['success' => false, 'error_code' => '1040', 'error' => (object)['token' => 'توکن منقضی شده!']]);
+            }
         }
         $categories = DB::table('content_categories')
                             ->when(!$request->isTemporary, function ($query) use ($customer, $default_last_visit_category_date) {
