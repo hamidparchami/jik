@@ -37,12 +37,13 @@ class ContentController extends Controller
                 ]);
             }
             $viewed_contents_count      = $customer_trial_token->viewed_contents_count + 1;
+            $remainingTrialContents     = (config('general.allowed_view_content_count') - $viewed_contents_count);
             $accountStatus['isTrial']   = true;
-            $accountStatus['remainingTrialContents'] = (config('general.allowed_view_content_count') - $viewed_contents_count);
+            $accountStatus['remainingTrialContents'] = $remainingTrialContents;
             //check if requested content has been seen before or not
             $content_view_log = ContentViewLog::where('content_id', $contentId)->where('temporary_token', $token)->first();
             if (is_null($content_view_log)) {
-                if ($viewed_contents_count <= config('general.allowed_view_content_count')) {
+                if ($viewed_contents_count <= config('general.allowed_view_content_count') && $remainingTrialContents >= 0) {
                     //increase viewed contents count
                     DB::connection('mongodb')->table('temporary_tokens')->where('token', $token)->increment('viewed_contents_count');
                     //store viewed content log

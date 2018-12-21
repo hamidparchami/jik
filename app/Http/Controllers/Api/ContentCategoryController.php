@@ -41,7 +41,16 @@ class ContentCategoryController extends Controller
                                 ->first();
 
         if (!$request->isTemporary) {
-            $customer       = Customer::where('account_id', $request->accountId)->first();
+            $customer = Customer::where('account_id', $request->accountId)->first();
+            if (is_null($customer)) {
+                //customer not found!
+                return response()->json([
+                    'success' => false,
+                    'error_code' => '1030',
+                    'error' => (object)['account' => 'customer account not found!']]
+                );
+            }
+
             $likeByCustomer = ContentLikeLog::where('customer_id', $customer->id)->get(['content_id'])->implode('content_id', ',');
             $likeByCustomer = explode(',', $likeByCustomer);
 
