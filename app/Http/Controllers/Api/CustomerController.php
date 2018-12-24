@@ -128,7 +128,7 @@ class CustomerController extends Controller
         $rules = [
             'account_id'    => 'sometimes|min:32|max:64',
             //this regex is only for MCI. for all mobile numbers (MCI, Irancell, Rightel) use this: /09(0[1-2]|1[0-9]|3[0-9]|2[0-1])-?[0-9]{3}-?[0-9]{4}/
-            'phone_number'  => ['required', 'size:11', 'regex:/09(0[1-2]|1[0-9])-?[0-9]{3}-?[0-9]{4}/'],
+            'phone_number'  => ['bail', 'required', 'size:11', 'regex:/09(0[1-2]|1[0-9])-?[0-9]{3}-?[0-9]{4}/'],
         ];
 
         $messages = [
