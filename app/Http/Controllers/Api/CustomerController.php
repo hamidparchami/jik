@@ -133,7 +133,7 @@ class CustomerController extends Controller
 
         $messages = [
             'phone_number.required' => 'لطفا شماره موبایل خود را وارد کنید.',
-            'phone_number.size'     => 'شماره موبایل را بصورت صحیح وارد کنید.',
+            'phone_number.size'     => 'شماره موبایل را بصورت ۱۱ رقمی وارد کنید.',
             'phone_number.regex'    => 'متاسفانه در حال حاضر فقط مشترکین همراه اول امکان عضویت دارند.',
         ];
 
