@@ -37,7 +37,7 @@ class ContentController extends Controller
                 ]);
             }
             $viewed_contents_count      = $customer_trial_token->viewed_contents_count + 1;
-            $remainingTrialContents     = (config('general.allowed_view_content_count') - $viewed_contents_count);
+            $remainingTrialContents     = max((config('general.allowed_view_content_count') - $viewed_contents_count), 0);
             $accountStatus['isTrial']   = true;
             $accountStatus['remainingTrialContents'] = $remainingTrialContents;
             //check if requested content has been seen before or not

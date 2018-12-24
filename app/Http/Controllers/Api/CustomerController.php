@@ -127,11 +127,13 @@ class CustomerController extends Controller
         //validate phone number
         $rules = [
             'account_id'    => 'sometimes|min:32|max:64',
-            'phone_number'  => ['required', 'regex:/09(0[1-2]|1[0-9]|3[0-9]|2[0-1])-?[0-9]{3}-?[0-9]{4}/'],
+            //this regex is only for MCI. for all mobile numbers (MCI, Irancell, Rightel) use this: /09(0[1-2]|1[0-9]|3[0-9]|2[0-1])-?[0-9]{3}-?[0-9]{4}/
+            'phone_number'  => ['required', 'regex:/09(0[1-2]|1[0-9])-?[0-9]{3}-?[0-9]{4}/'],
         ];
 
         $messages = [
             'phone_number.required' => 'لطفا شماره موبایل خود را وارد کنید.',
+            'phone_number.regex'    => 'متاسفانه در حال حاضر فقط مشترکین همراه اول امکان عضویت دارند.',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -166,7 +168,7 @@ class CustomerController extends Controller
             return compact('success', 'accountId');
         } else {
             //error between our server and aggregator!
-            return response()->json(['success' => false, 'error_code' => '1040', 'error' => (object)['subscription_otp' => 'خطا در ارتباط با سرور اپراتور!<br> لطفا چند دقیقه دیگر مجدد تلاش کنید.']]);
+            return response()->json(['success' => false, 'error_code' => '1200', 'error' => (object)['subscription_otp' => 'خطا در ارتباط با سرور اپراتور!<br> لطفا چند دقیقه دیگر مجدد تلاش کنید.']]);
         }
     }
 
