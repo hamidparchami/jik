@@ -45,7 +45,10 @@ class SiteController extends Controller
 
     public function getDownloadLandingPage()
     {
-        return view('frontend.landing.download');
+        $downloadDescription = VariableValue::where('variable', 'download_description')->get()->first();
+        $downloadLinkForAndroid = VariableValue::where('variable', 'download_link_for_android')->get()->first();
+
+        return view('frontend.landing.download', compact('downloadDescription', 'downloadLinkForAndroid'));
     }
 
     public function getShortUrl($id)
