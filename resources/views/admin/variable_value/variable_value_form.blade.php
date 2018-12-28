@@ -26,7 +26,7 @@
                         <div class="row form-row">
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
-                                <input name="variable" type="text" class="form-control rtl" value="{{ old('variable', (isset($variable_value->variable)) ? $variable_value->variable : '') }}">
+                                <input name="variable" type="text" class="form-control" value="{{ old('variable', (isset($variable_value->variable)) ? $variable_value->variable : '') }}">
                             </div>
                             <div class="col-md-4">نام متغیر</div>
                         </div>
@@ -34,7 +34,7 @@
                         <div class="row form-row">
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
-                                <input name="value" type="text" class="form-control" value="{{ old('value', (isset($variable_value->value)) ? $variable_value->value : '') }}">
+                                <textarea name="value" class="form-control rtl" rows="6">{{ old('value', (isset($variable_value->value)) ? $variable_value->value : '') }}</textarea>
                             </div>
                             <div class="col-md-4">مقدار متغیر</div>
                         </div>

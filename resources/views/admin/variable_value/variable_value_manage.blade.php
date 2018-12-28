@@ -15,7 +15,7 @@
             <a class="btn btn-primary" href="/admin/variable-value/create">افزودن متغیر</a>
         </div>
         <div class="col-md-6 text-right">
-            <h4>مدیریت اسلایدر</h4>
+            <h4>مدیریت متغیرها</h4>
         </div>
     </div>
     <hr>
