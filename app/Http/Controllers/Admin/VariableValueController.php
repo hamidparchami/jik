@@ -44,7 +44,7 @@ class VariableValueController extends Controller
     public function postEdit(Request $request)
     {
         $rules = [
-            'variable'  => 'required|unique:variable_values}max:255',
+            'variable'  => 'required|unique:variable_values|max:255',
             'value'     => 'required',
         ];
 
