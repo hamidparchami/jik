@@ -15,6 +15,6 @@ class VariableValue extends Model
      * @var array
      */
     protected $fillable = [
-        'variable','value',
+        'variable','value','is_active'
     ];
 }
