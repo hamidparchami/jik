@@ -10,7 +10,7 @@ class VariableValueController extends Controller
 {
     public function getView(Request $request)
     {
-        $variableValue = VariableValue::where('variable', $request->variable)->where('is_active', 1)->get(['value']);
+        $variableValue = VariableValue::where('variable', $request->variable)->where('is_active', 1)->get(['value'])->first();
         if (is_null($variableValue)) {
             return response([
                 'success'   => false,
