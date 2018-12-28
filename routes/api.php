@@ -49,4 +49,6 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
     Route::post('/aggregator/notification', 'Api\AggregatorController@postNotification');
     //VariableValue
     Route::get('/variable-value/view/{variable}', 'Api\VariableValueController@getView');
+    //Customer
+    Route::get('/customer/score', 'Api\CustomerController@getCustomerScore');
 });
