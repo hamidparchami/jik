@@ -10,6 +10,7 @@ use App\Event;
 use App\Like;
 use App\Service;
 use App\SliderImages;
+use App\VariableValue;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
