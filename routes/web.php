@@ -114,6 +114,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'user.role', 'user.a
     Route::get('/article/edit/id/{id}', 'Admin\ArticleController@getEdit');
     Route::post('/article/edit/id/{id}', 'Admin\ArticleController@postEdit');
     Route::get('/article/delete/id/{id}', 'Admin\ArticleController@getDelete');
+    //VariableValue
+    Route::get('/variable-value/manage', 'Admin\VariableValueController@index');
+    Route::get('/variable-value/create', 'Admin\VariableValueController@getCreate');
+    Route::post('/variable-value/create', 'Admin\VariableValueController@postCreate');
+    Route::get('/variable-value/edit/id/{id}', 'Admin\VariableValueController@getEdit');
+    Route::post('/variable-value/edit/id/{id}', 'Admin\VariableValueController@postEdit');
+    Route::get('/variable-value/delete/id/{id}', 'Admin\VariableValueController@getDelete');
 });
 
 

@@ -47,4 +47,6 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
     Route::post('/aggregator/mo', 'Api\AggregatorController@postMo');
     Route::post('/aggregator/renewal', 'Api\AggregatorController@postRenewal');
     Route::post('/aggregator/notification', 'Api\AggregatorController@postNotification');
+    //VariableValue
+    Route::get('/variable-value/view/{variable}', 'Api\VariableValueController@getView');
 });
