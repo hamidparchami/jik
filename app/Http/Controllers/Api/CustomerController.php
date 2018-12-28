@@ -8,6 +8,7 @@ use App\Lib\GeneralFunctions;
 use App\Lib\Sms_SendMessage;
 use App\TemporaryToken;
 use App\Token;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -225,5 +226,33 @@ class CustomerController extends Controller
             //OTP is not correct!
             return response()->json(['success' => false, 'error_code' => '1021', 'error' => (object)['otp' => 'کد وارد شده صحیح نیست!']]);
         }
+    }
+
+    public function getCustomerScore(Request $request)
+    {
+        //validate account id
+        $rules = [
+            'accountId'    => 'required|min:32|max:64',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'error_code' => '1020', 'error' => $validator->errors()]);
+        }
+
+        //search for customer
+        $token  = Token::where('account_id', $request->accountId)->where('is_valid', 1)->orderBy('created_at', 'desc')->first();
+
+        if (empty($token)) {
+            //customer not found!
+            return response()->json(['success' => false, 'error_code' => '1030', 'error' => (object)['account' => 'customer account not found!']]);
+        }
+
+        $customerRegistrationDays = Carbon::parse($token->created_at);
+        $customerRegistrationDays = $customerRegistrationDays->diffInDays(Carbon::now());
+        $customerScore = $customerRegistrationDays*20;
+
+        $success = true;
+        return compact('success', 'customerScore');
     }
 }
