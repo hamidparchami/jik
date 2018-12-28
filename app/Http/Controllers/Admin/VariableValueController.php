@@ -43,15 +43,15 @@ class VariableValueController extends Controller
 
     public function postEdit(Request $request)
     {
+        $variable_value = VariableValue::find($request->id);
         $rules = [
-            'variable'  => 'required|max:255|unique:variable_values,id,'.$request->id,
+            'variable'  => 'required|max:255|unique:variable_values,variable,'.$variable_value->id,
             'value'     => 'required',
         ];
 
         Validator::make($request->all(), $rules)->validate();
 
         $request['is_active'] = ($request['is_active'] == 'on' || $request['is_active'] == '1') ? 1 : 0;
-        $variable_value = VariableValue::find($request->id);
         $variable_value->update($request->all());
 
         return redirect('/admin/variable-value/manage')->with('message', 'متغیر با موفقیت ذخیره شد.');
