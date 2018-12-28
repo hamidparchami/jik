@@ -16,7 +16,7 @@ class CreateVariableValuesTable extends Migration
         Schema::create('variable_values', function (Blueprint $table) {
             $table->increments('id');
             $table->string('variable');
-            $table->string('value');
+            $table->text('value');
             $table->tinyInteger('is_active')->default(0);
             $table->softDeletes();
             $table->timestamps();
