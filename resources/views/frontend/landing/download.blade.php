@@ -14,9 +14,9 @@
         <img class="img-fluid app-screenshot" src="/images/app_screenshot.png">
     </div>
     <div class="col-md-4 col-sm-12 col-xs-12 description-container">
-        <div>{!! $downloadDescription !!}</div>
+        <div>{!! $downloadDescription->value !!}</div>
         <hr class="style-two">
-        <div><a href="{{ $downloadLinkForAndroid }}">دریافت نسخه اندروید</a></div>
+        <div><a href="{{ $downloadLinkForAndroid->value }}">دریافت نسخه اندروید</a></div>
         <div><a href="#">دریافت نسخه iOS</a></div>
     </div>
 </div>
