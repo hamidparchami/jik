@@ -24,7 +24,7 @@ class VariableValueController extends Controller
     {
         $rules = [
             'variable'  => 'required|unique:variable_values|max:255',
-            'value'     => 'required|max:255',
+            'value'     => 'required',
         ];
 
         Validator::make($request->all(), $rules)->validate();
@@ -45,7 +45,7 @@ class VariableValueController extends Controller
     {
         $rules = [
             'variable'  => 'required|unique:variable_values}max:255',
-            'value'     => 'required|max:255',
+            'value'     => 'required',
         ];
 
         Validator::make($request->all(), $rules)->validate();
