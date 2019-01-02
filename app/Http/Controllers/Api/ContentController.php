@@ -88,7 +88,7 @@ class ContentController extends Controller
     {
         //get all categories in requested catalog
         $catalog_categories = ContentCategory::where('catalog_id', $catalog_id)->get(['id'])->implode('id', ',');
-        $catalog_categories = (strpos($catalog_categories, ',')) ? explode(',', $catalog_categories) : str_split($catalog_categories, 1);
+        $catalog_categories = (strpos($catalog_categories, ',')) ? explode(',', $catalog_categories) : explode(' ', $catalog_categories);
 
         //get all user categories in requested catalog
         $user_categories    = CustomerCategory::whereHas('customer', function($q) use($account_id) {
@@ -98,7 +98,7 @@ class ContentController extends Controller
                                                 ->get(['category_id'])
                                                 ->implode('category_id', ',');
 
-        $user_categories = (strpos($user_categories, ',')) ? explode(',', $user_categories) : str_split($user_categories, 1);
+        $user_categories = (strpos($user_categories, ',')) ? explode(',', $user_categories) : explode(' ', $user_categories);
 
         //check if user has any favorite category or not, if not warn customer to select at least one category
         if (count($user_categories) == 0 || strlen($user_categories[0]) == 0) {
