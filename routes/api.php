@@ -33,7 +33,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
     //Content resource
     Route::get('/content/list-by-category/{category_id}', 'Api\ContentController@getContentListByCategory')->where('category_id', '[0-9]+');
     Route::get('/content/view/{id}', 'Api\ContentController@getView');
-    Route::get('/content/user-feed/{account_id}/catalog/{catalog_id}/offset/{offset?}', 'Api\ContentController@getUserFeed');
+    Route::get('/content/user-feed', 'Api\ContentController@getUserFeed');
     Route::post('/content/view/add-count', 'Api\ContentController@postAddViewCount');
 //    Route::get('/content/view/customer-log', 'Api\ContentController@postCustomerViewLog');
     Route::post('/content/like', 'Api\ContentController@postLike');
