@@ -84,44 +84,78 @@ class ContentController extends Controller
         return compact('success', 'content', 'accountStatus');
     }
 
-    public function getUserFeed($account_id, $catalog_id, $offset=0)
+    public function getUserFeed(Request $request)
     {
-        //get all categories in requested catalog
-        $catalog_categories = ContentCategory::where('catalog_id', $catalog_id)->get(['id'])->implode('id', ',');
-        $catalog_categories = (strpos($catalog_categories, ',')) ? explode(',', $catalog_categories) : explode(' ', $catalog_categories);
+        if (!$request->isTemporary) {
+            $accountId = $request->account_id;
+            $offset = !empty($request->offset) ? $request->offset : 0;
+            //get all categories in requested catalog
+            $catalog_categories = ContentCategory::where('catalog_id', $request->catalog_id)->get(['id'])->implode('id', ',');
+            $catalog_categories = (strpos($catalog_categories, ',')) ? explode(',', $catalog_categories) : explode(' ', $catalog_categories);
 
-        //get all user categories in requested catalog
-        $user_categories    = CustomerCategory::whereHas('customer', function($q) use($account_id) {
-                                                       $q->where('account_id', $account_id);
-                                                })
-                                                ->whereIn('category_id', $catalog_categories)
-                                                ->get(['category_id'])
-                                                ->implode('category_id', ',');
+            //get all user categories in requested catalog
+            $user_categories = CustomerCategory::whereHas('customer', function ($q) use ($accountId) {
+                $q->where('account_id', $accountId);
+            })
+                ->whereIn('category_id', $catalog_categories)
+                ->get(['category_id'])
+                ->implode('category_id', ',');
 
-        $user_categories = (strpos($user_categories, ',')) ? explode(',', $user_categories) : explode(' ', $user_categories);
+            $user_categories = (strpos($user_categories, ',')) ? explode(',', $user_categories) : explode(' ', $user_categories);
 
-        //check if user has any favorite category or not, if not warn customer to select at least one category
-        if (count($user_categories) == 0 || strlen($user_categories[0]) == 0) {
-            $result = [
-                    'success'   => false,
-                    'code'      => 2100,
-                    'message'   => "برای استفاده از امکانات ابتدا علاقه‌مندی‌هات رو از طریق زیر مشخص کن.",
-                    ];
-            
-            return compact('result');
+            //check if user has any favorite category or not, if not warn customer to select at least one category
+            if (count($user_categories) == 0 || strlen($user_categories[0]) == 0) {
+                $result = [
+                    'success' => false,
+                    'code' => 2100,
+                    'message' => "برای استفاده از امکانات ابتدا علاقه‌مندی‌هات رو از طریق زیر مشخص کن.",
+                ];
+
+                return compact('result');
+            }
+
+            //get all contents in customer categories
+            /*$take = $offset*self::FEED_CONTENTS_CHUNK_SIZE;
+            $skip = ($offset > 1) ? $take-self::FEED_CONTENTS_CHUNK_SIZE : 0;*/
+            $contents = Content::whereIn('category_id', $user_categories)
+                ->where('is_active', '1')
+                ->orderBy('updated_at', 'desc')
+                ->skip($offset)
+                ->take(config('general.feed_contents_chunk_size'))
+                ->get();
+
+            if (!$request->isTemporary) {
+                $customer = Customer::where('account_id', $request->accountId)->first();
+                if (is_null($customer)) {
+                    //customer not found!
+                    return response()->json([
+                            'success' => false,
+                            'error_code' => '1030',
+                            'error' => (object)['account' => 'customer account not found!']]
+                    );
+                }
+
+                $likeByCustomer = ContentLikeLog::where('customer_id', $customer->id)->get(['content_id'])->implode('content_id', ',');
+                $likeByCustomer = explode(',', $likeByCustomer);
+
+                if (isset($categories->contents)) {
+                    $contents->map(function ($content) use ($likeByCustomer) {
+                        if (in_array($content->id, $likeByCustomer)) {
+                            $content->user_has_liked_this_content = true;
+                        }
+                        return $content;
+                    });
+                }
+
+            }
+            return compact('contents');
+        } else {
+            return response()->json([
+                    'success' => false,
+                    'error_code' => '1030',
+                    'error' => (object)['account' => 'customer account not found!']]
+            );
         }
-
-        //get all contents in customer categories
-        /*$take = $offset*self::FEED_CONTENTS_CHUNK_SIZE;
-        $skip = ($offset > 1) ? $take-self::FEED_CONTENTS_CHUNK_SIZE : 0;*/
-        $contents = Content::whereIn('category_id', $user_categories)
-                            ->where('is_active', '1')
-                            ->orderBy('updated_at', 'desc')
-                            ->skip($offset)
-                            ->take(config('general.feed_contents_chunk_size'))
-                            ->get();
-
-        return compact('contents');
     }
 
     public function postAddViewCount(Request $request)
