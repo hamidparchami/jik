@@ -124,36 +124,34 @@ class ContentController extends Controller
                 ->take(config('general.feed_contents_chunk_size'))
                 ->get();
 
-            if (!$request->isTemporary) {
-                $customer = Customer::where('account_id', $request->accountId)->first();
-                if (is_null($customer)) {
-                    //customer not found!
-                    return response()->json([
-                            'success' => false,
-                            'error_code' => '1030',
-                            'error' => (object)['account' => 'customer account not found!']]
-                    );
-                }
-
-                $likeByCustomer = ContentLikeLog::where('customer_id', $customer->id)->get(['content_id'])->implode('content_id', ',');
-                $likeByCustomer = explode(',', $likeByCustomer);
-
-                if (isset($categories->contents)) {
-                    $contents->map(function ($content) use ($likeByCustomer) {
-                        if (in_array($content->id, $likeByCustomer)) {
-                            $content->user_has_liked_this_content = true;
-                        }
-                        return $content;
-                    });
-                }
-
+            $customer = Customer::where('account_id', $accountId)->first();
+            if (is_null($customer)) {
+                //customer not found!
+                return response()->json([
+                        'success' => false,
+                        'error_code' => '1030',
+                        'error' => (object)['account' => 'customer account not found!']]
+                );
             }
+
+            $likeByCustomer = ContentLikeLog::where('customer_id', $customer->id)->get(['content_id'])->implode('content_id', ',');
+            $likeByCustomer = explode(',', $likeByCustomer);
+
+            if (isset($categories->contents)) {
+                $contents->map(function ($content) use ($likeByCustomer) {
+                    if (in_array($content->id, $likeByCustomer)) {
+                        $content->user_has_liked_this_content = true;
+                    }
+                    return $content;
+                });
+            }
+
             return compact('contents');
         } else {
             return response()->json([
                     'success' => false,
-                    'error_code' => '1030',
-                    'error' => (object)['account' => 'customer account not found!']]
+                    'error_code' => '1035',
+                    'error' => (object)['account' => 'account is trail and this feature is not allowed in trial mode!']]
             );
         }
     }
