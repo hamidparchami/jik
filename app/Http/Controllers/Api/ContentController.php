@@ -137,7 +137,7 @@ class ContentController extends Controller
             $likeByCustomer = ContentLikeLog::where('customer_id', $customer->id)->get(['content_id'])->implode('content_id', ',');
             $likeByCustomer = explode(',', $likeByCustomer);
 
-            if (isset($categories->contents)) {
+            if (isset($contents) && $contents->count()) {
                 $contents->map(function ($content) use ($likeByCustomer) {
                     if (in_array($content->id, $likeByCustomer)) {
                         $content->user_has_liked_this_content = true;
