@@ -31,7 +31,7 @@ class VariableValueController extends Controller
             $forceUpdateCurrentVersion = VariableValue::where('variable', $variableForForceUpdateCurrentVersion)->where('is_active', 1)->get(['value'])->first();
 
             $data['latestVersion']  = $latestVersion->value;
-            $data['forceUpdate']    = ($forceUpdateCurrentVersion == 'true') ? true : false;
+            $data['forceUpdate']    = ($forceUpdateCurrentVersion->value == 'true') ? true : false;
             $data['updateUrl']      = $latestVersionUpdateUrl->value;
 
             return $data;
