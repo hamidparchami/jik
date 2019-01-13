@@ -30,9 +30,9 @@ class VariableValueController extends Controller
             $latestVersionUpdateUrl = VariableValue::where('variable', 'latestVersionUpdateUrlFor'.$request->platform)->where('is_active', 1)->get(['value'])->first();
             $forceUpdateCurrentVersion = VariableValue::where('variable', $variableForForceUpdateCurrentVersion)->where('is_active', 1)->get(['value'])->first();
 
-            $data['latestVersion']  = $latestVersion;
+            $data['latestVersion']  = $latestVersion->value;
             $data['forceUpdate']    = ($forceUpdateCurrentVersion == 'true') ? true : false;
-            $data['updateUrl']      = $latestVersionUpdateUrl;
+            $data['updateUrl']      = $latestVersionUpdateUrl->value;
 
             return $data;
         } else {
