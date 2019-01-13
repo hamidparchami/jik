@@ -252,6 +252,10 @@ class CustomerController extends Controller
         $customerRegistrationDays = $customerRegistrationDays->diffInDays(Carbon::now());
         $customerScore = $customerRegistrationDays*20;
 
+        if ($customerScore == 0) {
+            $customerScore = 10;
+        }
+
         $success = true;
         return compact('success', 'customerScore');
     }

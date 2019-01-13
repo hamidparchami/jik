@@ -51,4 +51,6 @@ Route::group(['prefix' => 'v1', 'middleware' => 'cors'], function () {
     Route::get('/variable-value/view/{variable}', 'Api\VariableValueController@getView');
     //Customer
     Route::get('/customer/score', 'Api\CustomerController@getCustomerScore');
+    //App
+    Route::get('/app/version/check-for-updates', 'Api\VariableValueController@getCheckForUpdates');
 });

@@ -21,4 +21,26 @@ class VariableValueController extends Controller
 
         return $variableValue;
     }
+
+    public function getCheckForUpdates(Request $request)
+    {
+        if (!empty($request->currentVersion) && !empty($request->platform)) {
+            $variableForForceUpdateCurrentVersion = 'forceUpdate' . $request->currentVersion . 'For' . $request->platform;
+            $latestVersion = VariableValue::where('variable', 'latestVersionFor'.$request->platform)->where('is_active', 1)->get(['value'])->first();
+            $latestVersionUpdateUrl = VariableValue::where('variable', 'latestVersionUpdateUrlFor'.$request->platform)->where('is_active', 1)->get(['value'])->first();
+            $forceUpdateCurrentVersion = VariableValue::where('variable', $variableForForceUpdateCurrentVersion)->where('is_active', 1)->get(['value'])->first();
+
+            $data['latestVersion']  = $latestVersion;
+            $data['forceUpdate']    = ($forceUpdateCurrentVersion == 'true') ? true : false;
+            $data['updateUrl']      = $latestVersionUpdateUrl;
+
+            return $data;
+        } else {
+            return response([
+                'success' => false,
+                'code' => 404,
+                'message' => 'Resource not found.'
+            ]);
+        }
+    }
 }
