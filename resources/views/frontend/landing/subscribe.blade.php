@@ -28,11 +28,10 @@
                 <form name="subscription" method="post">
                     {{ csrf_field() }}
                     <div class="row">
-                        <div class="col-md-8 col-xs-8">
-                            <input name="phone_number" class="form-control" type="text" value="{{ old('phone_number') }}">
+                        <div class="col-md-12 col-xs-12">
+                            <input name="phone_number" class="form-control" type="text" value="{{ old('phone_number') }}" placeholder="شماره موبایل">
                             <sub>مثال: 09123456789</sub>
                         </div>
-                        <div class="col-md-4 col-xs-4 text-right">شماره موبایل</div>
                     </div>
                     <br>
                     <div class="row">
@@ -54,10 +53,9 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-8 col-xs-8">
-                                <input name="otp" class="form-control" type="text" value="{{ old('otp') }}">
+                            <div class="col-md-12 col-xs-12">
+                                <input name="otp" class="form-control" type="text" value="{{ old('otp') }}" placeholder="کد دریافتی">
                             </div>
-                            <div class="col-md-4 col-xs-4 text-right">کد دریافتی</div>
                         </div>
                         <br>
                         <div class="row">
