@@ -28,18 +28,16 @@
                 <form name="subscription" method="post">
                     {{ csrf_field() }}
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-8 col-xs-8">
                             <input name="phone_number" class="form-control" type="text" value="{{ old('phone_number') }}">
                             <sub>مثال: 09123456789</sub>
                         </div>
-                        <div class="col-md-4 text-right">شماره موبایل</div>
+                        <div class="col-md-4 col-xs-4 text-right">شماره موبایل</div>
                     </div>
-
+                    <br>
                     <div class="row">
-                        <div class="col-md-2"></div>
-                        <div class="col-md-2"></div>
-                        <div class="col-md-8 text-right">
-                            <input name="submit" class="btn btn-success" type="submit" value="ثبت شماره موبایل">
+                        <div class="col-md-12 col-xs-12 text-right">
+                            <input name="submit" class="btn btn-block btn-success" type="submit" value="ثبت شماره موبایل">
                         </div>
                     </div>
                 </form>
@@ -56,17 +54,15 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-8 col-xs-8">
                                 <input name="otp" class="form-control" type="text" value="{{ old('otp') }}">
                             </div>
-                            <div class="col-md-4 text-right">کد دریافتی در پیامک</div>
+                            <div class="col-md-4 col-xs-4 text-right">کد دریافتی</div>
                         </div>
-
+                        <br>
                         <div class="row">
-                            <div class="col-md-2"></div>
-                            <div class="col-md-2"></div>
-                            <div class="col-md-8 text-right">
-                                <input name="submit" class="btn btn-success" type="submit" value="ثبت کد دریافتی">
+                            <div class="col-md-12 col-xs-12 text-right">
+                                <input name="submit" class="btn btn-block btn-success" type="submit" value="ثبت کد دریافتی">
                             </div>
                         </div>
                         @if (!empty($accountId))
