@@ -11,10 +11,11 @@
 <body class="subscription-body">
 <div class="container subscription-main-container">
 
-<div class="row rtl" style="margin-bottom: 10px; color: #FFFFFF;">
-    <div class="col-md-4 col-sm-6 col-xs-6"><span class="subscription-step-number">۱</span> ثبت شماره موبایل</div>
-    <div class="col-md-4 col-sm-6 col-xs-6"><span class="subscription-step-number">۲</span> دریافت هدیه</div>
-    <div class="col-md-4 hidden-xs hidden-sm"></div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 10px; color: #FFFFFF;">
+        <div class="col-md-6 col-sm-6 col-xs-6 rtl"><span class="subscription-step-number">۲</span> دریافت هدیه</div>
+        <div class="col-md-6 col-sm-6 col-xs-6 rtl"><span class="subscription-step-number">۱</span> ثبت شماره موبایل</div>
+    </div>
 </div>
 
 <div class="row">
