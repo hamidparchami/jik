@@ -8,22 +8,30 @@
     <link href="/css/app.css?v=0.1" rel="stylesheet">
     <link href="/css/common.css?v=0.1" rel="stylesheet">
 </head>
-<body>
+<body class="subscription-body">
 <div class="container subscription-main-container">
-    @if (count($errors) > 0)
-        <div class="alert alert-danger rtl">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+
+<div class="row rtl" style="margin-bottom: 10px; color: #FFFFFF;">
+    <div class="col-md-4 col-sm-6 col-xs-6"><span class="subscription-step-number">۱</span> ثبت شماره موبایل</div>
+    <div class="col-md-4 col-sm-6 col-xs-6"><span class="subscription-step-number">۲</span> دریافت هدیه</div>
+    <div class="col-md-4 hidden-xs hidden-sm"></div>
+</div>
+
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12 description-container">
         <div class="panel panel-default">
-            <div class="panel-heading rtl">شرکت در قرعه کشی</div>
+            <div class="panel-heading rtl">دریافت هدیه</div>
             <div class="panel-body">
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger rtl">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 @if(empty($step))
                 <form name="subscription" method="post">
                     {{ csrf_field() }}
