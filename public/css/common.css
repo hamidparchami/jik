@@ -19,17 +19,63 @@ a:hover {
     background-size: cover;
 }
 .subscription-main-container {
-    margin-top: 50px;
+    margin-top: 20px;
     min-height: 540px;
     max-width: 500px;
     margin-bottom: 50px;
 }
 .subscription-step-number {
-    background: #7bd153;
+    background: #e6e6e6;
     border-radius: 50%;
     border: 1px solid #65B042;
-    color: #FFFFFF;
+    color: #3c763d;
     padding: 2px 12px 2px 12px;
+}
+.subscription-active-step {
+    animation: stepTransform 1.5s infinite;
+}
+.subscription-gift-image-container-first-step {
+    width: 60%;
+    margin: 0 auto;
+    position: relative;
+    animation: wiggle 1.5s infinite;
+    /*margin-bottom: 30px;*/
+}
+@keyframes wiggle {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    80% {
+        transform: rotate(3deg);
+    }
+    85% {
+        transform: rotate(5deg);
+    }
+    95% {
+        transform: rotate(-5deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes stepTransform {
+    0% {
+        background-color: #7bd153;
+        color: #fff;
+        -webkit-box-shadow: 0 0 9px #333;
+    }
+    50% {
+        background-color: #e6e6e6;
+        color: #673bb7;
+        -webkit-box-shadow: 0 0 18px #91bd09;
+    }
+    100% {
+        background-color: #7bd153;
+        color: #fff;
+        -webkit-box-shadow: 0 0 9px #333;
+    }
 }
 .form-row {
     margin-bottom: 20px;

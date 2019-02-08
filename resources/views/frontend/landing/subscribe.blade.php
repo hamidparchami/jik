@@ -12,9 +12,21 @@
 <div class="container subscription-main-container">
 
 <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 10px; color: #FFFFFF;">
-        <div class="col-md-6 col-sm-6 col-xs-6 rtl"><span class="subscription-step-number">۲</span> دریافت هدیه</div>
-        <div class="col-md-6 col-sm-6 col-xs-6 rtl"><span class="subscription-step-number">۱</span> ثبت شماره موبایل</div>
+    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 15px; color: #FFFFFF;">
+        <div class="col-md-6 col-sm-6 col-xs-6 rtl"><span class="subscription-step-number @if($step == 'subscribed')subscription-active-step @endif">۲</span> دریافت هدیه</div>
+        <div class="col-md-6 col-sm-6 col-xs-6 rtl"><span class="subscription-step-number @if(empty($step) || $step == 'otp')subscription-active-step @endif">۱</span> ثبت شماره موبایل</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <div class="subscription-gift-image-container-first-step">
+            @if(empty($step) || $step == 'otp')
+                <img class="img-responsive" src="{{ asset('images/gift_step_one.png') }}" style="margin-bottom: 30px;">
+            @elseif($step == 'subscribed')
+                <img class="img-responsive" src="{{ asset('images/gift_step_two.png') }}" style="margin-bottom: 30px;">
+            @endif
+        </div>
     </div>
 </div>
 
