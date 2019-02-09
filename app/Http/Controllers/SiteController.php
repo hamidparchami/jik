@@ -21,12 +21,6 @@ class SiteController extends Controller
      */
     public function index()
     {
-/*        $like = Like::create(['customer_id' => 963852, 'customer_name' => 'Hamid Parchami', 'content_id' => 123654]);
-        if ($like) {
-            return 'succeed';
-        } else {
-            return 'error';
-        }*/
         return view('frontend.index');
     }
 

@@ -31,7 +31,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3"></div>
-            <div class="col-md-6" style="border: 1px solid #CCCCCC;">Main</div>
+            <div class="col-md-6" style="border: 1px solid #CCCCCC; padding: 10px; margin-top: 50px;">jikopeek.ir</div>
             <div class="col-md-3"></div>
         </div>
     </div>
