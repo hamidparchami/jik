@@ -43,7 +43,7 @@
 
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12 description-container">
-        <div class="rtl" style="color: #b52727; font-weight: bold; margin-bottom: 10px;">مجله جیک و پیک به مناسبت جشن ۲۲ بهمن ۲۲ گیگ اینترنت رایگان به کاربران خود هدیه می دهد.</div>
+        <div class="rtl" style="color: #b52727; font-weight: bold; margin-bottom: 10px;">مجله جیک و پیک به مناسبت جشن ۲۲ بهمن ۲۲ گیگ اینترنت رایگان به کاربران (همراه اول) خود هدیه می دهد.</div>
         <div class="panel panel-default">
             <div class="panel-heading rtl">دریافت هدیه دهه فجر</div>
             <div class="panel-body">
