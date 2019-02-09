@@ -24,12 +24,21 @@ a:hover {
     max-width: 500px;
     margin-bottom: 50px;
 }
+.subscription-steps-container {
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    padding: 8px 0px 8px 0px;
+    margin-bottom: 10px;
+    color: #333333;
+    font-size: 12px;
+}
 .subscription-step-number {
     background: #e6e6e6;
     border-radius: 50%;
     border: 1px solid #65B042;
     color: #3c763d;
     padding: 2px 12px 2px 12px;
+    margin-left: 4px;
 }
 .subscription-active-step {
     animation: stepTransform 1.5s infinite;
@@ -178,63 +187,6 @@ a:hover {
     display: inline-block;
     margin: 5px auto
 }
-.slogan-container {
-    padding-right: 0;
-}
-.slogan {
-    color: #ffffff;
-    direction: rtl;
-    padding-top: 40px;
-    font-size: 18px;
-}
-.social-icons li {
-    float: right;
-    display: inline;
-    list-style: none;
-    margin-right: 10px;
-    margin-bottom: 5px;
-    text-indent: -9999px;
-}
-.social-icons {
-    margin: 0;
-    padding: 0;
-}
-.social-icons li a, a.social-icon {
-    background: url(/images/social-icons.png) left top no-repeat;
-    width: 33px;
-    height: 33px;
-    display: block !important;
-    transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    -ms-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    -webkit-transition: all 0.3s ease-in-out;
-}
-.social_facebook {
-    background-position: 0 0 !important;
-}
-.social-icons li:hover .social_facebook { background-position:0 -43px !important; }
-.social_twitter {
-    background-position: -40px 0 !important;
-}
-.social-icons li:hover .social_twitter { background-position:-40px -43px !important; }
-.social_google {
-    background-position: -120px 0 !important;
-}
-.social-icons li:hover .social_google { background-position:-120px -43px !important; }
-
-.search-field {
-    width: 200px;
-    height: 34px;
-    border: 1px solid #ffffff;
-    border-radius: 4px;
-    background-color: #ffffff;
-    margin-top: 8px;
-    padding-right: 12px;
-}
-.search-field:focus {
-    outline: none;
-}
 .black-title {
     color: #000000;
     font-size: 16px
@@ -305,41 +257,6 @@ a:hover {
     /*height: 128px; padding-top: 50%;*/ cursor: pointer;
     align-items: stretch;
 }
-#middle-page-slider {
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-#middle-page-slider .item {
-    border: 2px solid #CCCCCC;
-}
-#middle-page-slider .item img, .middle-col-slider .item img {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: 600px;
-}
-#saying-slider {
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-#saying-slider .item, .middle-col-slider .item img {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: 600px;
-}
-.saying-container {
-    background-color: #f1f1f1;
-    color: #0094a3;
-    /*padding: 50px 0px 50px;*/
-    line-height: 1.8em;
-}
-.saying-image {
-    border: 2px solid #0094a3;
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-}
 .owl-carousel .owl-nav .owl-prev, .owl-carousel .owl-nav .owl-next{
     background: #ff6666 !important;
     padding: 12px 20px 12px 20px !important;
@@ -356,47 +273,6 @@ a:hover {
     height: 128px !important;
 }
 
-.section-resort {
-    background: url("/images/bg-kd.jpg") center bottom no-repeat;
-    background-size: 100%;
-    min-height: 770px;
-    /*margin-top: 100px;*/
-    padding-top: 300px;
-}
-.section-resort h1 {
-    color: #0094a3;
-}
-.section-resort h3 {
-    color: #0897a5;
-}
-.section-resort .text-container {
-    font-size: 24px;
-    direction: rtl;
-    line-height: 2.0em;
-}
-.section-resort .register-button {
-    background-color: #c71f24;
-    border: 2px solid #c71f24;
-    border-radius: 6px;
-    color: #ffffff;
-    padding: 6px;
-    width: 200px;
-    margin:20px auto;
-    -webkit-transition: .2s;
-    transition: .2s;
-    font-size: 20px;
-    /*background-color:rgba(255, 255, 255, 0.5);*/
-    /*background-color: #f5f5f5;*/
-}
-.section-resort .register-button:hover {
-    background-color:#d6262b;
-    border: 2px solid #911216;
-    /*opacity: 0.7;*/
-    /*width: 195px;*/
-}
-.section-resort a:hover {
-    text-decoration: none;
-}
 .header-navbar-container {
     border-top: 1px solid #88c5ce;
     margin-top: 10px;
@@ -475,50 +351,6 @@ a:hover {
 .navbar-nav>li {
     float: right;
 }
-.articles-list-container {
-    margin-top: 40px;
-    margin-bottom: 30px;
-}
-.article-main-container {
-    margin-top: 40px;
-}
-.article-container-row {
-    background-color: #f9f9f9;
-    border: 1px solid #ededed;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    border-radius: 4px;
-    box-shadow: 0 1px 1px rgba(0,0,0,.05);
-}
-.article-container-column {
-    padding-right: 0;
-    padding-left: 0;
-}
-.article-title {
-    padding-right: 10px;
-    padding-top: 10px;
-}
-.article-content {
-    padding: 20px 10px 10px 10px;
-    line-height: 1.8em;
-}
-.article-image-container {
-    padding-right: 0;
-    padding-left: 0;
-}
-.article-image {
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
-     width: 100%;
-}
-.article-image-in-list {
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-     width: 100%;
-}
-.article-information-container {
-    padding: 8px 10px;
-}
 .page-main-container {
     margin-top: 40px;
 }
@@ -537,349 +369,44 @@ a:hover {
     padding: 20px 10px 10px 10px;
 }
 
-.main-col-container {
-    background: linear-gradient(to top, rgba(1, 70, 134, 0.1), rgba(1, 70, 134, 0));
-    padding: 100px 0;
-    text-align: center;
-    width: 100%;
-    height: 600px;
-}
-.bonus-section {
-    background: #f1f1f1 url(/images/bg-bonus.png) 140px bottom no-repeat;
-    background-size: 40%;
-    text-align: center;
-    min-height: 900px;
-    /*margin-top: 100px;*/
-    padding-top: 200px;
-}
-.bonus-section h1 {
-    color: #0094a3;
-}
-.bonus-section .text-container {
-    font-size: 20px;
-    direction: rtl;
-    color: #333;
-    line-height: 2.0em;
-}
-.bonus-section .bonus-button {
-    border: 2px solid #88c5ce;
-    border-radius: 6px;
-    color: #0094a3;
-    font-size: 22px;
-    padding: 16px;
-    width: 200px;
-    margin:60px auto;
-    -webkit-transition: .2s;
-    transition: .2s;
-    text-align: center;
-}
-.bonus-section .more-info-button {
-    border: 2px solid #88c5ce;
-    border-radius: 6px;
-    color: #0094a3;
-    font-size: 22px;
-    padding: 16px;
-    width: 200px;
-    margin:60px auto;
-    -webkit-transition: .2s;
-    transition: .2s;
-    text-align: center;
-}
-.bonus-section .bonus-button:hover, .bonus-section .more-info-button:hover {
-    /*width: 195px;*/
-    background-color: #f9f9f9;
-}
-.bonus-section a:hover {
-    text-decoration: none;
-}
-.countdown-section {
-    background: url("/images/countdown.jpg") center no-repeat;
-    background-size: auto 100%;
-    padding-top: 80px;
-    /*margin-top: 30px;*/
-    height: 400px;
-}
-.countdown-section h1 {
-    color: #ffffff;
-}
-.training-section {
-    /*background-color: #0094a3;*/
-    /*background: url("/images/training-bg.jpg") center bottom no-repeat;*/
-    /*background-size: 100%;*/
-    /*background-color:rgba(0, 0, 0, 0.5);*/
-    margin-top: 150px;
-}
-.training-section .buttons-main-container {
-    padding-top: 165px;
-}
-.training-section .buttons-main-container .training-button {
-    background-color: #c71f24;
-    border: 1px solid #c71f24;
-    margin-top: 50px;
-}
-.training-section .buttons-main-container .training-button:hover {
-    background-color:#d6262b;
-    border: 1px solid #911216;
-}
-
-div#container {
-    margin: 0 auto;
-    padding: 20px;
-    width: 800px;
-}
-div#clock {
-    color: white;
-    margin: 20px auto;
-    width: 600px;
-    overflow: hidden;
-    text-align: center;
-}
-div#clock p {
-    background: #333;
-    float: left;
-    height: 88px;
-    width: 88px;
-}
-div#clock p span {
-    display: block;
-    font-size: 50px;
-    font-weight: bold;
-    padding: 5px 0 0;
-}
-div#clock div.space {
-    color: #ccc;
-    display: block;
-    line-height: 1.7em;
-    font-size: 50px;
-    float: left;
-    height: 88px;
-    width: 30px;
-}
-div.coupon {
-    color: #333 !important;
-    font-size: 50px;
-    font-weight: bold;
-}
-div.multi_clock {
-    border: 1px solid #666;
-    color: #333;
-    float: left;
-    margin: 10px;
-    padding: 5px;
-}
-pre {
-    background-color: #eee;
-    border: 1px solid #ccc;
-    line-height: 1.4em;
-    padding: 10px;
-    margin: 0;
-}
-.video-box >div {
-    margin: 40px 0;
-    display: block;
-}
 
 @media (max-width: 991px) {
-    .video-box { width: 100% !important; }
+    .subscription-steps-container {
+        margin-left: 6px;
+        margin-right: 6px;
+    }
 }
 @media (max-width: 767px) {
-    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-        color: #ffffff;
-    }
-    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
-    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-        color: #333;
+    .subscription-steps-container {
+        margin-left: 4px;
+        margin-right: 4px;
     }
 }
 
 
 @media (max-width: 480px) {
-    .logo {
-        margin-top: 20px;
-    }
-    .main-col-container {
-        padding: 0; margin: 0; margin-top: 210px;
-    }
-    .saying-image {
-        display: inline-block !important;
-        width: 120px !important;
-        height: 120px !important;
-    }
-    .saying-text {
-        margin-top: 20px;
-    }
-    .section-resort {
-        min-height: 500px;
-        background-size: cover;
-        margin-top: 0px;
-        padding-top: 100px;
-    }
-    .section-resort h1 {
-        font-size: 16px;
-    }
-    .section-resort .text-container {
-        font-size: 12px;
-    }
-    .section-resort .register-button {
-        width: 100%;
-    }
-    .section-resort .register-button:hover {
-        width: 99%;
-    }
-    .training-section {
-        /*background-size: 300%;
-        background-repeat: no-repeat;*/
-        margin-top: 20px;
-    }
-    .bonus-section {
-        background: none;
-        min-height: 500px;
-        padding-top: 30px;
-    }
-    .logo-container {
-        padding: inherit;
+    .subscription-steps-container {
+        margin-left: 4px;
+        margin-right: 4px;
     }
 }
 
 @media (min-width: 481px ) and (max-width: 767px) {
-    .logo {
-        margin-top: 20px;
+    .subscription-steps-container {
+        margin-left: 4px;
+        margin-right: 4px;
     }
-    .main-col-container {
-        padding: 0; margin: 0; margin-top: 210px;
-    }
-    .saying-image {
-        display: inline-block !important;
-        width: 120px !important;
-        height: 120px !important;
-    }
-    .saying-text {
-        margin-top: 20px;
-    }
-    .section-resort {
-        min-height: 500px;
-        background-size: cover;
-        margin-top: 0px;
-        padding-top: 100px;
-    }
-    .section-resort h1 {
-        font-size: 16px;
-    }
-    .section-resort .text-container {
-        font-size: 12px;
-    }
-    .section-resort .register-button {
-        width: 100%;
-    }
-    .section-resort .register-button:hover {
-        width: 99%;
-    }
-    .training-section {
-        /*background-size: 300%;
-        background-repeat: no-repeat;*/
-        margin-top: 20px;
-    }
-    .bonus-section {
-        min-height: 500px;
-        padding-top: 150px;
-    }
+
 }
 @media (min-width:768px) and (max-width: 1024px) {
-    .logo {
-        margin-top: 20px;
-    }
-    .main-col-container {
-        padding: 0; margin: 0; margin-top: 170px;
-    }
-    .saying-image {
-        display: inline-block !important;
-        width: 120px !important;
-        height: 120px !important;
-    }
-    .saying-text {
-        margin-top: 20px;
-    }
-    .section-resort {
-        min-height: 500px;
-        background-size: cover;
-        margin-top: 0px;
-        padding-top: 100px;
-    }
-    .section-resort h1 {
-        font-size: 16px;
-    }
-    .section-resort .text-container {
-        font-size: 12px;
-    }
-    .section-resort .register-button {
-        width: 100%;
-    }
-    .section-resort .register-button:hover {
-        width: 99%;
-    }
-    .training-section {
-        /*background-size: 300%;
-        background-repeat: no-repeat;*/
-        margin-top: 50px;
-    }
-    .bonus-section {
-        background-position: left bottom;
-        min-height: 500px;
-        padding-top: 60px;
-    }
-    .header-row {
-        /*top: 20px;*/
-    }
-    .countdown-section {
-        height: 300px;
-    }
-    .logo-container {
-        padding-left: 10px;
-        text-align: left;
+    .subscription-steps-container {
+        margin-left: 6px;
+        margin-right: 6px;
     }
 }
 @media (min-width:1025px) and (max-width: 1281px) {
-    .logo {
-        margin-top: 20px;
-    }
-    .main-col-container {
-        padding: 0; margin: 0; margin-top: 210px;
-    }
-    .saying-image {
-        display: inline-block !important;
-        width: 120px !important;
-        height: 120px !important;
-    }
-    .saying-text {
-        margin-top: 20px;
-    }
-    .section-resort {
-        min-height: 615px;
-        /* margin-top: 100px; */
-        padding-top: 200px;
-        min-height: 500px;
-        background-size: cover;
-        margin-top: 0px;
-        padding-top: 100px;
-    }
-    .section-resort h1 {
-        font-size: 16px;
-    }
-    .section-resort .text-container {
-        font-size: 12px;
-    }
-    .section-resort .register-button {
-        width: 100%;
-    }
-    .section-resort .register-button:hover {
-        width: 99%;
-    }
-    .training-section {
-        background-size: 300%;
-        background-repeat: no-repeat;
-    }
-    .bonus-section {
-        min-height: 500px;
-        padding-top: 150px;
+    .subscription-steps-container {
+        margin-left: 6px;
+        margin-right: 6px;
     }
 }

@@ -22,8 +22,9 @@
 <div class="container subscription-main-container">
 
 <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 15px; color: #FFFFFF;">
+    <div class="col-md-12 col-sm-12 col-xs-12 subscription-steps-container">
         <div class="col-md-6 col-sm-6 col-xs-6 rtl"><span class="subscription-step-number @if($step == 'subscribed')subscription-active-step @endif">۲</span> دریافت هدیه</div>
+        {{--<div class="col-md-4 col-sm-4 col-xs-4 rtl"><span class="subscription-step-number @if($step == 'otp')subscription-active-step @endif">۲</span>دریافت کد عضویت</div>--}}
         <div class="col-md-6 col-sm-6 col-xs-6 rtl"><span class="subscription-step-number @if(empty($step) || $step == 'otp')subscription-active-step @endif">۱</span> ثبت شماره موبایل</div>
     </div>
 </div>
@@ -42,8 +43,9 @@
 
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12 description-container">
+        <div class="rtl" style="color: #b52727; font-weight: bold; margin-bottom: 10px;">مجله جیک و پیک به مناسبت جشن ۲۲ بهمن ۲۲ گیگ اینترنت رایگان به کاربران خود هدیه می دهد.</div>
         <div class="panel panel-default">
-            <div class="panel-heading rtl">دریافت هدیه</div>
+            <div class="panel-heading rtl">دریافت هدیه دهه فجر</div>
             <div class="panel-body">
                 @if (count($errors) > 0)
                     <div class="alert alert-danger rtl">
@@ -79,7 +81,7 @@
                         <div class="row">
                             <div class="col-md-12 rtl">
                                 یک کد چهار رقمی برای شما پیامک شد.<br>
-                                لطفا پس از دریافت کد آن را در فیلد زیر وارد کنید.
+                                لطفا پس از دریافت کد آن را در قسمت زیر وارد کنید.
                                 <hr>
                             </div>
                         </div>
