@@ -121,6 +121,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'user.role', 'user.a
     Route::get('/variable-value/edit/id/{id}', 'Admin\VariableValueController@getEdit');
     Route::post('/variable-value/edit/id/{id}', 'Admin\VariableValueController@postEdit');
     Route::get('/variable-value/delete/id/{id}', 'Admin\VariableValueController@getDelete');
+    //Report
+    Route::get('/report/manage', 'Admin\ReportController@index');
 });
 
 

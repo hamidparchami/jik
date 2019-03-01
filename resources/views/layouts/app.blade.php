@@ -99,6 +99,18 @@
                         </li>
 
                         <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                گزارشات<span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu rtl" role="menu">
+                                <li>
+                                    <a href="{{ url('/admin/report/manage') }}">گزارشات کلی</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
                             @if (in_array('admin/slider/manage', session('allowed_URLs')) || in_array('admin/award/manage', session('allowed_URLs')) || in_array('admin/article-category/manage', session('allowed_URLs')))
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     محتوای پایه<span class="caret"></span>

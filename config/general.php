@@ -47,6 +47,7 @@ H8z7w4bI325ECqc8PnOQR7HPZaHD6OQr7rfnkT/eKpTgfSsYzrA7z4jgHJr+R/7A
 
     'red9_base_url'         => env('RED9_BASE_URL', 'https://red9.ir'),
     'red9_api_key'          => env('RED9_API_KEY', 'dd9c7a26-8726-4073-8282-87723a4951ff'),
+    'red9_client_key'       => env('RED9_CLIENT_KEY', 'c78809fa-c254-4941-8cc7-c72421e77322'),
     'red9_otp_subscribe'    => env('RED9_OTP_SUBSCRIBE', '/api/app/subscriptions/otp_subscribe'),
     'red9_otp_confirm_subscribe'    => env('RED9_OTP_CONFIRM_SUBSCRIBE', '/api/app/subscriptions/otp_confirm_subscription'),
 
