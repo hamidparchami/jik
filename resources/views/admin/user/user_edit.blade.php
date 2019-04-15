@@ -58,6 +58,17 @@
                             </div>
 
                             <div class="row form-row">
+                                <div class="col-md-3">
+
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-4">
+                                    <input name="password" type="text" class="form-control rtl">
+                                </div>
+                                <div class="col-md-4">رمز عبور</div>
+                            </div>
+
+                            <div class="row form-row">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
                                     <div class="checkbox">
