@@ -235,7 +235,7 @@
 
                             <ul class="dropdown-menu rtl" role="menu">
                                 <li>
-                                    <a href="{{ url('/user/change-password') }}">تغییر رمز</a>
+                                    <a href="{{ url('/admin/user/change-password') }}">تغییر رمز</a>
                                 </li>
                                 <li>
                                     <a href="{{ url('/logout') }}"
