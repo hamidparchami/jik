@@ -37,12 +37,14 @@ class UserController extends Controller
 
         Validator::make($request->all(), $rules)->validate();
 
+        $user = User::find($request->id);
+
         if (!empty($request->password)) {
-            $request->password = Hash::make($request->password);
-            $request->remember_token = null;
+            $user->update(['password' => Hash::make($request->password), 'remember_token' => null]);
         }
 
-        User::find($request->id)->update($request->all());
+        $user->update(['name' => $request->name, 'email' => $request->email,
+            'role_id' => $request->role_id]);
 
         return redirect('/admin/user/manage')->with('message', 'کاربر با موفقیت ذخیره شد.');
     }

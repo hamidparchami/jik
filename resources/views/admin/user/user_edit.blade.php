@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="col-md-1"></div>
                                 <div class="col-md-4">
-                                    <input name="password" type="text" class="form-control rtl">
+                                    <input name="password" type="password" class="form-control">
                                 </div>
                                 <div class="col-md-4">رمز عبور</div>
                             </div>
