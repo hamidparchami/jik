@@ -31,10 +31,16 @@ class UserController extends Controller
             'name'    => 'required|max:100',
             'email'   => 'required|email',
             'role_id' => 'required|numeric',
+            'password'  => 'sometimes|min:8|max:100|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9]).*$/|',
         ];
         $request['is_active'] = ($request['is_active'] == 'on' || $request['is_active'] == '1') ? '1' : '0';
 
         Validator::make($request->all(), $rules)->validate();
+
+        if (!empty($request->password)) {
+            $request->password = Hash::make($request->password);
+            $request->remember_token = null;
+        }
 
         User::find($request->id)->update($request->all());
 
